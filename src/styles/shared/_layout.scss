@@ -1,0 +1,6 @@
+@mixin setLayout($display, $justifyContent, $alignItems, $gap: 0) {
+    display: $display;
+    justify-content: $justifyContent;
+    align-items: $alignItems;
+    gap: $gap;
+}

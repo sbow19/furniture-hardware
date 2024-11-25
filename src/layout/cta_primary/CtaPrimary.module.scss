@@ -1,0 +1,15 @@
+@use '@/styles/shared/variables';
+
+.cta_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, center, center);
+    height: 100vh;
+    align-self: stretch;
+
+    .cta_image {
+        position: relative;
+        width: 840px;
+        height: 191px;
+        flex-shrink: 0;
+    }
+}

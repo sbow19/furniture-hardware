@@ -1,0 +1,6 @@
+@mixin setTypography($fontSize, $fontStyle, $fontWeight, $lineHeight) {
+    font-size: $fontSize;
+    font-style: $fontStyle;
+    font-weight: $fontWeight;
+    line-height: $lineHeight;
+}
