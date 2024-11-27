@@ -1,6 +1,7 @@
 import CallOut from "@/components/call_out/CallOut";
 import SubHeader from "@/components/sub_header/SubHeader";
 import Banner from "@/layout/banner/Banner";
+import BookDemo from "@/layout/book_demo/BookDemo";
 import CloseUpShots from "@/layout/closeup_shots/CloseUpShots";
 import ColorVar from "@/layout/color_var/ColorVar";
 import CtaPrimary from "@/layout/cta_primary/CtaPrimary";
@@ -13,6 +14,7 @@ import FunctionalityImages from "@/layout/functionality_images/FunctionalityImag
 import GroupShots from "@/layout/group_shots/GroupShots";
 import InstallationImages from "@/layout/installation_images/InstallationImages";
 import LifeStyleScenes from "@/layout/lifestyle_scenes/LifeStyleScenes";
+import MarketingImages from "@/layout/marketing_images/MarketingImages";
 import MaterialVar from "@/layout/material_var/MaterialVar";
 import ProductExplodedView from "@/layout/product_exploded_view/ProductExplodedView";
 import SiloImages from "@/layout/silo_images/SiloImages";
@@ -42,6 +44,8 @@ export default function Home() {
       <Testemonial />
       <InstallationImages />
       <FlatLayImages />
+      <MarketingImages />
+      <BookDemo />
     </>
   );
 }

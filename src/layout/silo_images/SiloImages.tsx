@@ -8,7 +8,7 @@ export default function SiloImages() {
                 <h3 className={styles.silo_content_heading}>
                     Product Silos
                 </h3>
-                <Button />
+                <Button text="Take a closer look" modifier="p-color" />
             </div>
             <div className={styles.silo_image} />
         </section>

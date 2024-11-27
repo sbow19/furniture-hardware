@@ -10,6 +10,12 @@
     border: $width $style $color;
 }
 
+@mixin setBorderNoColor($radius, $width, $style) {
+    border-radius: $radius;
+    border-width: $width;
+    border-style: $style;
+}
+
 @mixin setCallOutGradient() {
     @include setBackgroundClip($firstGradient)
 }

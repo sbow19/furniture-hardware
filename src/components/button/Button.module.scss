@@ -7,11 +7,10 @@
     padding: 13.333px 30px;
 
     /* STYLE */
-    @include variables.setBorder(66.667px, 2px, solid, variables.$primaryColor);
+    @include variables.setBorderNoColor(66.667px, 2px, solid);
 
     /* TYPOGRAPHY */
     @include variables.setTypography(12px, normal, 600, normal);
-    color: variables.$primaryColor;
     text-align: center;
 
     .button_icon {
@@ -20,4 +19,16 @@
         height: 14px;
         flex-shrink: 0;
     }
+}
+
+/* MODIFIES */
+
+.l-color {
+    color: variables.$light;
+    border-color: variables.$light;
+}
+
+.p-color {
+    color: variables.$primaryColor;
+    border-color: variables.$primaryColor;
 }

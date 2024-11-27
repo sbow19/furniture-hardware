@@ -1,0 +1,38 @@
+@use '@/styles/shared/variables';
+
+.book_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, center, center);
+    padding: 66.667px;
+
+    .book_content {
+        /* LAYOUT */
+        background: url("/images/book_demo/sector.png") no-repeat center/cover;
+        @include variables.setLayout(flex, center, start, 13.33px, column);
+        width: 100%;
+        height: 400px;
+        padding: 6.667px 33.333px;
+
+        /* STYLE */
+        border-radius: 20px;
+
+        .book_content_heading {
+            /*  STYLE*/
+            color: variables.$light;
+
+            /* TYPOGRAPHY */
+            @include variables.setTypography(60px, normal, 700, normal);
+        }
+
+        .book_content_paragraph {
+            /* LAYOUT */
+            width: 508px;
+
+            /*  STYLE*/
+            color: variables.$light;
+
+            /* TYPOGRAPHY */
+            @include variables.setTypography(16px, normal, 400, normal);
+        }
+    }
+}
