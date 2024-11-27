@@ -1,0 +1,13 @@
+@use '@/styles/shared/variables';
+
+.flatlay_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, start, center, 0, column);
+
+    .flatlay_image {
+        /* LAYOUT */
+        background: url("/images/flatlay_images/top_sight.png") variables.$fallback bottom / cover no-repeat;
+        width: 100%;
+        height: 948px;
+    }
+}

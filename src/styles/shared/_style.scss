@@ -10,6 +10,10 @@
     border: $width $style $color;
 }
 
+@mixin setCallOutGradient() {
+    @include setBackgroundClip($firstGradient)
+}
+
 /* PUBLIC COLORS */
 
 $primaryColor: #2a266a;

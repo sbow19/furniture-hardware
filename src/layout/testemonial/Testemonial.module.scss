@@ -65,9 +65,6 @@
                     @include variables.setLayout(flex, center, start, 2.67px, column);
 
                     .testemonial_content_card_left_heading {
-                        /* LAYOUT */
-                        width: fit-content;
-
                         /* STYLE */
                         @include variables.setBackgroundClip(variables.$testemonialCardHeadingGradient);
 

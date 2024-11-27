@@ -1,0 +1,34 @@
+@use '@/styles/shared/variables';
+
+.call_container {
+    @include variables.setLayout(flex, center, center);
+    height: 400px;
+    padding: 108px 0;
+
+    .call_heading {
+        @include variables.setCallOutGradient();
+        @include variables.setCallOutHeadingTypography();
+    }
+
+    .call_paragraph {
+        @include variables.setCallOutParagraphTypography();
+        color: variables.$primaryColor;
+    }
+}
+
+/* MODIFIES */
+
+.mw-928 {
+    /* LAYOUT */
+    max-width: 928px;
+}
+
+.mw-623 {
+    /* LAYOUT */
+    max-width: 623px;
+}
+
+.mw-563 {
+    /* LAYOUT */
+    max-width: 563px;
+}

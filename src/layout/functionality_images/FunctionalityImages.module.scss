@@ -1,5 +1,20 @@
 @use '@/styles/shared/variables';
 
 .functionality_container {
+    /* LAYOUT */
     height: 100vh;
+    padding: 79px 0px;
+
+    .functionality_content {
+        /* LAYOUT */
+        background: url("/images/functionality_images/furniture.png") no-repeat center/contain;
+        @include variables.setLayout(flex, space-between, center, 0, column);
+        height: 100%;
+        padding: 80.667px 0;
+
+        .functionality_content_heading {
+            @include variables.setCallOutGradient();
+            @include variables.setCallOutHeadingTypography();
+        }
+    }
 }

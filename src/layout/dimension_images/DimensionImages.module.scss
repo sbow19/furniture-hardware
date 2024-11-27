@@ -1,0 +1,6 @@
+@use '@/styles/shared/variables';
+
+.dimension_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, start, center, 0, column);
+}

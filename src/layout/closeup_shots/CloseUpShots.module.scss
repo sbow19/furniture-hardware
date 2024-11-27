@@ -1,0 +1,13 @@
+@use '@/styles/shared/variables';
+
+.close_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, start, center, 0, column);
+
+    .close_showcase {
+        /* LAYOUT */
+        background: variables.$lifeStyleDark, url("/images/closeup_shots/sofa.png") variables.$fallback bottom / cover no-repeat;
+        width: 100%;
+        height: 1320px; 
+    }
+}
