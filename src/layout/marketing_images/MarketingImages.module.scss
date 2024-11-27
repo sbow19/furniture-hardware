@@ -8,7 +8,7 @@
 
     .marketing_heading {
         /* STYLE */
-        @include variables.setCallOutGradient();
+        @include variables.setBackgroundClip(variables.$secondGradient);
         padding-left: 178px;
 
         /* TYPOGRAPHY */

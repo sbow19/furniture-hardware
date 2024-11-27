@@ -1,6 +1,7 @@
 import CallOut from "@/components/call_out/CallOut";
 import SubHeader from "@/components/sub_header/SubHeader";
 import Banner from "@/layout/banner/Banner";
+import Blogs from "@/layout/blogs/Blogs";
 import BookDemo from "@/layout/book_demo/BookDemo";
 import CloseUpShots from "@/layout/closeup_shots/CloseUpShots";
 import ColorVar from "@/layout/color_var/ColorVar";
@@ -46,6 +47,7 @@ export default function Home() {
       <FlatLayImages />
       <MarketingImages />
       <BookDemo />
+      <Blogs />
     </>
   );
 }

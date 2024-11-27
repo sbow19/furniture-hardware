@@ -1,0 +1,24 @@
+@use '@/styles/shared/variables';
+
+.blogs_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, center, center);
+    padding: 57.333px 0;
+
+    .blogs_content {
+        /* LAYOUT */
+        @include variables.setLayout(flex, center, start, 33.333px, column);
+
+        .blogs_content_heading {
+            /* STYLE */
+            @include variables.setBackgroundClip(variables.$secondGradient);
+
+            /* TYPOGRAPHY */
+            @include variables.setTypography(32px, normal, 500, normal);
+        }
+
+        .blogs_content_cards {
+            @include variables.setLayout(flex, center, center, 33.333px);
+        }
+    }
+}

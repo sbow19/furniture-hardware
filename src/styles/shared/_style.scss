@@ -29,6 +29,7 @@ $light: #FFF;
 $gray: #F0F3FB;
 
 $firstGradient: linear-gradient(90deg, #433E99 0%, #EF4B32 100%);
+$secondGradient: linear-gradient(90deg, #2A266A 0%, #EF4B32 100%);
 
 /* FILTERS */
 
@@ -71,3 +72,5 @@ $testemonialCard: #f9faff;
 $testemonialCardBorder: rgba(42, 38, 106, 0.15);
 $testemonialCardHeadingGradient: linear-gradient(270deg, #EF4B32 0%, #524BD0 100%);
 $testemonialCardSpanGradient: rgba(67, 62, 153, 0.80);
+
+$cardShadow: rgba(0, 0, 0, 0.25);

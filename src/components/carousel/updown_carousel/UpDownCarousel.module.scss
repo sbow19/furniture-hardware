@@ -42,9 +42,9 @@
 
 .bg-dimension {
     /* LAYOUT */
-    background: url("/images/dimension_images/sizes.png") variables.$fallback bottom / cover no-repeat;
+    background: url("/images/dimension_images/sizes.png") variables.$fallback center / cover no-repeat;
 }
 
 .bg-installation {
-    background: url("/images/installation_images/handbook.png") variables.$fallback bottom / cover no-repeat;
+    background: url("/images/installation_images/handbook.png") variables.$light center / cover no-repeat;
 }
