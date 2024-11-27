@@ -1,4 +1,3 @@
-import CallOut from "@/components/call_out/CallOut";
 import SubHeader from "@/components/sub_header/SubHeader";
 import Banner from "@/layout/banner/Banner";
 import Blogs from "@/layout/blogs/Blogs";
