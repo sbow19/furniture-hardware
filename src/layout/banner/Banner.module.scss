@@ -6,14 +6,11 @@
     height: 100vh;
 
     /* STYLE */
-    background: var(--color-white-solid, #FFF);
+    background: var(--color-white-solid, variables.$light);
 
     .banner_video {
-        /* Marker */
-        background-color: lightgray;
-
         /* LAYOUT */
-        width: 1280px;
+        object-fit: cover;
         flex-shrink: 0;
         align-self: stretch;
     }

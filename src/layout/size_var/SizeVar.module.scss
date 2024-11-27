@@ -1,0 +1,94 @@
+@use '@/styles/shared/variables';
+
+.size_container {
+    /* LAYOUT */
+    position: relative;
+    overflow: hidden;
+    @include variables.setLayout(flex, center, center);
+    height: 100vh;
+
+    /* STYLE */
+    background-color: variables.$gray;
+
+    .size_group {
+        /* LAYOUT */
+        position: relative;
+        width: 776px;
+        height: 100%;
+        flex-shrink: 0;
+
+        .size_group_content {
+            /* LAYOUT */
+            position: absolute;
+            @include variables.setLayout(flex, center, center);
+            width: 776px;
+            height: 100%;
+
+
+            span {
+                /* LAYOUT */
+                position: relative;
+
+                /* STYLES */
+                color: variables.$primaryColor;
+
+                /* TYPOGRAPHY */
+                /* DESKTOP - 1280 x 832/Title 2 */
+                @include variables.setTypography(32px, normal, 400, normal);
+            }
+
+            .size_group_content_span_large {
+                left: 35px;
+                top: 88px;
+            }
+
+            .size_group_content_span_medium {
+                left: 143px;
+                top: 170px;
+            }
+
+            .size_group_content_span_small {
+                left: 250px;
+                top: 270px;
+            }
+
+            div {
+                /* LAYOUT */
+                position: relative;
+                width: 776px;
+                height: 620.901px;
+                flex-shrink: 0;
+            }
+
+            .size_group_content_image_large {
+                /* LAYOUT */
+                background: url("/images/size_var/large.png") no-repeat center/contain;
+                top: -82px;
+            }
+
+            .size_group_content_image_medium {
+                /* LAYOUT */
+                background: url("/images/size_var/medium.png") no-repeat center/contain;
+            }
+
+            .size_group_content_image_small {
+                /* LAYOUT */
+                background: url("/images/size_var/small.png") no-repeat center/contain;
+                top: 98px;
+            }
+        }
+
+    }
+
+    .size_span {
+        /* LAYOUT */
+        position: absolute;
+        bottom: 6%;
+
+        /* STYLE */
+        @include variables.setBackgroundClip(variables.$firstGradient);
+        text-align: center;
+        /* DESKTOP - 1280 x 832/Body */
+        @include variables.setTypography(16px, normal, 400, normal);
+    }
+}

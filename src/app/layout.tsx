@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "@/styles/globals.scss";
+import "@/styles/fonts.scss";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -13,9 +14,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link href="https://fonts.cdnfonts.com/css/sf-pro-display" rel="stylesheet" />
-      </head>
       <body>
         {children}
       </body>

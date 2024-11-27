@@ -1,0 +1,33 @@
+@use '@/styles/shared/variables';
+
+.silo_container {
+    /* LAYOUT */
+    position: relative;
+    @include variables.setLayout(flex, center, center);
+    height: 100vh;
+
+    .silo_content {
+        /* LAYOUT */
+        @include variables.setLayout(flex, center, flex-start, 26.667px, column);
+
+        .silo_content_heading {
+            /* LAYOUT */
+            align-self: stretch;
+
+            /* TYPOGRAPHY */
+            @include variables.setTypography(64px, normal, 700, normal);
+
+            /* STYLE */
+            @include variables.setBackgroundClip(variables.$firstGradient);
+        }
+    }
+
+    .silo_image {
+        /* LAYOUT */
+        background: url("/images/silo_images/chair.png") no-repeat bottom center/contain;
+        width: 646px;
+        height: 100%;
+        flex-shrink: 0;
+        align-self: self-end;
+    }
+}

@@ -1,0 +1,101 @@
+@use '@/styles/shared/variables';
+
+.fabric_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex);
+    height: 100vh;
+
+    .fabric_left {
+        /* LAYOUT */
+        @include variables.setLayout(flex, center);
+        width: 55.6%;
+
+        .fabric_left_image {
+            /* LAYOUT */
+            background: url("/images/fabric_var/left.png") no-repeat center/contain;
+            width: 100%;
+        }
+    }
+
+    .fabric_right {
+        /* LAYOUT */
+        position: relative;
+        @include variables.setLayout(flex);
+        width: 44.4%;
+
+        .fabric_right_image {
+            /* LAYOUT */
+            background: url("/images/fabric_var/right.png") no-repeat center/cover;
+            width: 100%;
+        }
+
+        .fabrics {
+            /* LAYOUT */
+            position: absolute;
+            right: 0;
+            @include variables.setLayout(flex, flex-start, start, 0, column);
+            width: 350px;
+
+            button {
+                /* LAYOUT */
+                @include variables.setLayout(flex, space-between, center, 0);
+                height: 80px;
+                padding: 1px 0px 1px 20px;
+                align-self: stretch;
+
+                /* STYLES */
+                background-color: variables.$light;
+
+                .fabrics_span {
+                    /* STYLES */
+                    color: variables.$primaryColor;
+
+                    /* TYPOGRAPHY */
+                    @include variables.setTypography(16px, normal, 400, normal);
+                }
+
+                .fabrics_figure {
+                    /* LAYOUT */
+                    width: 150px;
+                    align-self: stretch;
+
+                    & div {
+                        /* LAYOUT */
+                        height: 100%;
+                    }
+
+                    .fabrics_figure_one {
+                        /* LAYOUT */
+                        background: url("/images/fabric_var/blue.png") no-repeat center/cover;
+                    }
+
+                    .fabrics_figure_two {
+                        /* LAYOUT */
+                        background: url("/images/fabric_var/yellow.png") no-repeat center/cover;
+                    }
+
+                    .fabrics_figure_three {
+                        /* LAYOUT */
+                        background: url("/images/fabric_var/orange.png") no-repeat center/cover;
+                    }
+
+                    .fabrics_figure_four {
+                        /* LAYOUT */
+                        background: url("/images/fabric_var/green.png") no-repeat center/cover;
+                    }
+
+                    .fabrics_figure_five {
+                        /* LAYOUT */
+                        background: url("/images/fabric_var/gray.png") no-repeat center/cover;
+                    }
+                }
+
+            }
+
+            .fabrics_last {
+                /* STYLE */
+                border-bottom-left-radius: 15px;
+            }
+        }
+    }
+}

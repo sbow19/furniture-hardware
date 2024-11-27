@@ -2,14 +2,30 @@
 
 .cta_container {
     /* LAYOUT */
+    position: relative;
     @include variables.setLayout(flex, center, center);
     height: 100vh;
-    align-self: stretch;
 
-    .cta_image {
-        position: relative;
-        width: 840px;
-        height: 191px;
+    .banner_video {
+        /* LAYOUT */
+        object-fit: cover;
         flex-shrink: 0;
+        align-self: stretch;
+    }
+
+    .cta_content {
+        /* LAYOUT */
+        position: absolute;
+        @include variables.setLayout(flex, center, center);
+        width: 100%;
+        height: 100%;
+        flex-shrink: 0;
+
+        /* STYLES */
+        background-color: variables.$light;
+
+
+        /* TYPOGRAPHY */
+        @include variables.setTypography(160.173px, normal, 600, normal);
     }
 }

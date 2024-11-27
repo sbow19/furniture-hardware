@@ -1,0 +1,36 @@
+@use '@/styles/shared/variables';
+
+.lifestyle_container {
+    /* LAYOUT */
+    height: 100vh;
+
+    .lifestyle_background {
+        /* LAYOUT */
+        position: relative;
+        @include variables.setLayout(flex, start, center);
+        background: variables.$lifeStyleDark, url("/images/lifestyle_scenes/background.png") variables.$fallback bottom / cover no-repeat;
+        width: 100%;
+        height: 100%;
+
+        .lifestyle_background_heading {
+            /* LAYOUT */
+            width: 585.333px;
+            margin-left: 120px;
+            flex-shrink: 0;
+
+            /* STYLES */
+            color: variables.$light;
+
+            /* TYPOGRAPHY */
+            @include variables.setTypography(64px, normal, 600, normal);
+            text-transform: capitalize;
+        }
+
+        .lifestyle_background_pop {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+}

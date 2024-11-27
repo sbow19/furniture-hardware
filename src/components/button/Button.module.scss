@@ -1,0 +1,23 @@
+@use '@/styles/shared/variables';
+
+.button_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, space-between, center);
+    width: 186px;
+    padding: 13.333px 30px;
+
+    /* STYLE */
+    @include variables.setBorder(66.667px, 2px, solid, variables.$primaryColor);
+
+    /* TYPOGRAPHY */
+    @include variables.setTypography(12px, normal, 600, normal);
+    color: variables.$primaryColor;
+    text-align: center;
+
+    .button_icon {
+        /* LAYOUT */
+        width: 16.667px;
+        height: 16.667px;
+        flex-shrink: 0;
+    }
+}
