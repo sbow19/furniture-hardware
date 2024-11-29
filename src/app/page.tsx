@@ -24,7 +24,7 @@ import Testemonial from "@/layout/testemonial/Testemonial";
 export default function Home() {
   return (
     <>
-      <SubHeader />
+      <SubHeader activePage="/" />
       <Banner />
       <CtaPrimary />
       <CtaSecondary />
