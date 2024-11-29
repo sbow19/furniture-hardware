@@ -1,7 +1,6 @@
 import SubHeader from "@/components/sub_header/SubHeader"
 import Title from "./layout/title/Title"
 import Visual from "./components/first_video/Visual"
-import Possibilities from "./layout/possibilities/Possibilities";
 
 export default function ProductVideos() {
     const videoPaths = [
@@ -18,7 +17,6 @@ export default function ProductVideos() {
             {videoPaths.map((path, index) => (
                 <Visual key={index} path={path} />
             ))}
-            <Possibilities />
         </>
     )
 }
