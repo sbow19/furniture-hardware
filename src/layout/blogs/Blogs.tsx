@@ -2,7 +2,7 @@ import Card from "@/components/card/Card";
 import styles from "./Blogs.module.scss";
 export default function Blogs() {
     return (
-        <section className={styles.blogs_container}>
+        <section className={styles.blogs_container} data-testid="tulfa-blogs-container">
             <div className={styles.blogs_content}>
                 <h4 className={styles.blogs_content_heading}>
                     Latest Blogs
