@@ -11,7 +11,7 @@ export default function ShowCase({ heading }: ShowCaseProps) {
         <div className={styles.showcase}>
             {heading && <h3 className={styles.showcase_heading}>{heading}</h3>}
             <div className={styles.showcase_pop}>
-                <PopUp />
+                {/* <PopUp /> */}
             </div>
         </div>
     );

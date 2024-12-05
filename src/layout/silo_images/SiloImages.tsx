@@ -1,4 +1,6 @@
 import Button from "@/components/button/Button";
+import Image from 'next/image';
+import chairImage from "root/public/images/silo_images/chair_drive.png";
 
 import styles from "./SiloImages.module.scss";
 export default function SiloImages() {
@@ -10,7 +12,12 @@ export default function SiloImages() {
                 </h3>
                 <Button text="Take a closer look" modifier="p-color" />
             </div>
-            <div className={styles.silo_image} />
+            <Image 
+                src={chairImage}
+                placeholder='blur'
+                alt=''
+                className={styles.silo_image}
+            />
         </section>
     );
 }

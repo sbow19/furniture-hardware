@@ -30,7 +30,7 @@ describe("Home Page", ()=>{
         
         render(<Home />);
 
-        const Blogs = screen.getByTestId('tulfa-blogs-container');
+        const Blogs = screen.getByTestId('tulfa-cta-primary-container');
 
         expect(Blogs).not.toBeInTheDocument();
     })

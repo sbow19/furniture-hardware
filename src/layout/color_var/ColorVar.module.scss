@@ -3,19 +3,21 @@
 .color_container {
     /* LAYOUT */
     position: relative;
+    overflow: hidden;
     @include variables.setLayout(flex, center);
-    height: 100vh;
+    max-height: 100vh;
 
     .color_left {
         /* LAYOUT */
         position: relative;
+        overflow: hidden;
         @include variables.setLayout(flex, center);
         width: 50%;
 
         .color_left_image {
             /* LAYOUT */
-            background: url("/images/color_var/left.png") no-repeat center/contain;
-            width: 100%;
+            height: 90%;
+            width: auto
         }
     }
 
@@ -98,7 +100,7 @@
     }
 
     .color_right {
-        overflow-x: hidden;
+        overflow: hidden;
         /* LAYOUT */
         @include variables.setLayout(flex);
         width: 50%;
@@ -108,8 +110,8 @@
 
         .color_right_image {
             /* LAYOUT */
-            background: url("/images/color_var/right.png") no-repeat center/cover;
-            width: 100%;
+            transform: scale(2) translateY(25%);
+            overflow: hidden;
         }
     }
 }

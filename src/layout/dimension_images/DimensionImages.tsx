@@ -1,12 +1,73 @@
 import CallOut from "@/components/call_out/CallOut";
 import UpDownCarousel from "@/components/carousel/updown_carousel/UpDownCarousel";
+import { StaticImageData } from "next/image";
+
+/* DIMENSION IMAGES */
+import handbookSizeImage from 'root/public/images/dimension_images/sizes.png'
+import lightChairSizeImage from 'root/public/images/dimension_images/2.png'
+import sofaSizeImage from 'root/public/images/dimension_images/3.png'
+import cushionSizeImage from 'root/public/images/dimension_images/4.png'
+import kitchenSizeImage from 'root/public/images/dimension_images/5.png'
+import darkChairSizeImage from 'root/public/images/dimension_images/6.png'
+
+type ImageSet = {
+    order: string[];
+    [key: string]: {
+        imageData: StaticImageData,
+        imageName: string,
+        buttonColor: "dark" | "light"
+    };
+}
+
+const imageSet: ImageSet = {
+    order: [
+        "handbook",
+        "lightChair",
+        "sofaSize",
+        "cushionSize",
+        "kitchenSize",
+        "darkChair"
+    ],
+    handbook: {
+        imageData: handbookSizeImage,
+        imageName: "handbook",
+        buttonColor: "light"
+    },
+    lightChair: {
+        imageData: lightChairSizeImage,
+        imageName: "lightChair",
+        buttonColor: "dark"
+    },
+    sofaSize: {
+        imageData: sofaSizeImage,
+        imageName: "sofaSize",
+        buttonColor: "dark"
+    },
+    cushionSize: {
+        imageData: cushionSizeImage,
+        imageName: "cushionSize",
+        buttonColor: "light"
+    },
+    kitchenSize: {
+        imageData: kitchenSizeImage,
+        imageName: "kitchenSize",
+        buttonColor: "light"
+    },
+    darkChair: {
+        imageData: darkChairSizeImage,
+        imageName: "darkChair",
+        buttonColor: "light"
+    }
+}
 
 import styles from "./DimensionImages.module.scss";
 export default function DimensionImages() {
     return (
         <section className={styles.dimension_container}>
             <CallOut heading="Dimension Images" />
-            <UpDownCarousel modifier="bg-dimension" />
+                <UpDownCarousel imageSet={imageSet}/>
+            <CallOut paragraph="Give your customers a clear view of how you furniture fits into their
+            space with precise dimensions and scale indicators." />
         </section>
     );
 }

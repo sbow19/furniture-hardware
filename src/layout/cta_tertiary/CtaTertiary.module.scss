@@ -5,6 +5,7 @@
     @include variables.setLayout(flex, center, center, 0, column);
     height: 2050px;
     padding-top: 324px;
+    
 
     .cta_content {
         /* LAYOUT */
@@ -33,8 +34,8 @@
 
     .cta_image {
         /* LAYOUT */
-        background: url("/images/cta_tertiary/sofa.png") no-repeat center/cover;
         width: 100%;
-        height: 805px;
+        height: auto;
+        transform: translateY(-35%)
     }
 }

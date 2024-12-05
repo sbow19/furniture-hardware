@@ -1,10 +1,27 @@
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
-
+import Image from 'next/image';
 import styles from "./MaterialVar.module.scss";
+
+/* KITCHEN ONDA MATERIAL VARIATIONS */
+import kitchenCounterBlack from "root/public/images/material_var/kitchen_onda_black.png"
+import kitchenCounterBlue from "root/public/images/material_var/kitchen_onda_blue.png"
+import kitchenCounterGold from "root/public/images/material_var/kitchen_onda_gold imperial.png"
+import kitchenCounterGreen from "root/public/images/material_var/kitchen_onda_green.png"
+import kitchenCounterPearl from "root/public/images/material_var/kitchen_onda_pearl royal.png"
+import kitchenCounterRed from "root/public/images/material_var/kitchen_onda_red.png"
+import kitchenCounterWhite from "root/public/images/material_var/kitchen_onda_white.png"
+import kitchenCounterYellow from "root/public/images/material_var/kitchen_onda_yellow.png"
+
+
 export default function MaterialVar() {
     return (
         <section className={styles.material_container}>
-            <div className={styles.material_image} />
+             <Image
+                    src={kitchenCounterYellow}
+                    alt=''
+                    className={styles.material_image}
+                    priority
+                />
             <div className={styles.material_content}>
                 <span className={styles.material_content_span}>
                     Material Variation

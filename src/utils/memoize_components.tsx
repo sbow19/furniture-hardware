@@ -3,17 +3,14 @@ import React, { memo } from 'react';
 /**
  * @params 
  */
-const memoizeComponents = (components: {
-    [key: string]: React.FC;
-}): {
-    [key: string]: React.ExoticComponent;
-} => {
+const memoizeComponents = (components: Array<React.FC>): Array<React.ExoticComponent> => {
 
-    Object.keys(components).forEach((key: string) => {
-        components[key] = memo(components[key]);
+    const memoizedComponents: Array<React.ExoticComponent> = [];
+    components.forEach((comp: React.FC) => {
+        memoizedComponents.push(memo(comp));
     });
 
-    return components;
+    return memoizedComponents;
 };
 
 export {

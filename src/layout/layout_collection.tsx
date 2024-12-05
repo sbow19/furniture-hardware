@@ -1,6 +1,29 @@
 
 /**
  * Individual slides on the page.
+ * Must follow this order <SubHeader activePage="/" />
+      <Banner />
+      <CtaPrimary />
+      <CtaSecondary />
+      <CtaTertiary />
+      <SiloImages />
+      <SizeVar />
+      <ColorVar />
+      <FabricVar />
+      <MaterialVar />
+      <Testemonial />
+      <LifeStyleScenes />
+      <FunctionalityImages />
+      <CloseUpShots />
+      <GroupShots />
+      <ProductExplodedView />
+      <DimensionImages />
+      <Testemonial />
+      <InstallationImages />
+      <FlatLayImages />
+      <MarketingImages />
+      <BookDemo />
+      <Blogs />
  */
 import Banner from "@/layout/banner/Banner";
 import Blogs from "@/layout/blogs/Blogs";
@@ -27,32 +50,40 @@ import Testemonial from "@/layout/testemonial/Testemonial";
 /* Memoize components */
 import { memoizeComponents } from "@/utils/memoize_components";
 
-const layoutCollection: {
-    [key: string]: React.FC;
-  } = {
+import structureLayouts from "@/utils/structure_layouts";
+
+/* LAYOUT COLLECTION MUST BE IN DESIRED ORDER */
+
+const layoutCollection: Array<React.FC> = [
     Banner,
-    Blogs,
-    BookDemo,
-    CloseUpShots,
-    ColorVar,
     CtaPrimary,
     CtaSecondary,
     CtaTertiary,
-    DimensionImages,
-    FabricVar,
-    FlatLayImages,
-    FunctionalityImages,
-    GroupShots,
-    InstallationImages,
-    LifeStyleScenes,
-    MarketingImages,
-    MaterialVar,
-    ProductExplodedView,
     SiloImages,
     SizeVar,
-    Testemonial
-};
+    ColorVar,
+    FabricVar,
+    MaterialVar,
+    Testemonial,
+    LifeStyleScenes,
+    FunctionalityImages,
+    CloseUpShots,
+    GroupShots,
+    ProductExplodedView,
+    DimensionImages,
+    Testemonial,
+    InstallationImages,
+    FlatLayImages,
+    MarketingImages,
+    BookDemo,
+    Blogs,
+];
 
 const layoutCollectionMemoized = memoizeComponents(layoutCollection);
 
-export default layoutCollectionMemoized;
+const layoutCollectionStructured = structureLayouts(layoutCollectionMemoized);
+
+// Set first comp to rendered
+layoutCollectionStructured[0].layoutRendered = true;
+
+export default layoutCollectionStructured;

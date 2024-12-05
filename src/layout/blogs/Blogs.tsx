@@ -1,4 +1,10 @@
 import Card from "@/components/card/Card";
+/* BLOG IMAGES*/
+import blogOneImage from  'root/public/images/blogs/car.png'
+import blogMetaImage from 'root/public/images/blogs/meta.png'
+import blogCutleryImage from 'root/public/images/blogs/cutlery.png'
+
+
 import styles from "./Blogs.module.scss";
 export default function Blogs() {
     return (
@@ -12,19 +18,19 @@ export default function Blogs() {
                         heading="Additive Manufacturing"
                         date="August 31, 2024"
                         paragraph="3D Printing the Electric Explorer: Ford’s Vision for the Future"
-                        modifier="bg-car"
+                        imageData={blogOneImage}
                     />
                     <Card
                         heading="Augmented Reality"
                         date="August 30, 2024"
                         paragraph="The End of an Era: Meta’s Spark AR Shutdown and the Way Forward"
-                        modifier="bg-meta"
+                        imageData={blogMetaImage}
                     />
                     <Card
                         heading="eCommerce"
                         date="August 15, 2024"
                         paragraph="Amazon Enhanced Brand Content (A+ Content): Essential Tips"
-                        modifier="bg-cutlery"
+                        imageData={blogCutleryImage}
                     />
                 </div>
             </div>

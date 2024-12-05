@@ -4,7 +4,8 @@
     /* LAYOUT */
     overflow: hidden;
     @include variables.setLayout(flex, start, start, 13.333px, column);
-    width: 315.556px;
+    height: 100%;
+    width: calc(100% / 3);
     padding-bottom: 33.333px;
     flex-shrink: 0;
 
@@ -15,9 +16,8 @@
 
     .card_image {
         /* LAYOUT */
-        height: 200px;
-        align-self: stretch;
-
+        width:100%;
+        height: auto
     }
 
     .card_header {
@@ -69,21 +69,4 @@
         text-overflow: ellipsis;
         @include variables.setTypography(16px, normal, 500, normal);
     }
-}
-
-/* MODIFIES */
-
-.bg-car {
-    /* LAYOUT */
-    background: url("/images/blogs/car.png") no-repeat center/cover;
-}
-
-.bg-meta {
-    /* LAYOUT */
-    background: url("/images/blogs/meta.png") no-repeat center/cover;
-}
-
-.bg-cutlery {
-    /* LAYOUT */
-    background: url("/images/blogs/cutlery.png") no-repeat center/cover;
 }

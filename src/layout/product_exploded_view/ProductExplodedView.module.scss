@@ -23,57 +23,64 @@
         .product_mattres_layer_one {
             /* LAYOUT */
             z-index: 8;
-            top: -150px;
-            background: url("/images/product_exploded_view/first.png") no-repeat center/contain;
+            top: -30%;
+            position: absolute;
         }
 
         .product_mattres_layer_two {
             /* LAYOUT */
             z-index: 7;
-            top: -135px;
-            background: url("/images/product_exploded_view/second.png") no-repeat center/contain;
+            top: -20%;
+            position: absolute;
+            
         }
 
         .product_mattres_layer_three {
             /* LAYOUT */
             z-index: 6;
-            top: -178px;
-            background: url("/images/product_exploded_view/third.png") no-repeat center/contain;
+            top: -10%;
+            position: absolute;
+            
         }
 
         .product_mattres_layer_four {
             /* LAYOUT */
             z-index: 5;
-            top: 80px;
-            background: url("/images/product_exploded_view/fourth.png") no-repeat center/contain;
+            top: 0%;
+            position: absolute;
+           
         }
 
         .product_mattres_layer_five {
             /* LAYOUT */
             z-index: 4;
-            top: 290px;
-            background: url("/images/product_exploded_view/fifth.png") no-repeat center/contain;
+            top: 10%;
+            position: absolute;
+            
         }
 
         .product_mattres_layer_six {
             /* LAYOUT */
             z-index: 3;
-            top: 260px;
-            background: url("/images/product_exploded_view/sixth.png") no-repeat center/contain;
+            top: 20%;
+            position: absolute;
+           
         }
 
         .product_mattres_layer_seven {
             /* LAYOUT */
             z-index: 2;
-            top: 300px;
-            background: url("/images/product_exploded_view/seventh.png") no-repeat center/contain;
+            top: 30%;
+            position: absolute;
+            
         }
 
         .product_mattres_layer_eight {
             /* LAYOUT */
             z-index: 1;
-            top: 350px;
-            background: url("/images/product_exploded_view/eighth.png") no-repeat center/contain;
+            top: 40%;
+            position: absolute;
+          
         }
     }
 }

@@ -24,10 +24,10 @@
 
     .silo_image {
         /* LAYOUT */
-        background: url("/images/silo_images/chair.png") no-repeat bottom center/contain;
         width: 646px;
-        height: 100%;
+        height: auto;
         flex-shrink: 0;
         align-self: self-end;
+        transform: translateY(10%) translateX(-5%)
     }
 }

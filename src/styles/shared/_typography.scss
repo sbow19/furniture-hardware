@@ -5,8 +5,8 @@
     line-height: $lineHeight;
 }
 
-@mixin setCallOutHeadingTypography() {
-    @include setTypography(64px, normal, 600, normal);
+@mixin setCallOutHeadingTypography($fs: 64px) {
+    @include setTypography($fs, normal, 600, normal);
     text-transform: capitalize;
 }
 

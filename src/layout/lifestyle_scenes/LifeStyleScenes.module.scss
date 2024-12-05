@@ -2,6 +2,12 @@
 
 .lifestyle_container {
     /* LAYOUT */
-    background: variables.$lifeStyleDark, url("/images/lifestyle_scenes/background.png") variables.$fallback center / cover no-repeat;
     height: 1320px;
+    position: relative
+}
+
+.lifestyle_image {
+    height: 120%;
+    min-width: 100%;
+    position:absolute;
 }

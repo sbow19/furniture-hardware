@@ -1,5 +1,7 @@
 import { Manrope } from "next/font/google"
 import styles from "./Testemonial.module.scss";
+import Image from 'next/image';
+import profileImage from "root/public/images/testemonial/profile.png";
 
 const manrope = Manrope({
     weight: ["400", "500"],
@@ -29,7 +31,12 @@ export default function Testemonial() {
                         </div>
                     </div>
                     <div className={styles.testemonial_content_card_right}>
-                        <div className={styles.testemonial_content_card_right_image} />
+                        <Image
+                            src={profileImage}
+                            alt=''
+                            className={styles.testemonial_content_card_right_image}
+                            priority
+                        />
                     </div>
                 </div>
             </div>

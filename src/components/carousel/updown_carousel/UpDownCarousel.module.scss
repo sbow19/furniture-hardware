@@ -4,7 +4,14 @@
     /* LAYOUT */
     position: relative;
     width: 100%;
-    height: 100vh;
+    height: 125vh;
+
+    .background_image {
+        position: absolute;
+        width: 100%;
+        height: auto;
+        z-index: 0
+    }
 
     .carousel_arrows {
         /* LAYOUT */
@@ -36,15 +43,4 @@
             }
         }
     }
-}
-
-/* MOMDIFIES */
-
-.bg-dimension {
-    /* LAYOUT */
-    background: url("/images/dimension_images/sizes.png") variables.$fallback center / cover no-repeat;
-}
-
-.bg-installation {
-    background: url("/images/installation_images/handbook.png") variables.$light center / cover no-repeat;
 }

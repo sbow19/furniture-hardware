@@ -4,6 +4,9 @@
     @include variables.setLayout(flex, center, center);
     height: 400px;
     padding: 108px 0;
+    overflow: hidden;
+    position: relative;
+    z-index: 10;
 
     .call_heading {
         @include variables.setCallOutGradient();
