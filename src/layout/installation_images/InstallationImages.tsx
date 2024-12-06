@@ -6,7 +6,7 @@ import useAutoScroll from "@/hooks/use_autoscroll";
 
 
 /* INSTALLATION IMAGES */
-import handbookSizeImage from 'root/public/images/installation_images/handbook.png'
+import handbookSizeImage from '/images/installation_images/handbook.png'
 
 import styles from "./InstallationImages.module.scss";
 

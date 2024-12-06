@@ -1,8 +1,8 @@
 'use client'
 import styles from "./ColorVar.module.scss";
 import Image from 'next/image';
-import rightImageRed from "root/public/images/color_var/right_drive.png";
-import leftImageRed from "root/public/images/color_var/left_drive.png";
+import rightImageRed from "/images/color_var/right_drive.png";
+import leftImageRed from "/images/color_var/left_drive.png";
 import useAutoScroll from "@/hooks/use_autoscroll";
 import { motion } from 'framer-motion'
 

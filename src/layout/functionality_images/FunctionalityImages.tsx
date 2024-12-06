@@ -2,7 +2,7 @@
 import PopUp from "@/components/pop_up/PopUp";
 import Button from '@/components/button/Button'
 import Image from 'next/image';
-import backgroundImageRender from "root/public/images/functionality_images/Renders/White Bakground render.jpg"
+import backgroundImageRender from "/images/functionality_images/Renders/White Bakground render.jpg"
 import useAutoScroll from "@/hooks/use_autoscroll";
 import { motion } from 'framer-motion'
 import styles from "./FunctionalityImages.module.scss";

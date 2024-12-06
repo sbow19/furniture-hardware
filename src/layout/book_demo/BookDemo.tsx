@@ -2,7 +2,7 @@
 
 import Button from "@/components/button/Button";
 import Image from 'next/image';
-import bookDemoImage from "root/public/images/book_demo/sector.png"
+import bookDemoImage from "/images/book_demo/sector.png"
 import { motion } from 'framer-motion'
 import useAutoScroll from "@/hooks/use_autoscroll";
 

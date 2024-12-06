@@ -1,7 +1,7 @@
 'use client'
 import styles from "./CtaTertiary.module.scss";
 import Image from 'next/image';
-import sofaImage from "root/public/images/cta_tertiary/sofa.png";
+import sofaImage from "/images/cta_tertiary/sofa.png";
 import useAutoScroll from "@/hooks/use_autoscroll";
 import {motion} from 'framer-motion'
 

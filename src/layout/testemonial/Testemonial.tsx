@@ -2,7 +2,7 @@
 import { Manrope } from "next/font/google"
 import styles from "./Testemonial.module.scss";
 import Image from 'next/image';
-import profileImage from "root/public/images/testemonial/profile.png";
+import profileImage from "/images/testemonial/profile.png";
 import useAutoScroll from "@/hooks/use_autoscroll";
 import { motion } from 'framer-motion'
 

@@ -2,7 +2,7 @@
 import ShowCase from "@/components/showcase/ShowCase";
 import Image from 'next/image';
 import Button from '@/components/button/Button'
-import lifeStyleScenesImage from "root/public/images/lifestyle_scenes/background.png";
+import lifeStyleScenesImage from "/images/lifestyle_scenes/background.png";
 import styles from "./LifeStyleScenes.module.scss";
 import useAutoScroll from "@/hooks/use_autoscroll";
 import { motion } from 'framer-motion'

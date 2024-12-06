@@ -5,14 +5,14 @@ import { motion } from 'framer-motion'
 import useAutoScroll from "@/hooks/use_autoscroll";
 
 /* MATTRESS LAYER IMAGES */
-import matressLayerOne from 'root/public/images/product_exploded_view/f.png'
-import matressLayerTwo from 'root/public/images/product_exploded_view/g.png'
-import matressLayerThree from 'root/public/images/product_exploded_view/third.png'
-import matressLayerFour from 'root/public/images/product_exploded_view/gfh.png'
-import matressLayerFive from 'root/public/images/product_exploded_view/ii.png'
-import matressLayerSix from 'root/public/images/product_exploded_view/fgh.png'
-import matressLayerSeven from 'root/public/images/product_exploded_view//bed0000.png'
-import matressLayerEight from 'root/public/images/product_exploded_view/eighth.png'
+import matressLayerOne from '/images/product_exploded_view/f.png'
+import matressLayerTwo from '/images/product_exploded_view/g.png'
+import matressLayerThree from '/images/product_exploded_view/third.png'
+import matressLayerFour from '/images/product_exploded_view/gfh.png'
+import matressLayerFive from '/images/product_exploded_view/ii.png'
+import matressLayerSix from '/images/product_exploded_view/fgh.png'
+import matressLayerSeven from '/images/product_exploded_view//bed0000.png'
+import matressLayerEight from '/images/product_exploded_view/eighth.png'
 
 
 import styles from "./ProductExplodedView.module.scss";

@@ -2,14 +2,14 @@ import styles from "./FabricVar.module.scss";
 import Image from 'next/image';
 import useAutoScroll from "@/hooks/use_autoscroll";
 import { motion } from 'framer-motion'
-import lightLeatherRight from "root/public/images/fabric_var/light_leather_right.tif";
-import lightLeatherFabricCloseup from "root/public/images/fabric_var/right.png";
+import lightLeatherRight from "/images/fabric_var/light_leather_right.tif";
+import lightLeatherFabricCloseup from "/images/fabric_var/right.png";
 /* FABRIC CHOICES */
-import blueFabric from "root/public/images/fabric_var/blue.png";
-import grayFabric from "root/public/images/fabric_var/gray.png";
-import orangeFabric from "root/public/images/fabric_var/orange.png";
-import yellowFabric from "root/public/images/fabric_var/yellow.png";
-import greenFabric from "root/public/images/fabric_var/green.png";
+import blueFabric from "/images/fabric_var/blue.png";
+import grayFabric from "/images/fabric_var/gray.png";
+import orangeFabric from "/images/fabric_var/orange.png";
+import yellowFabric from "/images/fabric_var/yellow.png";
+import greenFabric from "/images/fabric_var/green.png";
 
 type LayoutProps = {
     layoutName: number

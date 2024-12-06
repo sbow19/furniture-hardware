@@ -3,7 +3,7 @@ import CallOut from "@/components/call_out/CallOut";
 // import ShowCase from "@/components/showcase/ShowCase";
 import Button from '@/components/button/Button'
 import Image from 'next/image';
-import backgroundImageRender from "root/public/images/closeup_shots/nitavparikh_upholstery_cleaning_closeup_--v_6.1_a6bab072-4445-4e1c-b8b3-07bf91d176c8_1.png"
+import backgroundImageRender from "/images/closeup_shots/nitavparikh_upholstery_cleaning_closeup_--v_6.1_a6bab072-4445-4e1c-b8b3-07bf91d176c8_1.png"
 import useAutoScroll from "@/hooks/use_autoscroll";
 import { motion } from 'framer-motion'
 import styles from "./CloseUpShots.module.scss";

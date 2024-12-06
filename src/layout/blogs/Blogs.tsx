@@ -3,9 +3,9 @@ import Card from "@/components/card/Card";
 import { motion } from 'framer-motion'
 import useAutoScroll from "@/hooks/use_autoscroll";
 /* BLOG IMAGES*/
-import blogOneImage from  'root/public/images/blogs/car.png'
-import blogMetaImage from 'root/public/images/blogs/meta.png'
-import blogCutleryImage from 'root/public/images/blogs/cutlery.png'
+import blogOneImage from  '/images/blogs/car.png'
+import blogMetaImage from '/images/blogs/meta.png'
+import blogCutleryImage from '/images/blogs/cutlery.png'
 
 import styles from "./Blogs.module.scss";
 
