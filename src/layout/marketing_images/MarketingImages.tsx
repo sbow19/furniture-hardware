@@ -6,8 +6,8 @@ import { motion } from 'framer-motion'
 import useAutoScroll from "@/hooks/use_autoscroll";
 
 /* MARKETiNG IMAGES */
-import marketingOneImage from '/images/marketing_images/first_source.png'
-import marketingTwoImage from '/images/marketing_images/second_source.jpg'
+import marketingOneImage from '../../../public/images/marketing_images/first_source.png'
+import marketingTwoImage from '../../../public/images/marketing_images/second_source.jpg'
 
 type LayoutProps = {
     layoutName: number

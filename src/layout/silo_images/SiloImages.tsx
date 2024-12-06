@@ -1,7 +1,7 @@
 'use client'
 import Button from "@/components/button/Button";
 import Image from 'next/image';
-import chairImage from "/images/silo_images/chair_drive.png";
+import chairImage from "../../../public/images/silo_images/chair_drive.png";
 import useAutoScroll from "@/hooks/use_autoscroll";
 import { motion } from 'framer-motion'
 
