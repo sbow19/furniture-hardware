@@ -21,7 +21,7 @@
             /* LAYOUT */
             position: absolute;
             @include variables.setLayout(flex, center, center);
-            width: 776px;
+            width: auto;
             height: 100%;
 
 
@@ -58,32 +58,36 @@
                 width: 776px;
                 height: 620.901px;
                 flex-shrink: 0;
-            }
 
-            .size_group_content_image_large {
-                /* LAYOUT */
-                position: relative;
-                top: -82px;
-                height: 95%;
-                width: auto
-            }
-
-            .size_group_content_image_medium {
-                /* LAYOUT */
-                position: relative;
-                // top: 30px;
-                height: 95%;
-                width: auto
+                .size_group_content_image_large {
+                    /* LAYOUT */
+                    position: relative;
+                    height: 120%;
+                    width: auto;
+                    margin: 0 auto;
+                    top: -25%;
+                }
     
+                .size_group_content_image_medium {
+                    /* LAYOUT */
+                    position: relative;
+                    height: 110%;
+                    width: auto;
+                    margin: 0 auto;
+                    top: -5%
+        
+                }
+    
+                .size_group_content_image_small {
+                    /* LAYOUT */
+                    position: relative;
+                    height: 100%;
+                    width: auto;
+                    margin: 0 auto;
+                }
             }
 
-            .size_group_content_image_small {
-                /* LAYOUT */
-                position: relative;
-                top: 90px;
-                height: 95%;
-                width: auto
-            }
+           
         }
     }
 

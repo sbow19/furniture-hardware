@@ -3,15 +3,15 @@
 .cta_container {
     /* LAYOUT */
     @include variables.setLayout(flex, center, center, 0, column);
-    height: 2050px;
-    padding-top: 324px;
+    height: 190vh;
+    // padding-top: 324px;
     background-color: white;
     
 
     .cta_content {
         /* LAYOUT */
         @include variables.setLayout(flex, center, center, 10px);
-        padding: 100px 0px;
+        padding-bottom: 100px;
 
         .cta_content_paragraph {
             /* LAYOUT */
@@ -21,22 +21,30 @@
             /* TYPOGRAPHY */
             @include variables.setTypography(86px, normal, 600, normal);
 
-            .cta_content_paragraph_disabled {
-                /* STYLE  */
+            span {
                 color: variables.$ctaTertiaryTextDisabled;
+                transition: color ease 0.5s;
             }
 
             .cta_content_paragraph_activated {
                 /* STYLE  */
-                color: variables.$ctaTertiaryTextActivated;
+                color: variables.$primaryColor;
             }
         }
     }
+    .cta_image_container{
 
-    .cta_image {
-        /* LAYOUT */
-        width: 100%;
-        height: auto;
-        transform: translateY(-35%)
+        /*LAYOUT*/
+        max-height: 100vh; 
+        overflow: hidden;
+        position: relative;
+        .cta_image {
+            /* LAYOUT */
+            width: 100%;
+            height: auto;
+            transform: translateY(-35%)
+        }
     }
+
+    
 }

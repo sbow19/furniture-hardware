@@ -1,15 +1,73 @@
 'use client'
 import styles from "./ColorVar.module.scss";
-import Image from 'next/image';
-import rightImageRed from "../../assets/images/color_var/right_drive.png";
-import leftImageRed from "../../assets/images/color_var/left_drive.png";
+import Image, { StaticImageData } from 'next/image';
+import ColorVariation from "@/components/color_var/ColorVaration";
 import useAutoScroll from "@/hooks/use_autoscroll";
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion';
+
+/* LEFT IMAGES */
+import leftImageRed from "../../assets/images/color_var/Red Organic.png";
+import leftImageBrown from "../../assets/images/color_var/Brown.png";
+import leftImageLGrey from "../../assets/images/color_var/Light Grey.png";
+import leftImageOrganic from "../../assets/images/color_var/Organic.png";
+import leftImagePGreen from "../../assets/images/color_var/Pine Green.png";
+
+/* RIGHT IMAGES */
+import rightImageRed from "../../assets/images/color_var/Red Organic_S.png";
+import rightImageBrown from "../../assets/images/color_var/Brown_S.png";
+import rightImageLGrey from "../../assets/images/color_var/Light Grey_S.png";
+import rightImageOrganic from "../../assets/images/color_var/Organic_S.png";
+import rightImagePGreen from "../../assets/images/color_var/Pine Green_S.png";
 
 type LayoutProps = {
     layoutName: number
     handleLayoutLoad: () => void
 }
+
+type ColorVarImageSet = {
+    [key: string]: {
+        left: StaticImageData,
+        right: StaticImageData,
+        buttonColor: string
+        buttonFilter: string
+    }
+};
+
+const colorVarImageSet: ColorVarImageSet = {
+    red: {
+        right: rightImageRed,
+        left: leftImageRed,
+        buttonColor: styles.color_left_filter_five,
+        buttonFilter: styles.fifth_semicircle
+    },
+    brown: {
+        right: rightImageBrown,
+        left: leftImageBrown,
+        buttonColor: styles.color_left_filter_one,
+        buttonFilter: styles.first_semicircle
+    },
+    lGrey: {
+        right: rightImageLGrey,
+        left: leftImageLGrey,
+        buttonColor: styles.color_left_filter_two,
+        buttonFilter: styles.second_semicircle
+    },
+    organic: {
+        right: rightImageOrganic,
+        left: leftImageOrganic,
+        buttonColor: styles.color_left_filter_three,
+        buttonFilter: styles.third_semicircle
+    },
+    pGreen: {
+        right: rightImagePGreen,
+        left: leftImagePGreen,
+        buttonColor: styles.color_left_filter_four,
+        buttonFilter: styles.fourth_semicircle
+    }
+
+}
+
+
 
 const ColorVar: React.FC<LayoutProps> = ({
     layoutName,
@@ -20,40 +78,9 @@ const ColorVar: React.FC<LayoutProps> = ({
 
     return (
         <motion.section className={styles.color_container} ref={containerRef}>
-            <div className={styles.color_left}>
-                <Image
-                    src={leftImageRed}
-                    placeholder='blur'
-                    alt=''
-                    className={styles.color_left_image}
-                    priority
-                />
-            </div>
-            <div className={styles.color_left_filter}>
-                <button className={styles.color_left_filter_one}>
-                    <div className={styles.first_semicircle} />
-                </button>
-                <button className={styles.color_left_filter_two}>
-                    <div className={styles.second_semicircle} />
-                </button>
-                <button className={styles.color_left_filter_three}>
-                    <div className={styles.third_semicircle} />
-                </button>
-                <button className={styles.color_left_filter_four}>
-                    <div className={styles.fourth_semicircle} />
-                </button>
-                <button className={styles.color_left_filter_five}>
-                    <div className={styles.fifth_semicircle} />
-                </button>
-            </div>
-            <div className={styles.color_right}>
-                <Image
-                    src={rightImageRed}
-                    placeholder='blur'
-                    alt=''
-                    className={styles.color_right_image}
-                />
-            </div>
+           <ColorVariation 
+                imageSet={colorVarImageSet}
+           /> 
         </motion.section>
     );
 }

@@ -5,15 +5,20 @@
     position: relative;
     @include variables.setLayout(flex, center, center);
     height: 100vh;
+    padding: 0 0;
     background-color: white;
+    overflow: hidden;
 
     .silo_content {
         /* LAYOUT */
         @include variables.setLayout(flex, center, flex-start, 26.667px, column);
+        overflow: hidden;
 
         .silo_content_heading {
             /* LAYOUT */
             align-self: stretch;
+            position: relative;
+            z-index: 1;
 
             /* TYPOGRAPHY */
             @include variables.setTypography(64px, normal, 700, normal);
@@ -25,10 +30,12 @@
 
     .silo_image {
         /* LAYOUT */
-        width: 646px;
-        height: auto;
+        height: 100%;
+        width:auto;
         flex-shrink: 0;
         align-self: self-end;
-        transform: translateY(10%) translateX(-5%)
+        transform: translateY(10%) translateX(-10%);
+        position: relative;
+        
     }
 }

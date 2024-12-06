@@ -22,10 +22,19 @@ const CtaSecondary: React.FC<LayoutProps> = ({
         <motion.section
             ref={containerRef}
             className={styles.cta_container}
-
-
         >
-            <div className={styles.virtual_product_gradient_container}>
+            <motion.div className={styles.virtual_product_gradient_container}
+                initial={{
+                    opacity: 0
+                }}
+                animate={{
+                    opacity: 1
+                }}
+                transition={{
+                    duration: 1,
+                    delay: 3
+                }}
+            >
                 <div className={styles.gradient_one} />
                 <div className={styles.gradient_two} />
                 <div className={styles.gradient_three} />
@@ -33,7 +42,7 @@ const CtaSecondary: React.FC<LayoutProps> = ({
                 <div className={styles.gradient_five} />
                 <div className={styles.gradient_six} />
                 <div className={styles.gradient_seven} />
-            </div>
+            </motion.div>
             <motion.h2
                 className={styles.cta_heading}
                 initial={{
@@ -44,8 +53,9 @@ const CtaSecondary: React.FC<LayoutProps> = ({
                 }}
                 transition={{
                     duration: 1,
-                    delay: 3
-                }}>
+                    delay: 2
+                }}
+            >
                 Virtual Product Photography
             </motion.h2>
             <motion.div

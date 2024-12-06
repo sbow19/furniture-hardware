@@ -30,10 +30,13 @@ const useAutoScroll = (layoutName: number, loadNextLayout) => {
 			}
 
 			//Scroll to the top of the container
-			containerRef.current.scrollIntoView({
-				behavior: 'smooth',
-				block: 'start',
-			});
+			/**
+			 * REVIEW - OTHER TECHNIQUES FOR SCROLLING SMOOTHLY
+			 */
+			// containerRef.current.scrollIntoView({
+			// 	behavior: 'smooth',
+			// 	block: 'start',
+			// });
 		}
 	}, [isInView]); // Call only if component is in view
 
