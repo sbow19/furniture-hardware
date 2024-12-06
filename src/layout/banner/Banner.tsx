@@ -1,12 +1,44 @@
+'use client'
 import styles from "./Banner.module.scss";
+import useAutoScroll from "@/hooks/use_autoscroll";
+import { motion } from 'framer-motion'
+import VideoPlayer from "@/components/video/VideoPlayer";
+import CtaPrimary from "@/layout/cta_primary/CtaPrimary";
 
-export default function Banner() {
+
+type LayoutProps = {
+    layoutName: number
+    handleLayoutLoad: () => void
+}
+
+const Banner: React.FC<LayoutProps> = ({
+    layoutName,
+    handleLayoutLoad
+}) => {
+
+    // Detect when user scrolls into range
+    const containerRef = useAutoScroll(layoutName, null);
+
     return (
-        <section className={styles.banner_container} data-testid="tulfa-sofa-container">
-            <video className={styles.banner_video} preload="auto" muted>
-                <source src="/videos/banner/sofa.mp4" type="video/mp4" />
-                {/* ADD ALT TEXT */}
-            </video>
-        </section>
+        <motion.section
+            className={styles.banner_container}
+            data-testid="tulfa-sofa-container"
+            ref={containerRef}
+            
+        >
+            <CtaPrimary
+                handleLayoutLoad={() => {
+                    handleLayoutLoad(layoutName)
+                }}
+            />
+            <VideoPlayer
+                src="/videos/banner/sofa.mp4"
+                type="video/mp4"
+                altText=''
+            />
+
+        </motion.section>
     );
 }
+
+export default Banner;

@@ -3,15 +3,12 @@
 .banner_container {
     /* LAYOUT */
     @include variables.setLayout(flex, center, center);
-    height: 100vh;
+    height: 100%;
+    width: auto;
+    position: relative;
+    pointer-events: "none";
+    z-index: 10;
 
     /* STYLE */
     background: var(--color-white-solid, variables.$light);
-
-    .banner_video {
-        /* LAYOUT */
-        object-fit: cover;
-        flex-shrink: 0;
-        align-self: stretch;
-    }
 }

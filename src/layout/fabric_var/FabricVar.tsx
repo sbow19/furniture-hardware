@@ -1,5 +1,7 @@
 import styles from "./FabricVar.module.scss";
 import Image from 'next/image';
+import useAutoScroll from "@/hooks/use_autoscroll";
+import { motion } from 'framer-motion'
 import lightLeatherRight from "root/public/images/fabric_var/light_leather_right.tif";
 import lightLeatherFabricCloseup from "root/public/images/fabric_var/right.png";
 /* FABRIC CHOICES */
@@ -9,10 +11,21 @@ import orangeFabric from "root/public/images/fabric_var/orange.png";
 import yellowFabric from "root/public/images/fabric_var/yellow.png";
 import greenFabric from "root/public/images/fabric_var/green.png";
 
+type LayoutProps = {
+    layoutName: number
+    handleLayoutLoad: () => void
+}
 
-export default function FabricVar() {
+const FabricVar: React.FC<LayoutProps> = ({
+    layoutName,
+    handleLayoutLoad
+}) => {
+
+    // Detect whenuser scrolls into range
+    const containerRef = useAutoScroll(layoutName, handleLayoutLoad)
+
     return (
-        <section className={styles.fabric_container}>
+        <motion.section className={styles.fabric_container} ref={containerRef}>
             <div className={styles.fabric_left}>
                 <Image
                     src={lightLeatherRight}
@@ -108,6 +121,8 @@ export default function FabricVar() {
                     </button>
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 }
+
+export default FabricVar;

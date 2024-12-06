@@ -1,6 +1,9 @@
+'use client'
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import Image from 'next/image';
 import styles from "./MaterialVar.module.scss";
+import useAutoScroll from "@/hooks/use_autoscroll";
+import { motion } from 'framer-motion'
 
 /* KITCHEN ONDA MATERIAL VARIATIONS */
 import kitchenCounterBlack from "root/public/images/material_var/kitchen_onda_black.png"
@@ -12,10 +15,21 @@ import kitchenCounterRed from "root/public/images/material_var/kitchen_onda_red.
 import kitchenCounterWhite from "root/public/images/material_var/kitchen_onda_white.png"
 import kitchenCounterYellow from "root/public/images/material_var/kitchen_onda_yellow.png"
 
+type LayoutProps = {
+    layoutName: number
+    handleLayoutLoad: () => void
+}
 
-export default function MaterialVar() {
+const MaterialVar: React.FC<LayoutProps> = ({
+    layoutName,
+    handleLayoutLoad
+})=> {
+
+     // Detect whenuser scrolls into range
+    const containerRef = useAutoScroll(layoutName, handleLayoutLoad);
+
     return (
-        <section className={styles.material_container}>
+        <motion.section className={styles.material_container} ref={containerRef}>
              <Image
                     src={kitchenCounterYellow}
                     alt=''
@@ -35,6 +49,8 @@ export default function MaterialVar() {
                     </button>
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 }
+
+export default MaterialVar;

@@ -3,6 +3,7 @@
 import SubHeader from "@/components/sub_header/SubHeader";
 import layoutCollection from "@/layout/layout_collection";
 import { useCallback, useState } from "react";
+import { motion } from "motion/react"
 
 export default function Home() {
   // Layout Collection
@@ -11,22 +12,32 @@ export default function Home() {
   // Load next slide based on 
   const handleLayoutLoad = useCallback((layoutName: number) => {
 
-    // Calculate next layout name
-    const nextLayoutName = layoutName + 1;
+    setLayoutCollectionState((prevLayoutCollectionState) => {
+      // Calculate next layout name
+      const nextLayoutName = layoutName + 1;
+      if (nextLayoutName >= layoutCollection.order.length) {
+        return prevLayoutCollectionState
+      }
 
-    if (layoutCollectionState[nextLayoutName].layoutRendered) {
-      // Do nothing if layout already rendered
-    } else if (!layoutCollectionState[nextLayoutName].layoutRendered) {
-      const updatedLayoutCollection = {
-        ...layoutCollectionState,
-        [nextLayoutName]: {
-          ...layoutCollectionState[nextLayoutName],
-          layoutRendered: true,
-        },
-      };
-      setLayoutCollectionState(updatedLayoutCollection);
-    }
+      if (prevLayoutCollectionState[nextLayoutName].layoutRendered) {
+        // Do nothing if layout already rendered
+        return prevLayoutCollectionState
+      }
+      else if (!prevLayoutCollectionState[nextLayoutName].layoutRendered) {
+        const updatedLayoutCollection = {
+          ...prevLayoutCollectionState,
+          [nextLayoutName]: {
+            ...prevLayoutCollectionState[nextLayoutName],
+            layoutRendered: true,
+          },
+        };
+        return updatedLayoutCollection;
+      }
+    })
+
   }, []);
+
+
 
   return (
     <>
@@ -35,16 +46,25 @@ export default function Home() {
 
       {/* MOST RECENT COMPONENTS RENDERED */}
       {
-        layoutCollection.order.map((compName) => {
-          if (!layoutCollection[compName].layoutRendered) {
+        layoutCollectionState.order.map((compName) => {
+
+          if (!layoutCollectionState[compName].layoutRendered) {
             return null
           }
-          const NextComp = layoutCollection[compName].component;
+          const NextComp = layoutCollectionState[compName].component;
           return (
-            <NextComp
+            <motion.div
               key={compName}
-              handleLayoutLoad={handleLayoutLoad}
-            />
+              initial={{ opacity: 0 }} // Initial state
+              animate={{ opacity: 1 }} // Animated state
+              transition={{ duration: 1, delay: 2 }} // Duration of animation
+            >
+              <NextComp
+               
+                layoutName={compName}
+                handleLayoutLoad={handleLayoutLoad}
+              />
+            </motion.div>
           )
         })
       }

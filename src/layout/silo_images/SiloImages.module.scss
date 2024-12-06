@@ -5,6 +5,7 @@
     position: relative;
     @include variables.setLayout(flex, center, center);
     height: 100vh;
+    background-color: white;
 
     .silo_content {
         /* LAYOUT */

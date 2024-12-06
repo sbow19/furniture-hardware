@@ -30,7 +30,6 @@ import Blogs from "@/layout/blogs/Blogs";
 import BookDemo from "@/layout/book_demo/BookDemo";
 import CloseUpShots from "@/layout/closeup_shots/CloseUpShots";
 import ColorVar from "@/layout/color_var/ColorVar";
-import CtaPrimary from "@/layout/cta_primary/CtaPrimary";
 import CtaSecondary from "@/layout/cta_secondary/CtaSecondary";
 import CtaTertiary from "@/layout/cta_tertiary/CtaTertiary";
 import DimensionImages from "@/layout/dimension_images/DimensionImages";
@@ -56,7 +55,6 @@ import structureLayouts from "@/utils/structure_layouts";
 
 const layoutCollection: Array<React.FC> = [
     Banner,
-    CtaPrimary,
     CtaSecondary,
     CtaTertiary,
     SiloImages,

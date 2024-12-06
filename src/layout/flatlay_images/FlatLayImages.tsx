@@ -1,6 +1,9 @@
+'use client'
 import CallOut from "@/components/call_out/CallOut";
 import AutomaticCarousel from "@/components/carousel/automatic_carousel/AutomaticCarousel";
 import { StaticImageData } from "next/image";
+import { motion } from 'framer-motion'
+import useAutoScroll from "@/hooks/use_autoscroll";
 
 /* FLATLAY IMAGES */
 import flatlayOneImage from 'root/public/images/flatlay_images/FlatLay1.jpg'
@@ -10,6 +13,10 @@ import flatlayFourImage from 'root/public/images/flatlay_images/scene2.png'
 
 import styles from "./FlatLayImages.module.scss";
 
+type LayoutProps = {
+    layoutName: number
+    handleLayoutLoad: () => void
+}
 
 type ImageSet = {
     order: string[];
@@ -44,14 +51,21 @@ const imageSet: ImageSet = {
         imageData: flatlayFourImage
     }
 }
-export default function FlatLayImages() {
+const FlatLayImages: React.FC<LayoutProps> = ({
+    layoutName,
+    handleLayoutLoad
+}) => {
+    // Detect whenuser scrolls into range
+    const containerRef = useAutoScroll(layoutName, handleLayoutLoad);
     return (
-        <section className={styles.flatlay_container}>
+        <motion.section className={styles.flatlay_container} ref={containerRef}>
             <CallOut heading="Flat Lay Images" />
             <AutomaticCarousel
                 imageSet={imageSet}
             />
             <CallOut paragraph="Create mood boards to help interior designers select elements to enhance their projects." modifier="mw-563" />
-        </section>
+        </motion.section>
     );
 }
+
+export default FlatLayImages;

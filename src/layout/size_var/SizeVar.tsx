@@ -1,12 +1,27 @@
+'use client'
 import styles from "./SizeVar.module.scss";
 import Image from 'next/image';
 import largeImage from "root/public/images/size_var/large_drive.png";
 import mediumImage from "root/public/images/size_var/medium_drive.png";
 import smallImage from "root/public/images/size_var/small_drive.png";
+import useAutoScroll from "@/hooks/use_autoscroll";
+import { motion } from 'framer-motion'
 
-export default function SizeVar() {
+type LayoutProps = {
+    layoutName: number
+    handleLayoutLoad: ()=>void
+}
+
+const SizeVar: React.FC<LayoutProps> = ({
+    layoutName,
+    handleLayoutLoad
+})=> {
+
+    // Detect whenuser scrolls into range
+	const containerRef = useAutoScroll(layoutName, handleLayoutLoad);
+
     return (
-        <section className={styles.size_container}>
+        <motion.section className={styles.size_container} ref={containerRef}>
             <div className={styles.size_group}>
                 <div className={styles.size_group_content}>
                     <span className={styles.size_group_content_span_large}>L</span>
@@ -42,6 +57,8 @@ export default function SizeVar() {
             <span className={styles.size_span}>
                 Product Size Variation
             </span>
-        </section>
+        </motion.section>
     );
 }
+
+export default SizeVar

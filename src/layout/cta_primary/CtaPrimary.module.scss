@@ -2,30 +2,32 @@
 
 .cta_container {
     /* LAYOUT */
-    position: relative;
+    position: absolute;
     @include variables.setLayout(flex, center, center);
-    height: 100vh;
+    height: 130vh;
+    width: 100%;
+    z-index:10;
+    background-color: white;
+    mix-blend-mode: screen;
+    flex-shrink: 0;
+    overflow:hidden;
+    
 
-    .banner_video {
-        /* LAYOUT */
-        object-fit: cover;
-        flex-shrink: 0;
-        align-self: stretch;
-    }
+    /* TYPOGRAPHY */
+    @include variables.setTypography(160.173px, normal, 600, normal);
+}
 
-    .cta_content {
-        /* LAYOUT */
+.cta_dummy_container {
+    /* LAYOUT */
+    height: 120vh;
+    width: 100%;
+    position: absolute;
+    z-index: 99; 
+    overflow-y: scroll;
+
+    div {
         position: absolute;
-        @include variables.setLayout(flex, center, center);
+        height: 3000px;
         width: 100%;
-        height: 100%;
-        flex-shrink: 0;
-
-        /* STYLES */
-        background-color: variables.$light;
-
-
-        /* TYPOGRAPHY */
-        @include variables.setTypography(160.173px, normal, 600, normal);
     }
 }

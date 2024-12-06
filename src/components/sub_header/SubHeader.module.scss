@@ -10,6 +10,8 @@
     border-bottom: var(--stroke-weight-1, 1px) solid variables.$subHeaderBorder;
     background: variables.$subHeader;
     backdrop-filter: blur(3px);
+    z-index:20;
+    position: relative;
 
     .subheader_heading {
         /* TYPOGRAPHY */

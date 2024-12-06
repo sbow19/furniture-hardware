@@ -13,8 +13,9 @@
 
 .group_container {
     /* LAYOUT */
-    height: 100vh;
+    height: 200vh;
     width: 100vw;
+    overflow: hidden;
 
     .group_background_container {
 

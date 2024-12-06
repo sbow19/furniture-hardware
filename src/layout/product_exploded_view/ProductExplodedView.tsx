@@ -1,5 +1,10 @@
+'use client'
 import CallOut from "@/components/call_out/CallOut";
 import Image from 'next/image';
+import { motion } from 'framer-motion'
+import useAutoScroll from "@/hooks/use_autoscroll";
+
+/* MATTRESS LAYER IMAGES */
 import matressLayerOne from 'root/public/images/product_exploded_view/f.png'
 import matressLayerTwo from 'root/public/images/product_exploded_view/g.png'
 import matressLayerThree from 'root/public/images/product_exploded_view/third.png'
@@ -11,9 +16,23 @@ import matressLayerEight from 'root/public/images/product_exploded_view/eighth.p
 
 
 import styles from "./ProductExplodedView.module.scss";
-export default function ProductExplodedView() {
+
+type LayoutProps = {
+    layoutName: number
+    handleLayoutLoad: () => void
+}
+
+
+const ProductExplodedView: React.FC<LayoutProps> = ({
+    layoutName,
+    handleLayoutLoad
+}) => {
+
+     // Detect whenuser scrolls into range
+     const containerRef = useAutoScroll(layoutName, handleLayoutLoad);
+
     return (
-        <section className={styles.product_container}>
+        <motion.section className={styles.product_container} ref={containerRef}>
             <CallOut heading="Product Exploded View" />
             <div className={styles.product_mattres}>
                 <Image
@@ -59,6 +78,8 @@ export default function ProductExplodedView() {
                 />
             </div>
             <CallOut paragraph="Let Your Customers See The Meticulous Design, Premium Materials, And The Skill That Goes Into Every Detail-From The Inside Out." modifier="mw-928" />
-        </section>
+        </motion.section>
     );
 }
+
+export default ProductExplodedView;

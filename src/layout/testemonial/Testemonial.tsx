@@ -1,16 +1,32 @@
+'use client'
 import { Manrope } from "next/font/google"
 import styles from "./Testemonial.module.scss";
 import Image from 'next/image';
 import profileImage from "root/public/images/testemonial/profile.png";
+import useAutoScroll from "@/hooks/use_autoscroll";
+import { motion } from 'framer-motion'
 
 const manrope = Manrope({
     weight: ["400", "500"],
     subsets: ["latin"]
 })
 
-export default function Testemonial() {
+type LayoutProps = {
+    layoutName: number
+    handleLayoutLoad: () => void
+}
+
+const Testemonial:React.FC<LayoutProps> =({
+    layoutName,
+    handleLayoutLoad
+}) => {
+
+    // Detect whenuser scrolls into range
+    const containerRef = useAutoScroll(layoutName, handleLayoutLoad);
+
+
     return (
-        <section className={`${styles.testemonial_container} ${manrope.className}`}>
+        <motion.section className={`${styles.testemonial_container} ${manrope.className}`} ref={containerRef}>
             <div className={styles.testemonial_content}>
                 <div className={styles.testemonial_content_icon} />
                 <div className={styles.testemonial_content_card}>
@@ -40,6 +56,8 @@ export default function Testemonial() {
                     </div>
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 }
+
+export default Testemonial;

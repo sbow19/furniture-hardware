@@ -1,0 +1,9 @@
+@use '@/styles/shared/variables';
+
+.video_container {
+    width: 100%; 
+    height: auto;
+    overflow: hidden;
+    position: relative;
+    pointer-events: none;
+}

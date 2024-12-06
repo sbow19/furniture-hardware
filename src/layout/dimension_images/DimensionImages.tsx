@@ -1,6 +1,9 @@
+'use client'
 import CallOut from "@/components/call_out/CallOut";
 import UpDownCarousel from "@/components/carousel/updown_carousel/UpDownCarousel";
 import { StaticImageData } from "next/image";
+import { motion } from 'framer-motion'
+import useAutoScroll from "@/hooks/use_autoscroll";
 
 /* DIMENSION IMAGES */
 import handbookSizeImage from 'root/public/images/dimension_images/sizes.png'
@@ -17,6 +20,11 @@ type ImageSet = {
         imageName: string,
         buttonColor: "dark" | "light"
     };
+}
+
+type LayoutProps = {
+    layoutName: number
+    handleLayoutLoad: () => void
 }
 
 const imageSet: ImageSet = {
@@ -61,13 +69,20 @@ const imageSet: ImageSet = {
 }
 
 import styles from "./DimensionImages.module.scss";
-export default function DimensionImages() {
+const DimensionImages: React.FC<LayoutProps> = ({
+    layoutName,
+    handleLayoutLoad
+}) => {
+    // Detect whenuser scrolls into range
+    const containerRef = useAutoScroll(layoutName, handleLayoutLoad);
     return (
-        <section className={styles.dimension_container}>
+        <motion.section className={styles.dimension_container} ref={containerRef}>
             <CallOut heading="Dimension Images" />
-                <UpDownCarousel imageSet={imageSet}/>
+            <UpDownCarousel imageSet={imageSet} />
             <CallOut paragraph="Give your customers a clear view of how you furniture fits into their
             space with precise dimensions and scale indicators." />
-        </section>
+        </motion.section>
     );
 }
+
+export default DimensionImages;

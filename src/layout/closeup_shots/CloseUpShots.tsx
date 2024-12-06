@@ -1,14 +1,27 @@
+'use client'
 import CallOut from "@/components/call_out/CallOut";
 // import ShowCase from "@/components/showcase/ShowCase";
 import Button from '@/components/button/Button'
 import Image from 'next/image';
 import backgroundImageRender from "root/public/images/closeup_shots/nitavparikh_upholstery_cleaning_closeup_--v_6.1_a6bab072-4445-4e1c-b8b3-07bf91d176c8_1.png"
-
+import useAutoScroll from "@/hooks/use_autoscroll";
+import { motion } from 'framer-motion'
 import styles from "./CloseUpShots.module.scss";
 
-export default function CloseUpShots() {
+type LayoutProps = {
+    layoutName: number
+    handleLayoutLoad: () => void
+}
+
+const CloseUpShots: React.FC<LayoutProps> = ({
+    layoutName,
+    handleLayoutLoad
+}) => {
+    // Detect whenuser scrolls into range
+    const containerRef = useAutoScroll(layoutName, handleLayoutLoad);
+
     return (
-        <section className={styles.close_container}>
+        <motion.section className={styles.close_container} ref={containerRef}>
 
             <CallOut heading="Close Up Shots" />
             <div className={styles.close_showcase}>
@@ -18,7 +31,6 @@ export default function CloseUpShots() {
                     priority
                     className={styles.close_background}
                 />
-                {/* <ShowCase /> */}
 
             </div>
 
@@ -31,6 +43,8 @@ export default function CloseUpShots() {
                     buttonType={1}
                 />
             </div>
-        </section>
+        </motion.section>
     );
 }
+
+export default CloseUpShots;

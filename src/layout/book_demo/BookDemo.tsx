@@ -3,17 +3,29 @@
 import Button from "@/components/button/Button";
 import Image from 'next/image';
 import bookDemoImage from "root/public/images/book_demo/sector.png"
+import { motion } from 'framer-motion'
+import useAutoScroll from "@/hooks/use_autoscroll";
+
+type LayoutProps = {
+    layoutName: number
+    handleLayoutLoad: () => void
+}
 
 
 import styles from "./BookDemo.module.scss";
-export default function BookDemo() {
+const BookDemo = ({
+    layoutName,
+    handleLayoutLoad
+}) => {
 
     const onClick = () => {
 
     }
+    // Detect whenuser scrolls into range
+    const containerRef = useAutoScroll(layoutName, handleLayoutLoad);
 
     return (
-        <section className={styles.book_container}>
+        <motion.section className={styles.book_container} ref={containerRef}>
             <div className={styles.book_content}>
                 <Image
                     alt=''
@@ -37,6 +49,8 @@ export default function BookDemo() {
                     />
                 </div>
             </div>
-        </section>
+        </motion.section>
     );
 }
+
+export default BookDemo;

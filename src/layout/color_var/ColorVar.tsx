@@ -1,18 +1,33 @@
+'use client'
 import styles from "./ColorVar.module.scss";
 import Image from 'next/image';
 import rightImageRed from "root/public/images/color_var/right_drive.png";
 import leftImageRed from "root/public/images/color_var/left_drive.png";
-export default function ColorVar() {
+import useAutoScroll from "@/hooks/use_autoscroll";
+import { motion } from 'framer-motion'
+
+type LayoutProps = {
+    layoutName: number
+    handleLayoutLoad: () => void
+}
+
+const ColorVar: React.FC<LayoutProps> = ({
+    layoutName,
+    handleLayoutLoad
+}) => {
+    // Detect whenuser scrolls into range
+    const containerRef = useAutoScroll(layoutName, handleLayoutLoad);
+
     return (
-        <section className={styles.color_container}>
+        <motion.section className={styles.color_container} ref={containerRef}>
             <div className={styles.color_left}>
-            <Image
-                src={leftImageRed}
-                placeholder='blur'
-                alt=''
-                className={styles.color_left_image}
-                priority
-            />
+                <Image
+                    src={leftImageRed}
+                    placeholder='blur'
+                    alt=''
+                    className={styles.color_left_image}
+                    priority
+                />
             </div>
             <div className={styles.color_left_filter}>
                 <button className={styles.color_left_filter_one}>
@@ -33,12 +48,14 @@ export default function ColorVar() {
             </div>
             <div className={styles.color_right}>
                 <Image
-                        src={rightImageRed}
-                        placeholder='blur'
-                        alt=''
-                        className={styles.color_right_image}
-                    />
+                    src={rightImageRed}
+                    placeholder='blur'
+                    alt=''
+                    className={styles.color_right_image}
+                />
             </div>
-        </section>
+        </motion.section>
     );
 }
+
+export default ColorVar;
