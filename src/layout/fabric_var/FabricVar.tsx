@@ -2,14 +2,14 @@ import styles from "./FabricVar.module.scss";
 import Image from 'next/image';
 import useAutoScroll from "@/hooks/use_autoscroll";
 import { motion } from 'framer-motion'
-import lightLeatherRight from "../../../public/images/fabric_var/light_leather_right.tif";
-import lightLeatherFabricCloseup from "../../../public/images/fabric_var/right.png";
+import lightLeatherRight from "../../assets/images/fabric_var/light_leather_right.tif";
+import lightLeatherFabricCloseup from "../../assets/images/fabric_var/right.png";
 /* FABRIC CHOICES */
-import blueFabric from "../../../public/images/fabric_var/blue.png";
-import grayFabric from "../../../public/images/fabric_var/gray.png";
-import orangeFabric from "../../../public/images/fabric_var/orange.png";
-import yellowFabric from "../../../public/images/fabric_var/yellow.png";
-import greenFabric from "../../../public/images/fabric_var/green.png";
+import blueFabric from "../../assets/images/fabric_var/blue.png";
+import grayFabric from "../../assets/images/fabric_var/gray.png";
+import orangeFabric from "../../assets/images/fabric_var/orange.png";
+import yellowFabric from "../../assets/images/fabric_var/yellow.png";
+import greenFabric from "../../assets/images/fabric_var/green.png";
 
 type LayoutProps = {
     layoutName: number

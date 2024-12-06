@@ -6,10 +6,10 @@ import { motion } from 'framer-motion'
 import useAutoScroll from "@/hooks/use_autoscroll";
 
 /* FLATLAY IMAGES */
-import flatlayOneImage from '../../../public/images/flatlay_images/FlatLay1.jpg'
-import flatlayTwoImage from '../../../public/images/flatlay_images/FlatLay2.jpg'
-import flatlayThreeImage from '../../../public/images/flatlay_images/scene1.png'
-import flatlayFourImage from '../../../public/images/flatlay_images/scene2.png'
+import flatlayOneImage from '../../assets/images/flatlay_images/FlatLay1.jpg'
+import flatlayTwoImage from '../../assets/images/flatlay_images/FlatLay2.jpg'
+import flatlayThreeImage from '../../assets/images/flatlay_images/scene1.png'
+import flatlayFourImage from '../../assets/images/flatlay_images/scene2.png'
 
 import styles from "./FlatLayImages.module.scss";
 

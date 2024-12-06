@@ -6,14 +6,14 @@ import useAutoScroll from "@/hooks/use_autoscroll";
 import { motion } from 'framer-motion'
 
 /* KITCHEN ONDA MATERIAL VARIATIONS */
-import kitchenCounterBlack from "../../../public/images/material_var/kitchen_onda_black.png"
-import kitchenCounterBlue from "../../../public/images/material_var/kitchen_onda_blue.png"
-import kitchenCounterGold from "../../../public/images/material_var/kitchen_onda_gold imperial.png"
-import kitchenCounterGreen from "../../../public/images/material_var/kitchen_onda_green.png"
-import kitchenCounterPearl from "../../../public/images/material_var/kitchen_onda_pearl royal.png"
-import kitchenCounterRed from "../../../public/images/material_var/kitchen_onda_red.png"
-import kitchenCounterWhite from "../../../public/images/material_var/kitchen_onda_white.png"
-import kitchenCounterYellow from "../../../public/images/material_var/kitchen_onda_yellow.png"
+import kitchenCounterBlack from "../../assets/images/material_var/kitchen_onda_black.png"
+import kitchenCounterBlue from "../../assets/images/material_var/kitchen_onda_blue.png"
+import kitchenCounterGold from "../../assets/images/material_var/kitchen_onda_gold imperial.png"
+import kitchenCounterGreen from "../../assets/images/material_var/kitchen_onda_green.png"
+import kitchenCounterPearl from "../../assets/images/material_var/kitchen_onda_pearl royal.png"
+import kitchenCounterRed from "../../assets/images/material_var/kitchen_onda_red.png"
+import kitchenCounterWhite from "../../assets/images/material_var/kitchen_onda_white.png"
+import kitchenCounterYellow from "../../assets/images/material_var/kitchen_onda_yellow.png"
 
 type LayoutProps = {
     layoutName: number

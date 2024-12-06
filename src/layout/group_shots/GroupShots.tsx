@@ -1,9 +1,9 @@
 'use client'
 import CallOut from "@/components/call_out/CallOut";
 import Image from 'next/image';
-import groupShotBackgroundImage from '../../../public/images/group_shots/Firefly 20240929230829.png'
-import basketMask from '../../../public/images/group_shots/Basket/Product 44_120cm copy.png'
-import benchMask from '../../../public/images/group_shots/Bench/bench_01.tif'
+import groupShotBackgroundImage from '../../assets/images/group_shots/Firefly 20240929230829.png'
+import basketMask from '../../assets/images/group_shots/Basket/Product 44_120cm copy.png'
+import benchMask from '../../assets/images/group_shots/Bench/bench_01.tif'
 import { motion } from 'framer-motion'
 import useAutoScroll from "@/hooks/use_autoscroll";
 

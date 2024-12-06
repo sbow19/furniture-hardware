@@ -6,12 +6,12 @@ import { motion } from 'framer-motion'
 import useAutoScroll from "@/hooks/use_autoscroll";
 
 /* DIMENSION IMAGES */
-import handbookSizeImage from '../../../public/images/dimension_images/sizes.png'
-import lightChairSizeImage from '../../../public/images/dimension_images/2.png'
-import sofaSizeImage from '../../../public/images/dimension_images/3.png'
-import cushionSizeImage from '../../../public/images/dimension_images/4.png'
-import kitchenSizeImage from '../../../public/images/dimension_images/5.png'
-import darkChairSizeImage from '../../../public/images/dimension_images/6.png'
+import handbookSizeImage from '../../assets/images/dimension_images/1.png'
+import lightChairSizeImage from '../../assets/images/dimension_images/2.png'
+import sofaSizeImage from '../../assets/images/dimension_images/3.png'
+import cushionSizeImage from '../../assets/images/dimension_images/4.png'
+import kitchenSizeImage from '../../assets/images/dimension_images/5.png'
+import darkChairSizeImage from '../../assets/images/dimension_images/6.png'
 
 type ImageSet = {
     order: string[];

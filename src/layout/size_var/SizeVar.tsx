@@ -1,9 +1,9 @@
 'use client'
 import styles from "./SizeVar.module.scss";
 import Image from 'next/image';
-import largeImage from "../../../public/images/size_var/large_drive.png";
-import mediumImage from "../../../public/images/size_var/medium_drive.png";
-import smallImage from "../../../public/images/size_var/small_drive.png";
+import largeImage from "../../assets/images/size_var/large_drive.png";
+import mediumImage from "../../assets/images/size_var/medium_drive.png";
+import smallImage from "../../assets/images/size_var/small_drive.png";
 import useAutoScroll from "@/hooks/use_autoscroll";
 import { motion } from 'framer-motion'
 
