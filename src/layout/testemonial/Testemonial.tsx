@@ -26,7 +26,13 @@ const Testemonial:React.FC<LayoutProps> =({
 
 
     return (
-        <motion.section className={`${styles.testemonial_container} ${manrope.className}`} ref={containerRef}>
+        <motion.section 
+            className={`${styles.testemonial_container} ${manrope.className}`} 
+            ref={containerRef}
+            initial={{ transform: "translateY(20px)" }}
+            whileInView={{ transform: "translateY(0px)" }}
+            transition={{ type: "spring", delay: 2, stiffness: 100, damping: 50, mass:0.1 }}
+        >
             <div className={styles.testemonial_content}>
                 <div className={styles.testemonial_content_icon} />
                 <div className={styles.testemonial_content_card}>

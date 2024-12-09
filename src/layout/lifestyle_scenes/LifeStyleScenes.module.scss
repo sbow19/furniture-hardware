@@ -1,10 +1,13 @@
 @use '@/styles/shared/variables';
 
+.scroll_container {
+    height: 150vh;
+    width: 100%
+}
+
 .lifestyle_container {
     /* LAYOUT */
-    height: 1320px;
-    position: relative;
-    overflow: hidden;
+    height: 100%;
 }
 
 .lifestyle_image {

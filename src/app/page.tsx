@@ -50,6 +50,13 @@ export default function Home() {
 
   /*  END OF SCROLLING IMPLEMENTATION */
 
+  /* Pause scrolling triggered by children */
+  const [isScrollStopped, setIsScrollStopped ] = useState(false);
+
+  const handleScrollStopped = useCallback((state)=>{
+    setIsScrollStopped(state)
+  }, [])
+
   // Load next slide based on 
   const handleLayoutLoad = useCallback((layoutName: number) => {
 
@@ -96,7 +103,7 @@ export default function Home() {
           overflow: "hidden",
           willChange: "transform",
         }}
-      className="scroll-container"
+        className="scroll-container"
       >
       {/* MOST RECENT COMPONENTS RENDERED */}
       {
@@ -117,6 +124,7 @@ export default function Home() {
 
                 layoutName={compName}
                 handleLayoutLoad={handleLayoutLoad}
+                handleScrollStopped={handleScrollStopped}
               />
             </motion.div>
           )
@@ -125,7 +133,7 @@ export default function Home() {
 
     </motion.div >
 
-      <div style={{ height: scrollableHeight }} />
+    <div style={{ height: scrollableHeight }} />
 
     </>
   );

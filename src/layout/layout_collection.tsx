@@ -52,29 +52,28 @@ import { memoizeComponents } from "@/utils/memoize_components";
 import structureLayouts from "@/utils/structure_layouts";
 
 /* LAYOUT COLLECTION MUST BE IN DESIRED ORDER */
-
 const layoutCollection: Array<React.FC> = [
-    Banner,
-    CtaSecondary,
-    CtaTertiary,
-    SiloImages,
-    SizeVar,
-    ColorVar,
-    FabricVar,
-    MaterialVar,
+    // Banner,
+    // CtaSecondary,
+    // CtaTertiary,
+    // SiloImages,
+    // SizeVar,
+    // ColorVar,
+    // FabricVar,
+    // MaterialVar,
     Testemonial,
     LifeStyleScenes,
     FunctionalityImages,
-    CloseUpShots,
-    GroupShots,
-    ProductExplodedView,
-    DimensionImages,
-    Testemonial,
-    InstallationImages,
-    FlatLayImages,
-    MarketingImages,
-    BookDemo,
-    Blogs,
+    // CloseUpShots,
+    // GroupShots,
+    // ProductExplodedView,
+    // DimensionImages,
+    // Testemonial,
+    // InstallationImages,
+    // FlatLayImages,
+    // MarketingImages,
+    // BookDemo,
+    // Blogs,
 ];
 
 const layoutCollectionMemoized = memoizeComponents(layoutCollection);
