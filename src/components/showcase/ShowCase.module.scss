@@ -12,6 +12,8 @@
         width: 585.333px;
         margin-left: 120px;
         flex-shrink: 0;
+        position: relative;
+        z-index: 1000;
 
         /* STYLES */
         color: variables.$light;

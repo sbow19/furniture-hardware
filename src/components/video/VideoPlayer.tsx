@@ -1,10 +1,18 @@
-import React, { memo } from 'react';
+import React, { memo, useEffect } from 'react';
 import styles from "./VideoPlayer.module.scss";
 
-const VideoPlayer = memo(({ src, type, altText }) => {
+const VideoPlayer = memo(({ src, type, altText, onVideoComplete }) => {
+
+
   return (
     <div className={styles.video_container}>
-      <video controls={false} muted  preload='auto' autoPlay>
+      <video 
+        controls={false} 
+        muted  
+        preload='auto' 
+        autoPlay
+        onEnded={onVideoComplete ?? null}
+      >
         <source src={src} type={type} />
         Your browser does not support the video tag.
         {altText}

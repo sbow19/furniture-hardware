@@ -1,38 +1,40 @@
-import { useRef, useEffect } from 'react';
-import { useInView } from 'framer-motion';
+import { useEffect, useRef } from "react";
+import { useInView } from "motion/react";
+// Custom hook for handling wheel scroll events
+const useAutoScroll = (handleChangeSlide) => {
 
-/**
- * Hook checks when component is in view, then automatically scrolls to top of component at a given threshold
- * Container component with hook also calls the rendering of the next Layout, if index is valid
- * @param {number} layoutName -- index/layoutName of next Layout in Layout array (See App component)
- * @param loadNextLayout -- Handler function at App component level to load next Layout
- * @returns {React.MutableRefObject<null>} Reference passed to component against which in view is checked
- */
+    // Create a ref for the container element
+    const containerRef = useRef(null);
+    // Render next slide completely when component is fully in view
+    const isInView = useInView(containerRef, { amount: 0.75 });
 
-const useAutoScroll = (layoutName: number, loadNextLayout) => {
-	// Create a ref for the container element
-	const containerRef = useRef(null);
-	// Check if the container is in the viewport when it becomes visible
-	const isInView = useInView(containerRef, { amount: 0.05 });
+    useEffect(() => {
+      // Define the wheel event handler
+      const myListener = (e) => {
+        // Event handler logic here
+        if (e.deltaY > 0) {
+          // Scrolled down
+          handleChangeSlide(1);
+          document.removeEventListener("wheel", myListener);
+        } else {
+          // Scrolled up
+          handleChangeSlide(-1);
+          document.removeEventListener("wheel", myListener);
+        }
+      };
 
-	// When the container is visible, call the nextLayoutLoad with the current index
-	useEffect(() => {
-		if (isInView) {
-			//Reference to handler function in main app. Manages load of next component
-			if (layoutName >= 0) {
-				// Call nextLayoutLoad if layoutName is truthy
-				
-				if (loadNextLayout) {loadNextLayout(layoutName)};
-			} else {
-				// You can implement "pass" behavior here if needed
-				// (e.g., simply do nothing or log something)
-				console.log('No name provided, skipping...');
-			}
-
-			}
-	}, [isInView]); // Call only if component is in view
-
-	return containerRef;
-};
-
-export default useAutoScroll;
+      if(isInView){
+        // Apply the event listener after a 2-second delay
+        document.addEventListener("wheel", myListener);
+      }
+  
+      // Cleanup function to remove the listener when the component is unmounted
+      return () => {
+        document.removeEventListener("wheel", myListener); // Remove the event listener
+      };
+    }, [isInView]); // Dependency array includes handleChangeSlide to ensure it's fresh if it changes
+  
+    return containerRef;
+  };
+  
+  export default useAutoScroll;

@@ -23,6 +23,10 @@
       "root/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
-  "exclude": ["node_modules"]
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "src/types/app_types.d.ts"],
+  "exclude": ["node_modules"],
+  "typeRoots": [
+    "node_modules/@types",  // Default location for third-party types
+    "src/types"              // Custom types folder for your global types
+  ]
 }

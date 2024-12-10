@@ -2,62 +2,45 @@
 
 import SubHeader from "@/components/sub_header/SubHeader";
 import layoutCollection from "@/layout/layout_collection";
-import { useCallback, useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform, SpringOptions, useSpring } from "motion/react"
-import ResizeObserver from "resize-observer-polyfill";
+import { useCallback, useState, useRef } from "react";
+import { motion } from "motion/react"
+import useWindowSize from "@/hooks/use_window_size";
 
 export default function Home() {
   // Layout Collection
-  const [layoutCollectionState, setLayoutCollectionState] = useState(layoutCollection)
+  const [layoutCollectionState, setLayoutCollectionState] = useState(layoutCollection);
 
-  // Momentum scrolling https://medium.com/@d_vsh/craft-a-smooth-momentum-scrolling-experience-with-react-and-framer-motion-72533d3cfc92
-  const scrollRef = useRef<HTMLDivElement>(null);
+  const windowSize = useWindowSize();
 
-  const [scrollableHeight, setScrollableHeight] = useState<number>(0);
+  const [currentSlide, setCurrentSlide] = useState({
+    currentSlide: 0,
+    previousSlide: 0
+  });
 
-  const resizeScrollableHeight = useCallback((entries: ResizeObserverEntry[]) => {
-    for (let entry of entries) {
-      setScrollableHeight(entry.contentRect.height);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+
+  const handleChangeSlide = useCallback((direction: number) => {
+    // Clear any existing timeout before setting a new one
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
     }
-  }, []);
-
-  useEffect(() => {
-    const resizeObserver = new ResizeObserver((entries) =>
-      resizeScrollableHeight(entries)
-    );
-    scrollRef.current && resizeObserver.observe(scrollRef.current);
-
-    return () => resizeObserver.disconnect();
-  }, []);
-
-  const { scrollY } = useScroll();
-  const negativeScrollY = useTransform(
-    scrollY,
-    [0, scrollableHeight],
-    [0, -scrollableHeight]
-  );
-
-  const springPhysics: SpringOptions = {
-    damping: 40,
-    mass: 0.1,
-    stiffness: 100,
-    bounce: 0.4,
-    duration: 0.4,
-    velocity: 400,
-  };
-
-  const springNegativeScrollY = useSpring(negativeScrollY, springPhysics);
-
-  /*  END OF SCROLLING IMPLEMENTATION */
-
-  /* Pause scrolling triggered by children */
-  const [isScrollStopped, setIsScrollStopped ] = useState(false);
-
-  const handleScrollStopped = useCallback((state)=>{
-    setIsScrollStopped(state)
+    // Set a timeout to handle the slide change after a delay
+    timeoutRef.current = setTimeout(() => {
+      setCurrentSlide(prev => {
+        if (prev.currentSlide + direction < 0) {
+          return prev;
+        } else if (prev.currentSlide + direction >= layoutCollectionState.order.length) {
+          return prev;
+        } else {
+          return {
+            currentSlide: prev.currentSlide + direction,
+            previousSlide: prev.currentSlide
+          };
+        }
+      });
+    }, 100); // Adjust the timeout delay (e.g., 300ms) as needed
   }, [])
 
-  // Load next slide based on 
   const handleLayoutLoad = useCallback((layoutName: number) => {
 
     setLayoutCollectionState((prevLayoutCollectionState) => {
@@ -86,55 +69,78 @@ export default function Home() {
   }, []);
 
 
-
   return (
     <>
-      {/* STICKY AT TOP - TO ANIMATE */}
       <SubHeader activePage="/" />
 
       <motion.div
-        ref={scrollRef}
+        // ref={scrollRef}
         style={{
-          y: springNegativeScrollY,
-          position: "fixed",
+          position: "relative",
           top: 0,
           left: 0,
           width: "100%",
+          height: "100vh",
           overflow: "hidden",
-          willChange: "transform",
         }}
-        className="scroll-container"
       >
-      {/* MOST RECENT COMPONENTS RENDERED */}
-      {
-        layoutCollectionState.order.map((compName) => {
+        {/* MOST RECENT COMPONENTS RENDERED */}
+        {
+          layoutCollectionState.order.map((compName) => {
 
-          if (!layoutCollectionState[compName].layoutRendered) {
-            return null
-          }
-          const NextComp = layoutCollectionState[compName].component;
-          return (
-            <motion.div
-              key={compName}
-              initial={{ opacity: 0 }} // Initial state
-              animate={{ opacity: 1 }} // Animated state
-              transition={{ duration: 1, delay: 2 }} // Duration of animation
-            >
-              <NextComp
+            if (!layoutCollectionState[compName].layoutRendered) {
+              return null
+            }
 
-                layoutName={compName}
-                handleLayoutLoad={handleLayoutLoad}
-                handleScrollStopped={handleScrollStopped}
-              />
-            </motion.div>
-          )
-        })
-      }
+            if(compName > currentSlide.currentSlide + 1 || compName < currentSlide.currentSlide - 1){
+              return null
+            }
 
-    </motion.div >
+            const NextComp = layoutCollectionState[compName].component;
 
-    <div style={{ height: scrollableHeight }} />
+            // Determine whether the component falls eitehrside of current component
+            const direction = compName - currentSlide.currentSlide;
+            let modifier = 1;
 
+            if (direction < 0) {
+              modifier = -1
+            }
+
+            
+            return (
+              <motion.div
+                key={compName}
+                style={{
+                  position: 'absolute',
+                  width: "100%",
+
+                }}
+                initial={{
+                  opacity: 0,
+                  y: currentSlide.currentSlide === compName ? 0 : modifier * windowSize.height,
+                }}
+                animate={{
+                  opacity: currentSlide.currentSlide === compName ? 1 : 0,
+                  y: currentSlide.currentSlide === compName ? 0 : modifier * windowSize.height
+                }}
+                transition={{
+                  duration: 0.5
+                }}
+                
+              >
+                <NextComp
+                  layoutName={compName}
+                  handleLayoutLoad={handleLayoutLoad}
+                  handleChangeSlide={handleChangeSlide}
+                  currentSlide={currentSlide}
+                />
+
+              </motion.div>
+            )
+          })
+        }
+
+      </motion.div >
     </>
   );
 }

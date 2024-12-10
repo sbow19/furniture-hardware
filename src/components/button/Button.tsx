@@ -8,10 +8,11 @@ type ButtonProps = {
     text: "Take a closer look" | "Schedule a Demo";
     modifier: keyof typeof styles;
     buttonType?: number;
-    onClick: () => void
+    onClick: () => void;
+    containerStyles?: {}
 }
 
-export default function Button({ text, modifier, buttonType, onClick }: ButtonProps) {
+export default function Button({ text, modifier, buttonType, onClick, containerStyles }: ButtonProps) {
 
     let Button: React.FC;
 
@@ -33,9 +34,12 @@ export default function Button({ text, modifier, buttonType, onClick }: ButtonPr
             break;
     }
 
-    return (<>
+    return (
+        <div
+            style={containerStyles}
+        >
         {Button}
-    </>
+        </div>
     );
 }
 

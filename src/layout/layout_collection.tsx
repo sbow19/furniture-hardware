@@ -1,30 +1,8 @@
 
 /**
  * Individual slides on the page.
- * Must follow this order <SubHeader activePage="/" />
-      <Banner />
-      <CtaPrimary />
-      <CtaSecondary />
-      <CtaTertiary />
-      <SiloImages />
-      <SizeVar />
-      <ColorVar />
-      <FabricVar />
-      <MaterialVar />
-      <Testemonial />
-      <LifeStyleScenes />
-      <FunctionalityImages />
-      <CloseUpShots />
-      <GroupShots />
-      <ProductExplodedView />
-      <DimensionImages />
-      <Testemonial />
-      <InstallationImages />
-      <FlatLayImages />
-      <MarketingImages />
-      <BookDemo />
-      <Blogs />
- */
+ * */
+
 import Banner from "@/layout/banner/Banner";
 import Blogs from "@/layout/blogs/Blogs";
 import BookDemo from "@/layout/book_demo/BookDemo";
@@ -41,7 +19,7 @@ import InstallationImages from "@/layout/installation_images/InstallationImages"
 import LifeStyleScenes from "@/layout/lifestyle_scenes/LifeStyleScenes";
 import MarketingImages from "@/layout/marketing_images/MarketingImages";
 import MaterialVar from "@/layout/material_var/MaterialVar";
-import ProductExplodedView from "@/layout/product_exploded_view/ProductExplodedView";
+// import ProductExplodedView from "@/layout/product_exploded_view/ProductExplodedView";
 import SiloImages from "@/layout/silo_images/SiloImages";
 import SizeVar from "@/layout/size_var/SizeVar";
 import Testemonial from "@/layout/testemonial/Testemonial";
@@ -53,27 +31,27 @@ import structureLayouts from "@/utils/structure_layouts";
 
 /* LAYOUT COLLECTION MUST BE IN DESIRED ORDER */
 const layoutCollection: Array<React.FC> = [
-    // Banner,
-    // CtaSecondary,
-    // CtaTertiary,
-    // SiloImages,
-    // SizeVar,
-    // ColorVar,
-    // FabricVar,
-    // MaterialVar,
+    Banner,
+    CtaSecondary,
+    CtaTertiary,
+    SiloImages,
+    SizeVar,
+    ColorVar,
+    FabricVar,
+    MaterialVar,
     Testemonial,
     LifeStyleScenes,
     FunctionalityImages,
-    // CloseUpShots,
-    // GroupShots,
+    CloseUpShots,
+    GroupShots,
     // ProductExplodedView,
-    // DimensionImages,
-    // Testemonial,
-    // InstallationImages,
-    // FlatLayImages,
-    // MarketingImages,
-    // BookDemo,
-    // Blogs,
+    DimensionImages,
+    Testemonial,
+    InstallationImages,
+    FlatLayImages,
+    MarketingImages,
+    BookDemo,
+    Blogs,
 ];
 
 const layoutCollectionMemoized = memoizeComponents(layoutCollection);
