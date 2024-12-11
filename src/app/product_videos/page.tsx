@@ -12,7 +12,7 @@ export default function ProductVideos() {
 
     return (
         <>
-            <SubHeader activePage="/product_videos" />
+            <SubHeader activePage="/product_videos" headerStyleType={0}/>
             <Title />
             {videoPaths.map((path, index) => (
                 <Visual key={index} path={path} />
