@@ -72,7 +72,6 @@ const GroupShots: React.FC<LayoutProps> = ({
             // Apply the event listener after a 2-second delay
             elementRef.current.addEventListener("wheel", myListener);
         } else {
-            console.log(isInView)
             elementRef.current.removeEventListener("wheel", myListener);
         }
 
@@ -81,7 +80,10 @@ const GroupShots: React.FC<LayoutProps> = ({
     return (
         <div ref={elementRef}>
             <motion.section className={styles.group_container} ref={containerRef}>
-                <CallOut heading="Group Shots" />
+                <CallOut 
+                    heading="Group Shots" 
+                    calloutStyleType={1}
+                />
                 {/* <GroupCarousel /> */}
                 <div
                     className={styles.group_background_container}

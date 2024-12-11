@@ -25,8 +25,11 @@
 $primaryColor: #2a266a;
 $secondaryColor: #433e99;
 $tertiaryColor: #ef4b32;
+$quaternaryColor: #FFD222;
 $light: #FFF;
 $gray: #F0F3FB;
+
+$headerColorOne: #433E99;
 
 $firstGradient: linear-gradient(90deg, #433E99 0%, #EF4B32 100%);
 $secondGradient: linear-gradient(90deg, #2A266A 0%, #EF4B32 100%);
@@ -42,7 +45,7 @@ $testemonialCardImageGradient: linear-gradient(0deg, rgba(67, 62, 153, 0.20) 0%,
 $subHeader: rgba(245, 245, 247, 0.902);
 $subHeaderBorder: rgba(42, 38, 106, 0.40);
 $subHeaderText: $secondaryColor;
-$subHeaderTextDisabled: rgba(67, 62, 153, 0.60);
+$subHeaderTextDisabledOne: #CDCDCD;
 $subHeaderButton: $tertiaryColor;
 $subHeaderButtonText: #eeeeee;
 

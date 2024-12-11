@@ -194,7 +194,7 @@ const FabricVar: React.FC<LayoutProps> = ({
             <motion.section className={styles.variation_container} ref={containerRef}>
                 <DropdownVar
                     variationSet={dropDownVarSet}
-                    defaultVar={"lLeather"}
+                    defaultVar={"prints"}
                 />
             </motion.section>
         </div>

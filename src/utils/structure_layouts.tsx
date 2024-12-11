@@ -8,10 +8,11 @@ type LayoutSet = {
         layoutName: number
         layoutRendered: boolean
         component: React.FC | React.ExoticComponent
+        subHeaderStyle: 0 | 1
     };
 }
 
-const structureLayouts = (layoutCollection: Array<React.FC | React.ExoticComponent>): LayoutSet =>{
+const structureLayouts = (layoutCollection: Array<[React.FC | React.ExoticComponent, number]>): LayoutSet =>{
 
     const layoutStructure: LayoutSet = {
         order: []        
@@ -22,7 +23,8 @@ const structureLayouts = (layoutCollection: Array<React.FC | React.ExoticCompone
         layoutStructure[i] = {
             layoutName: i,
             layoutRendered: false,
-            component: layoutCollection[i]
+            component: layoutCollection[i][0],
+            subheaderStyle: layoutCollection[i][1]
         }
     }
 

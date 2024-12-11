@@ -95,7 +95,7 @@ const InstallationImages: React.FC<LayoutProps> = ({
     return (
         <div ref={elementRef}>
             <motion.section className={styles.installation_container} ref={containerRef}>
-                <CallOut heading="Installation Images" />
+                <CallOut heading="Installation Images" calloutStyleType={1} />
                 <UpDownCarousel imageSet={imageSet} />
                 <CallOut paragraph="Guide your customers with clear, step-by-step images for assembling and setting up the furniture." modifier="mw-623" />
             </motion.section>

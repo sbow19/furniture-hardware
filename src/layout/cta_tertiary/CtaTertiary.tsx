@@ -3,7 +3,7 @@ import styles from "./CtaTertiary.module.scss";
 import Image from 'next/image';
 import sofaImage from "../../assets/images/cta_tertiary/sofa.png";
 import useAutoLoad from "@/hooks/use_autoload";
-import { motion, useInView } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { useEffect, useMemo, useRef, useState } from "react";
 import useWindowSize from "@/hooks/use_window_size";
 
@@ -17,25 +17,23 @@ const CtaTertiary: React.FC<LayoutProps> = ({
     // Detect whenuser scrolls into range
     const containerRef = useAutoLoad(layoutName, handleLayoutLoad, 0.5);
 
-    
-
-    // Calculate size of screen initially 
+    // Calculate size invisible animation element 
     const viewportSize = useWindowSize();
     const scrollHeight = useMemo(() => {
 
-        // Height of element is 190vh, therefore we  multiply viewport by 1.9 to get total scroll distance
-        return viewportSize.height * 1.9;
+        // Change size depending on desired length of animations
+        return viewportSize.height * 6;
 
     }, [viewportSize])
 
     // Monitor scroll position and check if at top or bottom of component
     const isAtTopRef = useRef(true); // Ref for tracking if it's at the top
     const isAtBottomRef = useRef(false); // Ref for tracking if it's at the bottom
-    const scrollContainerRef = useRef(null);
+    const scrollTarget = useRef(null);
 
     useEffect(() => {
         const handleScroll = () => {
-            const scrollContainer = scrollContainerRef.current;
+            const scrollContainer = scrollTarget.current;
 
             // If scroll container is available, check the scroll position
             if (scrollContainer) {
@@ -50,7 +48,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
         };
 
         // Add scroll event listener to track the scroll position
-        const scrollContainer = scrollContainerRef.current;
+        const scrollContainer = scrollTarget.current;
         if (scrollContainer) {
             scrollContainer.addEventListener('wheel', handleScroll);
         }
@@ -100,8 +98,8 @@ const CtaTertiary: React.FC<LayoutProps> = ({
 
                 } else {
                     // Scrolled up
-                    if (isAtTopRef.current) { 
-                        handleChangeSlide(-1) 
+                    if (isAtTopRef.current) {
+                        handleChangeSlide(-1)
                     };
                 }
             }
@@ -149,44 +147,88 @@ const CtaTertiary: React.FC<LayoutProps> = ({
         return
     });
 
+    /* Target scroll container for animation tracking */
+    const { scrollYProgress } = useScroll({
+        container: scrollTarget
+    })
+
+    /* SCROLLBASED ANIMATIONS */
+    const translateAnimationOne = useTransform(
+        scrollYProgress,
+        [0, 0.8],
+        [scrollHeight / 5, -scrollHeight / 3]
+    )
+    const springyTranslateAnimationOne = useSpring(translateAnimationOne, {
+        damping: 40,
+        velocity: 50
+    })
+
+    const translateAnimationTwo = useTransform(
+        scrollYProgress,
+        [0, 0.1, 0.9, 1],
+        [-scrollHeight / 15, -scrollHeight / 100, -scrollHeight / 100, -scrollHeight / 10]
+    )
+
+    const springyTranslateAnimationTwo = useSpring(translateAnimationTwo, {
+        damping: 20
+    })
+
+
 
     return (
-
-        <div
-
-            ref={elementRef}
-            style={{
-                zIndex: 100,
-                position: 'relative',
-                height: '100vh'
-            }}
-        >
+        <>
             <div
-                ref={scrollContainerRef}
                 style={{
-                    zIndex: 100,
-                    position: 'relative',
                     height: '100vh',
-                    overflowY: "auto",
+                    width: '100vw',
+                    overflowY: "scroll",
+                    position: 'absolute',
+                }}
+                ref={scrollTarget}
+            >
+                <div
+                    style={{
+                        minHeight: viewportSize.height * 6,
+                        backgroundColor: 'transparent',
+                        position: 'relative',
+                        zIndex: 100
+                    }}
+                    ref={elementRef}
+
+                />
+            </div>
+            <div
+                style={{
+                    position: 'relative',
+                    height: '100%',
+                    width: '100%'
                 }}
             >
                 <motion.section
                     className={styles.cta_container}
                     ref={containerRef}
                 >
-                    <div className={styles.cta_content}>
+                    <motion.div 
+                        className={styles.cta_content}
+                        style={{
+                            y: springyTranslateAnimationOne
+                        }}
+                    >
                         <p className={styles.cta_content_paragraph}>
                             <span className='text-group'>Lorem ipsum dolor sit amet. </span>
                             <span className='text-group'>Quo odit atque ut architecto obcaecati rem </span>
                             <span className='text-group'>vitae tempore non asperiores consequatur ut! </span>
                         </p>
-                    </div>
+                    </motion.div>
                     <motion.div
-                        initial={{ y: -100, opacity: 0 }}
-                        whileInView={{ x: 0, opacity: 1 }}
-                        transition={{ duration: 1 }}
-                        viewport={{ once: true, amount: 0.25 }}
-                        className={styles.cta_image_container}
+                        style={{
+                            position: 'absolute',
+                            y: springyTranslateAnimationTwo,
+                            backgroundColor: 'transparent'
+                        }}
+                        className={
+                            styles.cta_image_container
+                        }
                     >
                         <Image
                             src={sofaImage}
@@ -197,7 +239,9 @@ const CtaTertiary: React.FC<LayoutProps> = ({
 
                 </motion.section>
             </div>
-        </div>
+        </>
+
+
     );
 }
 

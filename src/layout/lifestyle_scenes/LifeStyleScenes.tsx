@@ -5,7 +5,7 @@ import Button from '@/components/button/Button'
 import lifeStyleScenesImage from "../../assets/images/lifestyle_scenes/background.png";
 import styles from "./LifeStyleScenes.module.scss";
 import useAutoLoad from "@/hooks/use_autoload";
-import { motion, useMotionValueEvent, useScroll, useTransform, useSpring } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { useRef, useEffect, useState, useMemo } from "react";
 import useWindowSize from "@/hooks/use_window_size";
 
@@ -92,8 +92,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
             if (isInView) {
 
                 if (e.deltaY > 0) {
-                    // Scrolled down
-                    console.log(isAtBottomRef.current)
+                    // Scrolled do
                     if (isAtBottomRef.current) {
 
                         handleChangeSlide(1);
@@ -122,8 +121,6 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
     }, [isInView]); // Dependency array includes handleChangeSlide to ensure it's fresh if it changes
 
     /* Target scroll container for animation tracking */
-
-
     const { scrollYProgress } = useScroll({
         container: scrollTarget
     });
@@ -265,9 +262,6 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
                     }}
                 />
             </div>
-
-
-
         </>
     );
 }

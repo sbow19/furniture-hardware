@@ -6,6 +6,7 @@
     height: 190vh;
     // padding-top: 324px;
     background-color: white;
+    position: 'relative';
     
     
 
@@ -36,14 +37,12 @@
     .cta_image_container{
 
         /*LAYOUT*/
-        max-height: 100vh; 
+        min-height: 100vh; 
         overflow: hidden;
-        position: relative;
         .cta_image {
             /* LAYOUT */
             width: 100%;
             height: auto;
-            transform: translateY(-35%)
         }
     }
 

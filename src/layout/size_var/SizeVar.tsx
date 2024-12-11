@@ -128,9 +128,6 @@ const SizeVar: React.FC<LayoutProps> = ({
                         </motion.div>
                     </div>
                 </div>
-                <span className={styles.size_span}>
-                    Product Size Variation
-                </span>
             </motion.section>
         </div>
     );

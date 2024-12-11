@@ -1,17 +1,31 @@
 @use '@/styles/shared/variables';
 
+.callout_style_1 {
+
+    position: absolute;
+    .call_heading {
+        @include variables.setCallOutHeadingTypography();
+        color: variables.$light
+        
+    }
+}
+
+.callout_style_2 {
+
+    position: relative;
+    .call_heading {
+        @include variables.setCallOutGradient();
+        @include variables.setCallOutHeadingTypography();
+    }
+    
+}
+
 .call_container {
     @include variables.setLayout(flex, center, center);
     height: 400px;
     padding: 108px 0;
     overflow: hidden;
-    position: relative;
     z-index: 10;
-
-    .call_heading {
-        @include variables.setCallOutGradient();
-        @include variables.setCallOutHeadingTypography();
-    }
 
     .call_paragraph {
         @include variables.setCallOutParagraphTypography();

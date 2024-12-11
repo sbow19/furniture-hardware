@@ -1,61 +1,115 @@
 @use '@/styles/shared/variables';
 
-.subheader_container {
-    /* LAYOUT */
-    @include variables.setLayout(flex, space-between, center);
-    min-height: 70px;
-    padding: var(--item-spacing-10, 10px) 100px;
+.subheader_style_1 {
 
     /* STYLE */
-    border-bottom: var(--stroke-weight-1, 1px) solid variables.$subHeaderBorder;
-    background: variables.$subHeader;
-    backdrop-filter: blur(3px);
-    z-index:20;
-    position: relative;
+    background-color: variables.$headerColorOne;
+}
 
-    .subheader_heading {
-        /* TYPOGRAPHY */
-        color: variables.$subHeaderText;
-        /* DESKTOP - 1920 x 1080/SF Pro Display/Title 3 (semi-bolder) */
-        @include variables.setTypography(20px, normal, 400, normal);
-    }
+.subheader_style_2 {
 
-    .subheader_nav {
+    /* STYLE */
+    background-color: white;
+}
+
+.subheader_style_2 {
+
+    /* STYLE */
+    background-color: transparent;
+}
+
+.subheader_font_color_1 {
+    
+    color: white
+    
+}
+
+.subheader_font_color_2 {
+   
+    color:  variables.$headerColorOne
+    
+}
+
+.subheader_nav_activated_1 {
+    /* TYPOGRAPHY */
+    color: variables.$light;
+}
+
+.subheader_nav_disabled_1 {
+    /* TYPOGRAPHY */
+    color: variables.$subHeaderTextDisabledOne;
+    text-align: center;
+}
+
+.subheader_nav_activated_2 {
+    /* TYPOGRAPHY */
+    color: variables.$headerColorOne;
+}
+
+.subheader_nav_disabled_2 {
+    /* TYPOGRAPHY */
+    color: variables.$headerColorOne;
+    text-align: center;
+}
+
+.subheader_container {
+    /* LAYOUT */
+    @include variables.setLayout(flex, center, center);
+    max-height: 50px;
+    padding: var(--item-spacing-10, 10px) 100px;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    /* STYLE */
+    z-index: 20;
+
+    .subheader_inner_container {
+
         /* LAYOUT */
-        @include variables.setLayout(flex, center, center, 20px);
+        @include variables.setLayout(flex, space-between, center);
+        max-width: 1440px;
+        min-width: 100%;
 
-        a {
-            /* TYPOGRAPHY */
-            /* DESKTOP - 1920 x 1080/SF Pro Display/Subheadline */
-            @include variables.setTypography(14px, normal, 400, normal);
+        .subheader_heading {
+            /* DESKTOP - 1920 x 1080/SF Pro Display/Title 3 (semi-bolder) */
+            @include variables.setTypography(20px, normal, 400, normal);
         }
 
-        .subheader_nav_activated {
-            /* TYPOGRAPHY */
-            color: variables.$subHeaderText;
-        }
-
-        .subheader_nav_disabled {
-            /* TYPOGRAPHY */
-            color: variables.$subHeaderTextDisabled;
-            text-align: center;
-        }
-
-        button {
+        .subheader_nav {
             /* LAYOUT */
-            @include variables.setLayout(flex, center, center, var(--item-spacing-10, 10px));
-            width: 106px;
-            padding: var(--item-spacing-5, 5px) 20px;
+            @include variables.setLayout(flex, center, center, 20px);
+            width: 645px;
 
-            /* STYLE */
-            border-radius: 10px;
-            background: variables.$subHeaderButton;
+            div {
+                /* LAYOUT */
+                @include variables.setLayout(flex, space-around, center, 20px);
+                width: 100%;
 
-            /* TYPOGRAPHY */
-            color: variables.$subHeaderButtonText;
-            text-align: center;
-            /* DESKTOP - 1920 x 1080/SF Pro Display/Footnote */
-            @include variables.setTypography(12px, normal, 400, normal);
+
+                a {
+                    /* TYPOGRAPHY */
+                    /* DESKTOP - 1920 x 1080/SF Pro Display/Subheadline */
+                    @include variables.setTypography(12px, normal, 400, normal);
+                }
+            }
+           
+            button {
+                /* LAYOUT */
+                width: 120px;
+                padding: var(--item-spacing-5, 5px) 10px;
+
+                /* STYLE */
+                border-radius: 10px;
+                background: variables.$quaternaryColor;
+
+                /* TYPOGRAPHY */
+                color: variables.$secondaryColor;
+                text-align: center;
+                /* DESKTOP - 1920 x 1080/SF Pro Display/Footnote */
+                @include variables.setTypography(12px, normal, 400, normal);
+            }
         }
     }
 }

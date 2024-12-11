@@ -2,13 +2,15 @@
 
 import SubHeader from "@/components/sub_header/SubHeader";
 import layoutCollection from "@/layout/layout_collection";
-import { useCallback, useState, useRef } from "react";
+import { useCallback, useState, useRef, useEffect } from "react";
 import { motion } from "motion/react"
 import useWindowSize from "@/hooks/use_window_size";
 
 export default function Home() {
   // Layout Collection
   const [layoutCollectionState, setLayoutCollectionState] = useState(layoutCollection);
+
+  const [ headerStyle, setHeaderStyle ] = useState(0);
 
   const windowSize = useWindowSize();
 
@@ -38,8 +40,16 @@ export default function Home() {
           };
         }
       });
-    }, 100); // Adjust the timeout delay (e.g., 300ms) as needed
+
+      
+
+    
+    }, 100);
   }, [])
+
+  useEffect(()=>{
+    setHeaderStyle(layoutCollectionState[currentSlide.currentSlide].subheaderStyle)
+  }, [currentSlide])
 
   const handleLayoutLoad = useCallback((layoutName: number) => {
 
@@ -71,7 +81,10 @@ export default function Home() {
 
   return (
     <>
-      <SubHeader activePage="/" />
+      <SubHeader 
+        activePage="/" 
+        headerStyleType={headerStyle}
+      />
 
       <motion.div
         // ref={scrollRef}

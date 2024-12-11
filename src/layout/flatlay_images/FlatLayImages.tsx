@@ -102,7 +102,6 @@ const FlatLayImages: React.FC<LayoutProps> = ({
             // Apply the event listener after a 2-second delay
             elementRef.current.addEventListener("wheel", myListener);
         } else {
-            console.log(isInView)
             elementRef.current.removeEventListener("wheel", myListener);
         }
 
@@ -110,7 +109,7 @@ const FlatLayImages: React.FC<LayoutProps> = ({
     return (
         <div ref={elementRef}>
             <motion.section className={styles.flatlay_container} ref={containerRef}>
-                <CallOut heading="Flat Lay Images" />
+                <CallOut heading="Flat Lay Images" calloutStyleType={1}/>
                 <AutomaticCarousel
                     imageSet={imageSet}
                 />

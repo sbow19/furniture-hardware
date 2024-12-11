@@ -129,7 +129,10 @@ const DimensionImages: React.FC<LayoutProps> = ({
     return (
         <div ref={elementRef}>
             <motion.section className={styles.dimension_container} ref={containerRef}>
-                <CallOut heading="Dimension Images" />
+                <CallOut 
+                    heading="Dimension Images" 
+                    calloutStyleType={1}
+                />
                 <UpDownCarousel imageSet={imageSet} />
                 <CallOut paragraph="Give your customers a clear view of how you furniture fits into their
             space with precise dimensions and scale indicators." />

@@ -69,7 +69,9 @@ const ColorVariation: React.FC<ColorVarProps> = ({
                                 <button
                                     className={imageSet[color].buttonColor}
                                     key={index}
-                                    onClick={() => {
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        e.preventDefault()
                                         handleChangeColor(color)
                                     }}
                                 >

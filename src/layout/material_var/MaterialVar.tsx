@@ -160,9 +160,7 @@ const MaterialVar: React.FC<LayoutProps> = ({
                     </motion.div>
                 </AnimatePresence>
                 <div className={styles.material_content}>
-                    <span className={styles.material_content_span}>
-                        Material Variation
-                    </span>
+
                     <div className={styles.material_content_arrows}>
                         <button className={styles.material_content_arrow_disabled}
                             onClick={() => handleSetCurrentImage(-1)}>
