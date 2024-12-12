@@ -6,6 +6,8 @@ import TulfaSubheaderStyleTwo from "@/assets/icons/tulfa_icon_2";
 import { motion } from 'framer-motion';
 import { useRef, useEffect, useState } from "react";
 
+
+
 type SubHeaderProps = {
     activePage: "/" | "/product_videos" | "/immersive_experience" | "/happiest_costumers";
     headerStyleType: 0 | 1 | 2;

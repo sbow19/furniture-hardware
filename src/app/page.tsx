@@ -1,5 +1,10 @@
 'use client'
-import SubHeader from "@/components/sub_header/SubHeader";
+
+import dynamic from "next/dynamic";
+const SubHeader = dynamic(
+  () => import("@/components/sub_header/SubHeader"),
+  { ssr: false }
+)
 import layoutCollection from "@/layout/layout_collection";
 import { useCallback, useState, useRef, useEffect } from "react";
 import { motion } from "motion/react"
