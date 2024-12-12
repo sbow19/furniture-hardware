@@ -3,18 +3,34 @@
 .button_two_container {
     /* LAYOUT */
     @include variables.setLayout(flex, space-between, center);
-    width: 220px;
-    padding: 13.333px 30px;
+    
     position: relative;
 
     /* STYLE */
-    @include variables.setBorderNoColor(66.667px, 2px, solid);
+    @include variables.md {
+        @include variables.setBorderNoColor(66.667px, 2px, solid);
+        width: 170px;
+    }
+    @include variables.lg {
+        @include variables.setBorderNoColor(66.667px, 2px, solid);
+        width: 220px;
+    }
+    
     transition: transform 0.2s ease;
     transition: background-color 0.5s ease, color 0.5s ease;
 
     /* TYPOGRAPHY */
-    @include variables.setTypography(16px, normal, 600, normal);
-    text-align: center;
+    @include variables.md {
+        @include variables.setTypography(12px, normal, 600, normal);
+        text-align: center;
+        padding: 10px 20px;
+    }
+    @include variables.lg {
+        @include variables.setTypography(16px, normal, 600, normal);
+        text-align: center;
+        padding: 13.333px 30px;
+    }
+    
 
     .button_icon {
         /* LAYOUT */

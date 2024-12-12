@@ -74,7 +74,7 @@ const Banner: React.FC<LayoutProps> = ({
                 ref={containerRef}
             >
                 <VideoPlayer
-                    src="/videos/banner/sofa.mp4"
+                    src="/videos/banner/Edit version_text edit.mp4"
                     type="video/mp4"
                     altText=''
                     onVideoComplete={() => {

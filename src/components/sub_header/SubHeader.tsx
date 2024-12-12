@@ -19,7 +19,7 @@ export default function SubHeader({
         { href: "/", label: "Product Images" },
         { href: "/product_videos", label: "Product Videos" },
         { href: "/immersive_experience", label: "Immersive Experience" },
-        { href: "/happiest_costumers", label: "Happiest Costumers" },
+        // { href: "/happiest_costumers", label: "Happiest Costumers" },
     ];
 
     let headerStyle = "";
@@ -77,7 +77,10 @@ export default function SubHeader({
 
         const handleClick = (e) => {
 
-            if(!e.target.closest('button')){
+            /* DISABLE TOGGLE */
+            if(e.target.closest('.trigger_header_button')){
+                setIsVisible(false)
+            } else {
                 setIsVisible(prev=>!prev)
             }
 

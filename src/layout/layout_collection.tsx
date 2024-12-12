@@ -29,20 +29,20 @@ import structureLayouts from "@/utils/structure_layouts";
 const layoutCollection: Array<[React.FC, number]> = [
     [Banner, 0],
     [SiloImages, 0],
-    [LifeStyleScenes, 2],
-    [CtaTertiary, 0],
-    [ColorVar, 0],
-    [FabricVar, 0],
-    [SizeVar, 0],
-    [MaterialVar, 0],
-    [CloseUpShots, 2],
-    [GroupShots, 0],
-    [DimensionImages, 0],
-    [InstallationImages, 0],
-    [FlatLayImages, 0],
-    [MarketingImages, 0],
-    [BookDemo, 0],
-    [Blogs, 0],
+    // [LifeStyleScenes, 2],
+    // [CtaTertiary, 0],
+    // [ColorVar, 0],
+    // [FabricVar, 0],
+    // [SizeVar, 0],
+    // [MaterialVar, 0],
+    // [CloseUpShots, 2],
+    // [GroupShots, 2],
+    // [DimensionImages, 0],
+    // [InstallationImages, 0],
+    // [FlatLayImages, 0],
+    // [MarketingImages, 0],
+    // [BookDemo, 0],
+    // [Blogs, 0],
 ];
 
 const layoutCollectionMemoized = memoizeComponents(layoutCollection);
@@ -53,3 +53,5 @@ const layoutCollectionStructured = structureLayouts(layoutCollectionMemoized);
 layoutCollectionStructured[0].layoutRendered = true;
 
 export default layoutCollectionStructured;
+				
+			

@@ -23,7 +23,7 @@
 
     .close_button_container {
         position: absolute;
-        left: calc(50vw - 50px);
-        bottom: 5%
+        z-index: 20;
+        bottom: 60%
     }
 }

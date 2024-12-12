@@ -2,8 +2,6 @@
 import CallOut from "@/components/call_out/CallOut";
 import Image from 'next/image';
 import groupShotBackgroundImage from '../../assets/images/group_shots/Firefly 20240929230829.png'
-import basketMask from '../../assets/images/group_shots/Basket/Product 44_120cm copy.png'
-import benchMask from '../../assets/images/group_shots/Bench/bench_01.tif'
 import { motion } from 'framer-motion'
 import useAutoLoad from "@/hooks/use_autoload";
 import { useEffect, useState, useRef } from "react";
@@ -80,10 +78,10 @@ const GroupShots: React.FC<LayoutProps> = ({
     return (
         <div ref={elementRef}>
             <motion.section className={styles.group_container} ref={containerRef}>
-                <CallOut 
+                {/* <CallOut 
                     heading="Group Shots" 
-                    calloutStyleType={1}
-                />
+                    calloutStyleType={0}
+                /> */}
                 {/* <GroupCarousel /> */}
                 <div
                     className={styles.group_background_container}
@@ -95,20 +93,7 @@ const GroupShots: React.FC<LayoutProps> = ({
                         className={styles.group_background}
                     />
 
-                    {/* MASKING IMAGES */}
-                    <Image
-                        src={basketMask}
-                        alt=''
-                        className={styles.basket_mask}
-                    />
-                    {/* <Image
-                    src={benchMask}
-                    alt=''
-                    className={styles.bench_mask}
-                    width={2000}
-                    height={2000}
-                /> */}
-                    <div className={styles.mask_test}></div>
+                    
 
 
                 </div>

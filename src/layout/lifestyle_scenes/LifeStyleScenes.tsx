@@ -2,7 +2,7 @@
 import ShowCase from "@/components/showcase/ShowCase";
 import Image from 'next/image';
 import Button from '@/components/button/Button'
-import lifeStyleScenesImage from "../../assets/images/lifestyle_scenes/background.png";
+import lifeStyleScenesImage from "../../assets/images/lifestyle_scenes/Banner.png";
 import styles from "./LifeStyleScenes.module.scss";
 import useAutoLoad from "@/hooks/use_autoload";
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
@@ -161,6 +161,13 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
         damping: 40
     })
 
+    /* BUTTON ANIMATION */
+    const transformOpacityAnimationTwo = useTransform(
+        scrollYProgress,
+        [0, .15, .9, 1],
+        [0, 1, 1, 0]
+    )
+
 
     return (
         <>
@@ -207,6 +214,23 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
                         className={styles.lifestyle_container}
                         ref={containerRef}
                     >
+                        {/* BACKDROP OVERLAY */}
+
+                        <motion.div
+                            style={{
+                                width: '100%',
+                                height: '100%',
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                zIndex: 20,
+                                backgroundColor: 'rgb(0,0,0)',
+                                opacity: transformOpacityAnimationOne
+                            }}
+
+                        />
+
+                        {/* BACKGROUND IMAGE */}
                         <motion.div
                             style={{
                                 width: '100%',
@@ -231,15 +255,30 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
                                 position: 'absolute',
                                 top: 0,
                                 left: 0,
-                                backgroundColor: 'rgba(0,0,0)',
-                                opacity: transformOpacityAnimationOne
+                                zIndex: 30
                             }}
                         >
                             <ShowCase
                                 heading="Lifestyle Scenes"
                                 animationValues={{
-                                    y: springyTransformShowcaseAnimationOne
+                                    y: springyTransformShowcaseAnimationOne,
+                                    opacity: transformOpacityAnimationTwo
                                 }}
+                            />
+                        </motion.div>
+
+                        {/* BUTTON CONTAINER */}
+                        <motion.div
+                            className={styles.lifestyle_button_container}
+                            style={{
+                                opacity: transformOpacityAnimationTwo,
+                                y: springyTransformShowcaseAnimationOne,
+                            }}
+                        >
+                            <Button
+                                text="Take a closer look"
+                                modifier="p-color"
+                                buttonType={1}
                             />
                         </motion.div>
 
@@ -247,20 +286,6 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
 
                     </motion.section>
                 </motion.div>
-
-                <Button
-                    text="Take a closer look"
-                    modifier="p-color"
-                    buttonType={1}
-                    onClick={() => { }}
-                    containerStyles={{
-                        position: 'fixed',
-                        bottom: '5%',
-                        width: '100%',
-                        display: 'flex',
-                        justifyContent: 'center'
-                    }}
-                />
             </div>
         </>
     );

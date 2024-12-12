@@ -1,4 +1,5 @@
 import styles from "./CallOut.module.scss";
+import { motion } from'framer-motion'
 
 type CallOutProps =
     | {
@@ -6,15 +7,21 @@ type CallOutProps =
         paragraph?: never;
         modifier?: never
         calloutStyleType?: 0 | 1
+        animationValues?: {
+      
+        }
     } | {
         paragraph: string;
         heading?: never;
         modifier?: keyof typeof styles;
         calloutStyleType?: 0 | 1
+        animationValues?: {
+      
+        }
     }
     
 
-export default function CallOut({ heading, paragraph, modifier, calloutStyleType }: CallOutProps) {
+export default function CallOut({ heading, paragraph, modifier, calloutStyleType, animationValues }: CallOutProps) {
     
     let calloutStyle = '';
     switch(calloutStyleType){
@@ -30,12 +37,13 @@ export default function CallOut({ heading, paragraph, modifier, calloutStyleType
     
     
     return (
-        <div 
+        <motion.div 
             className={`${styles.call_container} ${calloutStyle}`}
+            style={animationValues}
             
         >
             {heading && <h3 className={styles.call_heading}>{heading}</h3>}
             {paragraph && <p className={`${styles.call_paragraph} ${modifier ? styles[modifier] : ''}`}>{paragraph}</p>}
-        </div>
+        </motion.div>
     );
 }

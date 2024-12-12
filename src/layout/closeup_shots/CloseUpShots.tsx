@@ -93,7 +93,7 @@ const CloseUpShots: React.FC<LayoutProps> = ({
 
     useEffect(() => {
         const myListener = (e) => {
-   
+
             if (isInView) {
 
                 if (e.deltaY > 0) {
@@ -138,7 +138,7 @@ const CloseUpShots: React.FC<LayoutProps> = ({
     const transformScaleAnimationOne = useTransform(
         scrollYProgress,
         [0, .15, .9, 1],
-        [2, 1, 1, 1.5]
+        [2, 1, 1, 1.1]
     )
     const springyTransformScaleAnimationOne = useSpring(transformScaleAnimationOne, {
         damping: 40
@@ -162,6 +162,29 @@ const CloseUpShots: React.FC<LayoutProps> = ({
         damping: 40
     })
 
+    /* CALLOUT ANIMATIONS */
+    const transformOpacityAnimationOne = useTransform(
+        scrollYProgress,
+        [0, .15, .9, 1],
+        [0, 0.3, 0.3, 0]
+    )
+
+    const transformShowcaseAnimationOne = useTransform(
+        scrollYProgress,
+        [0, .15, 0.75, 1],
+        [200, 50, 50, -viewportSize.height]
+    )
+
+    const springyTransformShowcaseAnimationOne = useSpring(transformShowcaseAnimationOne, {
+        damping: 40
+    })
+
+    /* BUTTON ANIMATION */
+    const transformOpacityAnimationTwo = useTransform(
+        scrollYProgress,
+        [0, .15, .9, 1],
+        [0, 1, 1, 0]
+    )
 
     return (
         <>
@@ -186,12 +209,63 @@ const CloseUpShots: React.FC<LayoutProps> = ({
                 />
             </div>
 
-            <motion.section className={styles.close_container} ref={containerRef}>
+            <motion.section
+                className={styles.close_container}
+                ref={containerRef}
+            >
+                {/* BACKDROP OVERLAY */}
 
-                <CallOut
-                    heading="Close Up Shots"
-                    calloutStyleType={0}
+                <motion.div
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        zIndex: 20,
+                        backgroundColor: 'rgb(0,0,0)',
+                        opacity: transformOpacityAnimationOne
+                    }}
+
                 />
+
+                {/* CALLOUT CONTAINER */}
+                <motion.div
+                    style={{
+                        width: '100%',
+                        height: '100%',
+                        position: 'absolute',
+                        top: 0,
+                        left: 0,
+                        zIndex: 30
+                    }}
+
+                >
+                    <CallOut
+                        heading="Close Up Shots"
+                        calloutStyleType={0}
+                        animationValues={{
+                            y: springyTransformShowcaseAnimationOne,
+                            opacity: transformOpacityAnimationTwo
+                        }}
+                    />
+                </motion.div>
+
+                {/* BUTTON CONTAINER */}
+                <motion.div
+                    className={styles.close_button_container}
+                    style={{
+                        opacity: transformOpacityAnimationTwo,
+                        y: springyTransformShowcaseAnimationOne,
+                    }}
+                >
+                    <Button
+                        text="Take a closer look"
+                        modifier="p-color"
+                        buttonType={1}
+                    />
+                </motion.div>
+
                 <motion.div
                     className={styles.close_showcase}
                     style={{
@@ -211,15 +285,7 @@ const CloseUpShots: React.FC<LayoutProps> = ({
 
 
             </motion.section>
-            <div
-                className={styles.close_button_container}
-            >
-                <Button
-                    text="Take a closer look"
-                    modifier="p-color"
-                    buttonType={1}
-                />
-            </div>
+
 
         </>
     );

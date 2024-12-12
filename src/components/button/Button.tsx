@@ -37,6 +37,7 @@ export default function Button({ text, modifier, buttonType, onClick, containerS
     return (
         <div
             style={containerStyles}
+            className="trigger_header_button"
         >
         {Button}
         </div>
