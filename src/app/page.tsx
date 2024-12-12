@@ -1,5 +1,4 @@
 'use client'
-
 import SubHeader from "@/components/sub_header/SubHeader";
 import layoutCollection from "@/layout/layout_collection";
 import { useCallback, useState, useRef, useEffect } from "react";
