@@ -2,7 +2,7 @@
 import Button from "@/components/button/Button";
 import useAutoLoad from "@/hooks/use_autoload";
 import { motion, AnimatePresence } from 'framer-motion'
-import { useEffect, useRef, useState, useCallback } from "react";
+import { useEffect, useRef, useState, useCallback, useMemo } from "react";
 import styles from "./SiloImages.module.scss";
 import { StaticImageData } from "next/image";
 import FadeInCarousel from "@/components/fade_in_slideshow.tsx/fadeSlideShow";
@@ -10,7 +10,7 @@ import SiloModal from "./siloModal";
 import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 import useWindowSize from "@/hooks/use_window_size";
 
-import chairImageOne from "../../assets/images/silo_images/chair.png"
+import chairImageOne from "../../assets/images/silo_images/chair_drive.png"
 import chairImageTwo from "../../assets/images/silo_images/BCL 8003 BL_View02.png"
 import chairImageThree from "../../assets/images/silo_images/BCL 8003 BL_View01.png"
 import chairImageFour from "../../assets/images/silo_images/BCL 8003 BL_View04.png"
@@ -44,23 +44,30 @@ const mainImageSet: ImageSet = {
     ],
     chairImageOne: {
         imageName: "chairImageOne",
-        imageData: chairImageOne
+        imageData: chairImageOne,
+        overrideStyle: {
+            transform: "scaleX(-1)"
+        }
     },
     chairImageTwo: {
         imageName: "chairImageTwo",
-        imageData: chairImageTwo
+        imageData: chairImageTwo,
+        overrideStyle: {}
     },
     chairImageThree: {
         imageName: "chairImageThree",
-        imageData: chairImageThree
+        imageData: chairImageThree,
+        overrideStyle: {}
     },
     chairImageFour: {
         imageName: "chairImageFour",
-        imageData: chairImageFour
+        imageData: chairImageFour,
+        overrideStyle: {}
     },
     chairImageFive: {
         imageName: "chairImageFive",
-        imageData: chairImageFive
+        imageData: chairImageFive,
+        overrideStyle: {}
     }
 }
 
@@ -186,6 +193,32 @@ const SiloImages: React.FC<LayoutProps> = ({
         setModalOpen(false)
     },[])
 
+    
+    /* Calculate popup button position*/
+    const popupPosition = useMemo(()=>{
+
+        const popupPositionInternal = {
+            height: 0,
+            width: 0,
+            left: 0,
+            top: 0
+        };
+
+        if(viewportSize.width < 720){
+            popupPositionInternal.height = 50;
+            popupPositionInternal.width = 200;
+            popupPositionInternal.top = viewportSize.height / 1.2;
+            popupPositionInternal.left = viewportSize.width / 4
+        } else {
+            popupPositionInternal.height = 70;
+            popupPositionInternal.width = 300;
+            popupPositionInternal.top = viewportSize.height / 1.2;
+            popupPositionInternal.left = viewportSize.width / 2.5
+        }
+
+        return popupPositionInternal;
+    }, [viewportSize]);
+
     return (
         <div
             ref={elementRef}
@@ -194,7 +227,6 @@ const SiloImages: React.FC<LayoutProps> = ({
             }}
         >
 
-            
             <motion.section 
                 className={styles.silo_container} 
                 ref={containerRef}
@@ -239,14 +271,14 @@ const SiloImages: React.FC<LayoutProps> = ({
                 style={{
                     position: 'absolute', 
                     top: viewportSize.height / 1.2,
-                    left: viewportSize.width / 2 - 100
+                    left: viewportSize.width / 2.5
                 }}
             >
               
                 <TulfaPopupButton 
                     timer={2000}
-                    height={70}
-                    width={300}
+                    height={popupPosition.height}
+                    width={popupPosition.width}
                     text={"Blogs: Lorem"}
                 />
                       

@@ -1,12 +1,15 @@
 'use client'
 
-import Lottie from 'lottie-react';
+
 import popupButton from './tulfa-popup-button_plain.json'
 import { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion'
 import styles from './tulfa_popup_button.module.scss'
+import dynamic from 'next/dynamic';
 
-
+const Lottie = dynamic(()=>import('lottie-react'),
+{ssr: false}
+)
 
 const TulfaPopupButton = ({
    timer,

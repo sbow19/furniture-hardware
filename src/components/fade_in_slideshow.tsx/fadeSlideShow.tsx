@@ -56,7 +56,8 @@ const FadeInCarousel: React.FC<FadeInCarouselProps> = memo(({ imageSet }) => {
                                 position: 'absolute',
                                 backgroundColor: 'transparent',
                                 display: 'flex',
-                                alignItems: 'center'
+                                alignItems: 'center',
+                                transform: imageSet[imageName].overrideStyle.transform
                             }}
                         >
                             <Image
@@ -64,6 +65,7 @@ const FadeInCarousel: React.FC<FadeInCarouselProps> = memo(({ imageSet }) => {
                                 src={imageSet[imageName].imageData}
                                 alt=''
                                 objectFit='contain'
+                                objectPosition='0 0'
 
                             />
                         </motion.div>

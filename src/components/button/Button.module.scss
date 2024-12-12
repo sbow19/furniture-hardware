@@ -7,6 +7,11 @@
     position: relative;
 
     /* STYLE */
+    @include variables.sm {
+        @include variables.setBorderNoColor(66.667px, 2px, solid);
+        width: 170px;
+    }
+
     @include variables.md {
         @include variables.setBorderNoColor(66.667px, 2px, solid);
         width: 170px;
@@ -20,6 +25,11 @@
     transition: background-color 0.5s ease, color 0.5s ease;
 
     /* TYPOGRAPHY */
+    @include variables.sm {
+        @include variables.setTypography(12px, normal, 600, normal);
+        text-align: center;
+        padding: 10px 20px;
+    }
     @include variables.md {
         @include variables.setTypography(12px, normal, 600, normal);
         text-align: center;
