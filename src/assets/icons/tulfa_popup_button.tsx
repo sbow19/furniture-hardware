@@ -1,3 +1,5 @@
+'use client'
+
 import Lottie from 'lottie-react';
 import popupButton from './tulfa-popup-button_plain.json'
 import { useState, useEffect, useRef } from 'react';
