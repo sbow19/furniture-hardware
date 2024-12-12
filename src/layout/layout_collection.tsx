@@ -2,7 +2,7 @@
 /**
  * Individual slides on the page.
  * */
-
+'use client'
 import Banner from "@/layout/banner/Banner";
 import Blogs from "@/layout/blogs/Blogs";
 import BookDemo from "@/layout/book_demo/BookDemo";

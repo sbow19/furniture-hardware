@@ -89,13 +89,15 @@ export default function SubHeader({
             
         }
 
-        document.addEventListener("wheel", handleScroll);
-        document.addEventListener("click", handleClick);
-
-        return () => {
-            document.removeEventListener("wheel", handleScroll);
+        if (typeof document !== 'undefined') {
+            document.addEventListener("wheel", handleScroll);
             document.addEventListener("click", handleClick);
-            
+
+            // Cleanup the event listeners when the component unmounts
+            return () => {
+                document.removeEventListener("wheel", handleScroll);
+                document.removeEventListener("click", handleClick);
+            };
         }
 
     }, [])
