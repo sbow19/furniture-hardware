@@ -15,8 +15,11 @@ const TulfaPopupButton = ({
    timer,
    text,
    height,
-   width
+   width,
+   textStyle,
+   onClick
 }) => {
+
 
    const [isVisible, setIsVisible] = useState(false);
 
@@ -64,18 +67,25 @@ const TulfaPopupButton = ({
    return (
       <div
          ref={elementRef}
+         style={{
+            zIndex: 150,
+         }}
+         
       >
 
          {isVisible &&
 
-            <div
+            <motion.button
                style={
                   {
                      position: 'relative',
                      height: height,
-                     width: width
+                     width: width,
+                     zIndex: 150
                   }
                }
+               onClick={onClick}
+               className='trigger_header_button'
             >
                <Lottie
                   animationData={popupButton}
@@ -85,6 +95,7 @@ const TulfaPopupButton = ({
                />
                <motion.p
                   className={styles.text_style}
+                  style={textStyle}
                   initial={{
                      opacity: 0
                   }}
@@ -100,7 +111,7 @@ const TulfaPopupButton = ({
                </motion.p>
 
 
-            </div>
+            </motion.button>
          }
 
       </div>

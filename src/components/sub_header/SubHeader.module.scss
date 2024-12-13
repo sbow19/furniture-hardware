@@ -69,8 +69,17 @@
 
         /* LAYOUT */
         @include variables.setLayout(flex, space-between, center);
-        max-width: 1440px;
-        min-width: 100%;
+        
+
+        @include variables.sm {
+            min-width: 350px;
+            max-width: 500px
+        }
+
+        @include variables.lg {
+            max-width: 1440px;
+            min-width: 100%;
+        }
 
         .subheader_heading {
             /* DESKTOP - 1920 x 1080/SF Pro Display/Title 3 (semi-bolder) */
@@ -79,8 +88,15 @@
 
         .subheader_nav {
             /* LAYOUT */
-            @include variables.setLayout(flex, center, center, 20px);
-            width: 645px;
+            @include variables.setLayout(flex, flex-end, center, 20px);
+            
+            @include variables.sm {
+                width: 50%;
+            }
+
+            @include variables.md {
+                width: 645px;
+            }
 
             div {
                 /* LAYOUT */
@@ -94,8 +110,15 @@
                     @include variables.setTypography(12px, normal, 400, normal);
                 }
             }
+
+            .dropdown_arrow {
+                /* LAYOUT */
+                justify-self: flex-end;
+                width: 30px;
+                height: 30px;
+            }
            
-            button {
+            .book_demo{
                 /* LAYOUT */
                 width: 120px;
                 padding: var(--item-spacing-5, 5px) 10px;
@@ -112,4 +135,18 @@
             }
         }
     }
+}
+
+.dropdown_bar {
+    /* LAYOUT */
+    @include variables.setLayout(flex, space-around, center);
+    flex-direction: column;
+    background-color: variables.$headerColorOne;
+    min-height: 30vh;
+    width: 100vw;
+    position: absolute;
+    top: -30vh;
+    left: 0;
+    z-index: -1;
+
 }

@@ -1,7 +1,7 @@
 'use client'
 import ShowCase from "@/components/showcase/ShowCase";
 import Image from 'next/image';
-import Button from '@/components/button/Button'
+import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 import lifeStyleScenesImage from "../../assets/images/lifestyle_scenes/Banner.png";
 import styles from "./LifeStyleScenes.module.scss";
 import useAutoLoad from "@/hooks/use_autoload";
@@ -22,7 +22,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
     const scrollHeight = useMemo(() => {
 
         // Height of element is 150%, therefore we  multiply viewport by 1.9 to get total scroll distance
-        return viewportSize.height * 8;
+        return viewportSize.height * 6;
 
     }, [viewportSize])
 
@@ -64,11 +64,19 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
     const [isInView, setIsInView] = useState(false);
     const elementRef = useRef(null);
 
+    const [isPopupVisible, setIsPopupVisible] = useState(false)
+    const popupButtonRef = useRef(null)
+
     useEffect(() => {
         // IntersectionObserver logic to track if element is in view
         const observer = new IntersectionObserver(
             ([entry]) => {
-                setIsInView(entry.isIntersecting); // Set inView status based on intersection
+                // Check if the element is in view and update state
+                if (entry.target === elementRef.current) {
+                    setIsInView(entry.isIntersecting);
+                } else if (entry.target === popupButtonRef.current) {
+                    setIsPopupVisible(entry.isIntersecting);
+                }
             },
             { threshold: 0.1 } // Trigger when 10% of the element is in view
         );
@@ -77,10 +85,20 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
             observer.observe(elementRef.current); // Start observing the element
         }
 
+        if (popupButtonRef.current) {
+            observer.observe(popupButtonRef.current); // Start observing the element
+        }
+
+
         return () => {
             if (elementRef.current) {
                 observer.unobserve(elementRef.current); // Clean up observer
             }
+            if (popupButtonRef.current) {
+                observer.unobserve(popupButtonRef.current); // Start observing the element
+            }
+
+
         };
     }, []);
 
@@ -129,7 +147,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
     const transformScaleAnimationOne = useTransform(
         scrollYProgress,
         [0, .15, .9, 1],
-        [2, 1, 1, 1.5]
+        [2, 1, 1, 1.1]
     )
     const springyTransformScaleAnimationOne = useSpring(transformScaleAnimationOne, {
         damping: 40
@@ -138,7 +156,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
     const translateAnimationOne = useTransform(
         scrollYProgress,
         [0, .2, .9, 1],
-        [150, -150, -150, -400]
+        [150, -150, -150, -viewportSize.height / 1.5]
     )
     const springyTranslateAnimationOne = useSpring(translateAnimationOne, {
         damping: 40
@@ -168,6 +186,49 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
         [0, 1, 1, 0]
     )
 
+    const transformShowcaseAnimationTwo = useTransform(
+        scrollYProgress,
+        [0, .15],
+        [150, -250]
+    )
+
+    const springyTransformShowcaseAnimationTwo = useSpring(transformShowcaseAnimationTwo, {
+        damping: 40
+    })
+
+    /* Calculate popup button position*/
+    const popupPosition = useMemo(() => {
+
+        const popupPositionInternal = {
+            height: 0,
+            width: 0,
+            left: 0,
+            top: 0
+        };
+
+        if (viewportSize.width < 720) {
+            popupPositionInternal.height = 50;
+            popupPositionInternal.width = 200;
+            popupPositionInternal.top = viewportSize.height / 1.2;
+            popupPositionInternal.left = viewportSize.width / 4;
+            popupPositionInternal.textStyle = {
+                fontSize: "12px",
+                left: "30%"
+            }
+        } else {
+            popupPositionInternal.height = 70;
+            popupPositionInternal.width = 300;
+            popupPositionInternal.top = viewportSize.height / 1.2;
+            popupPositionInternal.left = viewportSize.width / 2.5;
+            popupPositionInternal.textStyle = {
+            
+            }
+        }
+
+        return popupPositionInternal;
+    }, [viewportSize]);
+
+
 
     return (
         <>
@@ -182,7 +243,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
             >
                 <div
                     style={{
-                        minHeight: viewportSize.height * 8,
+                        minHeight: viewportSize.height * 6,
                         backgroundColor: 'transparent',
                         position: 'relative',
                         zIndex: 100
@@ -206,7 +267,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
                         top: 0,
                         left: 0,
                         width: "100%",
-                        overflow: 'hidden'
+                        overflow: 'hidden',
                     }}
                     className={styles.scroll_container}
                 >
@@ -245,6 +306,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
                                 priority
                                 className={styles.lifestyle_image}
 
+
                             />
                         </motion.div>
 
@@ -267,26 +329,51 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
                             />
                         </motion.div>
 
-                        {/* BUTTON CONTAINER */}
+                        {/* BUTTON TRIGGER */}
                         <motion.div
                             className={styles.lifestyle_button_container}
                             style={{
                                 opacity: transformOpacityAnimationTwo,
-                                y: springyTransformShowcaseAnimationOne,
+                                y: springyTransformShowcaseAnimationTwo,
                             }}
-                        >
-                            <Button
-                                text="Take a closer look"
-                                modifier="p-color"
-                                buttonType={1}
-                            />
-                        </motion.div>
-
-
+                            ref={popupButtonRef}
+                        />
 
                     </motion.section>
+
+
                 </motion.div>
+
+
             </div>
+
+            {/* POP BUTTON CONTAINER */}
+            <div
+                style={{
+                    position: "absolute",
+                    bottom: "15%",
+                    left: "calc(50vw - 110px)",
+                    width: 400,
+                    height: 60,
+                    zIndex: 150,
+                    top: "85vh",
+                }}
+
+                
+            >
+                {
+                    isPopupVisible &&
+                    <TulfaPopupButton
+                        timer={1000}
+                        height={60}
+                        width={300}
+                        textStyle={popupPosition.textStyle}
+                        text={"Take a closer look"}
+                        onClick={()=>{console.log("Helloworld")}}
+                    />
+                }
+            </div>
+
         </>
     );
 }

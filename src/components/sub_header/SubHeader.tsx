@@ -3,8 +3,10 @@ import Link from "next/link";
 import styles from "./SubHeader.module.scss";
 import TulfaSubheaderStyleOne from "@/assets/icons/tulfa_icon_1";
 import TulfaSubheaderStyleTwo from "@/assets/icons/tulfa_icon_2";
-import { motion } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useRef, useEffect, useState } from "react";
+import useWindowSize from "@/hooks/use_window_size";
+import { TulfaDownArrow } from "@/assets/icons/tulfa_nav_arrows";
 
 
 
@@ -29,6 +31,7 @@ export default function SubHeader({
     let headerLinkActivated = "";
     let headerLinkDisabled = "";
     let TulfaIcon: JSX.Element = "";
+    let arrowFill = "#433E99";
 
     switch (headerStyleType) {
         case 0:
@@ -37,6 +40,7 @@ export default function SubHeader({
             headerLinkActivated = styles.subheader_nav_activated_1;
             headerLinkDisabled = styles.subheader_nav_disabled_1;
             TulfaIcon = TulfaSubheaderStyleOne;
+            
             break
         case 1:
             headerStyle = styles.subheader_style_2;
@@ -51,6 +55,7 @@ export default function SubHeader({
             headerLinkActivated = styles.subheader_nav_activated_1;
             headerLinkDisabled = styles.subheader_nav_disabled_1;
             TulfaIcon = TulfaSubheaderStyleOne;
+            arrowFill = "transparent"
             break
         default:
             break
@@ -79,14 +84,15 @@ export default function SubHeader({
 
         const handleClick = (e) => {
 
-            /* DISABLE TOGGLE */
-            if(e.target.closest('.trigger_header_button')){
+            if (e.target.closest('.trigger_header_button')) {
                 setIsVisible(false)
+            } else if (e.target.closest('.disable_trigger_header_button')) {
+                return
             } else {
-                setIsVisible(prev=>!prev)
+                setIsVisible(prev => !prev)
             }
 
-            
+
         }
 
         if (typeof document !== 'undefined') {
@@ -102,13 +108,18 @@ export default function SubHeader({
 
     }, [])
 
+    /* DEVICE SIZE  */
+    const viewportSize = useWindowSize();
+
+    const [headerActivated, setHeaderActivated] = useState(false);
+
     return (
         <>
 
             <motion.header
                 ref={headerRef}
                 className={`${styles.subheader_container} ${headerStyle}`}
-                initial={{ top: '-10vh' }} 
+                initial={{ top: '-10vh' }}
                 animate={{ top: isVisible ? 0 : '-10vh' }}
                 transition={{
                     type: "spring",
@@ -120,9 +131,13 @@ export default function SubHeader({
 
                 <div
                     className={styles.subheader_inner_container}
+
                 >
-                    <div
+                    <motion.div
                         className={styles.subheader_heading_container}
+                        animate={{
+                            transform: (headerActivated && viewportSize.width < 720 && viewportSize.width > 500) ? `translateX(-15vw)` : null
+                        }}
                     >
                         <h3 className={
                             `${styles.subheader_heading} ${headerFontColor}`
@@ -134,12 +149,18 @@ export default function SubHeader({
                             />
 
                         </h3>
-                    </div>
+                    </motion.div>
 
 
-                    <nav className={styles.subheader_nav}>
+                    <motion.nav
+                        className={styles.subheader_nav}
+                        animate={{
+                            transform: (headerActivated && viewportSize.width < 720 && viewportSize.width > 500) ? `translateX(15vw)` : null
+                        }}
+                    >
 
-                        <div>
+                        {/* LAPTOPS */}
+                        {viewportSize.width > 720 && <div>
                             {navLinks.map(({ href, label }) => (
                                 <Link
                                     key={href}
@@ -154,11 +175,94 @@ export default function SubHeader({
                                 </Link>
                             ))}
                         </div>
+                        }
+
+                        {/* MOBILE DEVICES */}
+                        {viewportSize.width < 720 &&
+
+                            <>
+                                <motion.div
+                                    className={styles.dropdown_arrow}
+                                    initial={{
+                                        rotate: 0
+                                    }}
+                                    animate={
+                                        {
+                                            rotate: headerActivated ? 180 : 0
+                                        }
+                                    }
+                                >
+                                    <TulfaDownArrow
+                                        height={30}
+                                        width={30}
+                                        fill={arrowFill}
+                                        arrowColor="#FFF"
+                                        handleClick={() => {
+                                            setHeaderActivated(prev => !prev)
+                                        }}
+                                    />
+
+                                </motion.div>
 
 
+                            </>
+                        }
 
-                        <button>Book a demo</button>
-                    </nav>
+                        <button
+                            className={styles.book_demo}
+                        >Book a demo</button>
+                    </motion.nav>
+
+                    {/* DROPDOWN BAR */}
+                    <motion.div
+                        className={styles.dropdown_bar}
+                        animate={{
+                            transform: headerActivated ? `translateY(37vh)` : 'translateY(-30vh)'
+                        }}
+                        transition={{
+                            type: 'spring',
+                            damping: 40,
+                            duration: 0.2
+                        }}
+                    >
+                        {navLinks.map(({ href, label }) => (
+                            <AnimatePresence
+                                key={href}
+
+                            >
+                                <motion.div
+                                   
+                                    initial={{ opacity: 0 }}  // Start with opacity 0
+                                    whileInView={{ opacity: 1 }}  // Fade in to opacity 1 when in view
+                                    transition={{ duration: 0.2}}
+                                    exit={{ opacity: 0 }} 
+                                    style={{
+                                        width: "100%",
+                                        height: '100%'
+                                    }}
+                                >
+                                    <Link
+
+                                        href={href}
+                                        className={
+                                            activePage === href
+                                                ? headerLinkActivated
+                                                : headerLinkDisabled
+                                        }
+                                        style={{
+                                            textAlign: 'left',
+                                            width: '80%',
+                                            paddingLeft: "15vw"
+                                        }}
+                                    >
+                                        {label}
+                                    </Link>
+                                </motion.div>
+                            </AnimatePresence>
+                        ))}
+
+                    </motion.div>
+
                 </div>
 
 

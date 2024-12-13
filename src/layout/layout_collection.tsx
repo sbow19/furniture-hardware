@@ -27,9 +27,9 @@ import structureLayouts from "@/utils/structure_layouts";
 
 /* LAYOUT COLLECTION MUST BE IN DESIRED ORDER */
 const layoutCollection: Array<[React.FC, number]> = [
-    // [Banner, 0],
+    [Banner, 0],
     [SiloImages, 0],
-    // [LifeStyleScenes, 2],
+    [LifeStyleScenes, 2],
     // [CtaTertiary, 0],
     // [ColorVar, 0],
     // [FabricVar, 0],

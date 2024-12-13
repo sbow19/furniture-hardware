@@ -19,7 +19,14 @@
         color: variables.$light;
 
         /* TYPOGRAPHY */
-        @include variables.setTypography(64px, normal, 600, normal);
+
+        @include variables.sm {
+            @include variables.setTypography(42px, normal, 600, normal);
+        }
+        @include variables.lg {
+            @include variables.setTypography(64px, normal, 600, normal);
+        }
+       
         text-transform: capitalize;
     }
 
