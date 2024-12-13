@@ -40,30 +40,31 @@ const Banner: React.FC<LayoutProps> = ({
         };
     }, []);
 
-    useEffect(() => {
-        // Define the wheel event handler
-        const myListener = (e) => {
-            if (isInView) { // Check if the element is in view before handling scroll
-                if (e.deltaY > 0) {
-                    // Scrolled down
-                    handleChangeSlide(1); // Call function to handle slide change (scroll down)
-                } else {
-                    // Scrolled up
-                    handleChangeSlide(-1); // Call function to handle slide change (scroll up)
-                }
-            }
-        };
+    // useEffect(() => {
+    //     // Define the wheel event handler
+    //     const myListener = (e) => {
+    //         if (isInView) { // Check if the element is in view before handling scroll
+    //             if (e.deltaY > 0) {
+    //                 // Scrolled down
+    //                 handleChangeSlide(1); // Call function to handle slide change (scroll down)
+    //             } else {
+    //                 // Scrolled up
+    //                 handleChangeSlide(-1); // Call function to handle slide change (scroll up)
+    //             }
+    //         }
+    //     };
 
-        if (isInView) {
-            // Apply the event listener after a 2-second delay
-            elementRef.current.addEventListener("wheel", myListener);
-        } else {
-            elementRef.current.removeEventListener("wheel", myListener);
-        }
+    //     if (isInView) {
+    //         // Apply the event listener after a 2-second delay
+    //         elementRef.current.addEventListener("wheel", myListener);
+    //     } else {
+    //         elementRef.current.removeEventListener("wheel", myListener);
+    //     }
 
-    }, [isInView]); // Re-run the effect when `isInView` changes
+    // }, [isInView]); // Re-run the effect when `isInView` changes
 
     // Trigger move to next slide programmatically??
+    
     return (
         <div
             ref={elementRef}
@@ -84,6 +85,8 @@ const Banner: React.FC<LayoutProps> = ({
                         //     handleChangeSlide(1)
                         // }, 2000)
                     }}
+                    scrub={true}
+                    onScrollEndHandler={handleChangeSlide}
 
                 />
 

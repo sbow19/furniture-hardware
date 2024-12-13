@@ -96,8 +96,8 @@ export default function SubHeader({
         }
 
         if (typeof document !== 'undefined') {
-            document.addEventListener("wheel", handleScroll);
-            document.addEventListener("click", handleClick);
+            document.addEventListener("wheel", handleScroll, {capture: true});
+            document.addEventListener("click", handleClick, {capture: true});
 
             // Cleanup the event listeners when the component unmounts
             return () => {
