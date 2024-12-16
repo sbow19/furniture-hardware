@@ -37,6 +37,7 @@
             overflow: hidden;
             justify-self: flex-end;
             position: relative;
+            align-items: flex-start;
             transform: translateX(15vw);
             z-index: 20;
         };
@@ -74,12 +75,12 @@
         background-color: transparent;
 
         @include variables.sm {
-            height: 75vh;
+            height: 65vh;
             width: 75vw;
-            top: -10%;
+            top: -5%;
         }
         @include variables.md {
-            height: 100vh;
+            height: 85vh;
             width: 60vw;
             right: -10vw;
         }
@@ -92,9 +93,9 @@
 .silo_modal_container {
     position: absolute;
     top: 0;
-    left: 10vw;
+    left: 15vw;
     height: 90vh;
-    width: 80vw;
+    width: 70vw;
     background-color: transparent;
     z-index: 200;
 
@@ -117,13 +118,11 @@
             position: absolute;
             background-color: #2A266A;
             opacity: 0.8;
-            width: 40px;
-            height: 40px;
             color: white;
             right: 10%;
             top: 10%;
-            border-radius: 20px;
-            font-size: 24px
+            border-radius: 25px;
+            font-size: 25px
         }
 
         .silo_text_container {
@@ -137,8 +136,11 @@
            
 
             .silo_text {
-                @include variables.md {
+                @include variables.sm {
                     @include variables.setTypography(20px, medium, 500, normal);
+                }
+                @include variables.md {
+                    @include variables.setTypography(26px, medium, 500, normal);
                 }
                 @include variables.lg {
                     @include variables.setTypography(32px, medium, 500, normal);
@@ -154,40 +156,53 @@
 
         .silo_carousel_container {
             height: 50%;
+            padding-left: 17%;
             min-width: 100vw;
             position: relative;
             display: flex;
             margin-top: 20px;
-            column-gap: 10px;
+            column-gap: 20px;
             align-items: flex-start;
             justify-content: flex-start;
             overflow: hidden;
 
         }
-        .invisi_button_left {
-            position: absolute;
-            left: -2px;
-            top: 0;
-            height: 100%;
-            width: 5%;
-            z-index: 10;
-            background: linear-gradient(90deg, rgba(0, 0, 0, 0.01), rgba(0, 0, 0, 0));
-            border-color: transparent;
-            background-clip: padding-box;
-            border-radius: 10px
-        }
 
-        .invisi_button_right {
-            position: absolute;
-            right: -2px;
-            height: 100%;
-            width: 5%;
-            z-index: 5000;
-            background: linear-gradient(270deg, rgba(0, 0, 0, 0.02), rgba(0, 0, 0, 0.0));
-            border-color: transparent;
-            background-clip: padding-box;
-            border-radius: 10px
-        
+        .button_container {
+
+            height: 5vh;
+            width: 7vw;
+            align-self: flex-end;
+            display: flex;
+            justify-content: space-between;
+            
+
+            @include variables.sm {
+                width: 20vw;
+                transform: translateX(-5vw) translateY(2vh);
+            }
+            @include variables.md {
+                width: 15vw;
+                transform: translateX(-5vw) translateY(5vh);
+            }
+            @include variables.lg {
+                width: 7vw;
+                transform: translateX(-5vw) translateY(5vh);
+            }
+            
+
+            .invisi_button_left {
+
+                z-index: 10;
+            }
+    
+            .invisi_button_right {
+                z-index: 5000;
+                
+            
+            }
+
         }
+        
     }
 }

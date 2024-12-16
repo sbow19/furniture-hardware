@@ -9,6 +9,7 @@ import layoutCollection from "@/layout/layout_collection";
 import { useCallback, useState, useRef, useEffect } from "react";
 import { motion } from "motion/react"
 import useWindowSize from "@/hooks/use_window_size";
+import {throttle} from 'lodash'
 
 export default function Home() {
   // Layout Collection
@@ -82,6 +83,32 @@ export default function Home() {
 
   }, []);
 
+  useEffect(() => {
+    // This will be our throttled scroll handler
+    const handleWheel = throttle((event) => {
+      // Prevent default scroll behavior (optional)
+      event.preventDefault();
+
+      // Adjust the scroll sensitivity for the trackpad (event.deltaY is the scroll amount)
+      let scrollSpeed = 1; // Default speed for mouse wheel
+      if (Math.abs(event.deltaY) > 10) {
+        // If the event delta is too large (likely from trackpad), reduce sensitivity
+        scrollSpeed = 0.1; // Adjust this value as needed
+      }
+      // Handle the scroll event (e.g., move content, change state, etc.)
+      window.scrollBy(0, event.deltaY * scrollSpeed);
+      
+    }, 1000); // Throttle to run once every 100ms
+
+    // Attach event listener for 'wheel' event
+    window.addEventListener('wheel', handleWheel);
+
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener('wheel', handleWheel);
+    };
+  }, []);
+
 
   return (
     <>
@@ -130,6 +157,7 @@ export default function Home() {
                 style={{
                   position: 'absolute',
                   width: "100%",
+                  height: "100%"
 
                 }}
                 initial={{

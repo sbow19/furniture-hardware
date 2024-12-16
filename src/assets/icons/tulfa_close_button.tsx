@@ -11,7 +11,7 @@ const TulfaCloseButton = ({
     return (
         <button
             onClick={onClick}
-            className={className}
+            className={`${className} disable_trigger_header_button`}
         >
             <svg width={width} height={height} viewBox="0 0 37 36" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <g filter="url(#filter0_b_2735_6319)">

@@ -20,9 +20,16 @@
     
 }
 
+.callout_style_3 {
+    height: 30vh;
+    .call_paragraph {
+        @include variables.setCallOutParagraphTypography();
+        color: variables.$primaryColor;
+    }
+}
+
 .call_container {
     @include variables.setLayout(flex, center, center);
-    height: 400px;
     padding: 108px 50px;
     overflow: hidden;
     z-index: 20;
@@ -38,6 +45,11 @@
 .mw-928 {
     /* LAYOUT */
     max-width: 928px;
+}
+
+.mw-768 {
+    /* LAYOUT */
+    max-width: 768px;
 }
 
 .mw-623 {

@@ -4,10 +4,10 @@
     /* LAYOUT */
     @include variables.setLayout(flex, center, center);
     height: 100%;
-    width: auto;
+    width: 100%;
     position: relative;
     pointer-events: "none";
-    z-index: 10;
+    z-index: 20;
 
     /* STYLE */
     background: var(--color-white-solid, variables.$light);

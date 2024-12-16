@@ -1,11 +1,12 @@
 'use client'
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useRef, useMemo } from 'react';
 import { StaticImageData } from 'next/image';
 import Image from 'next/image'
 import styles from "./SiloImages.module.scss";
 import useWindowSize from '@/hooks/use_window_size';
 import TulfaCloseButton from "@/assets/icons/tulfa_close_button";
+import { TulfaRightArrow, TulfaLeftArrow } from '@/assets/icons/tulfa_nav_arrows';
 
 type ImageSet = {
     [key: string]: {
@@ -44,16 +45,99 @@ const SiloModal = ({ handleClose, modalOpen, imageSet }) => {
 
     const windowSize = useWindowSize();
 
-    const [displacementValue, setDisplacementValue] = useState(windowSize.width / 4);
+    const findDisplacementValue = (baseSizeCoefficient: number, imageOneWidthFactor: number, imageTwoWidthFactor, gapSize: number, offset: number) => {
 
-    
+        const actualImageOneWidth = windowSize.width * baseSizeCoefficient * 0.125 * imageOneWidthFactor;
+        const actualImageTwoWidth = windowSize.width * baseSizeCoefficient * 0.125 * imageTwoWidthFactor;
 
+        if (baseSizeCoefficient === 4) {
+            gapSize = gapSize * 2
+        }
+        const displacementSize = (actualImageOneWidth / 2) + (actualImageTwoWidth / 2) + gapSize - offset;
+
+        return displacementSize
+
+    }
+
+    const imageBaseSizeCoefficient = useMemo(() => {
+
+        let baseSizeCoefficient;
+
+        if (windowSize.width > 768) {
+            baseSizeCoefficient = 2
+        } else {
+            baseSizeCoefficient = 4
+        }
+
+        return baseSizeCoefficient
+    }, [windowSize])
+
+    const [displacementValue, setDisplacementValue] = useState(0);
+    const currentIndex = useRef(0)
     const translateRight = () => {
-        setDisplacementValue((prev) => prev + windowSize.width/4);
+
+        const newIndex = currentIndex.current - 1;
+
+        if (newIndex < 0) {
+            return
+        }
+
+        const imageName = imageSet.order[currentIndex.current];
+        const imageWidth = imageSet[imageName].width
+
+        const nextImageName = imageSet.order[newIndex];
+        const nextImageWidth = imageSet[nextImageName].width;
+
+        let offset = 0;
+        if (newIndex === 0) {
+            offset = windowSize.width * (0.8) * (0.15);
+        }
+
+        
+
+        const displacement = findDisplacementValue(imageBaseSizeCoefficient, imageWidth, nextImageWidth, 20, offset)
+
+
+        setDisplacementValue((prev) => {
+
+            return prev + displacement
+        }
+        );
+
+        currentIndex.current = newIndex;
     };
 
     const translateLeft = () => {
-        setDisplacementValue((prev) => prev - windowSize.width/4);
+        const newIndex = currentIndex.current + 1;
+
+        if (newIndex > imageSet.order.length) {
+            return
+        }
+
+        const imageName = imageSet.order[currentIndex.current];
+        const imageWidth = imageSet[imageName].width
+
+        const nextImageName = imageSet.order[newIndex];
+        const nextImageWidth = imageSet[nextImageName].width;
+
+        let offset = 0;
+        if (currentIndex.current === 0) {
+            offset = windowSize.width * (0.8) * (0.15);
+        }
+
+        if(newIndex === imageSet.order.length - 1){
+            offset = windowSize.width * (0.8) * (0.02);
+        }
+
+        const displacement = findDisplacementValue(imageBaseSizeCoefficient, imageWidth, nextImageWidth, 20, offset)
+
+        setDisplacementValue((prev) => {
+
+            return prev - displacement
+        }
+        );
+
+        currentIndex.current = newIndex;
     };
 
     return (
@@ -71,7 +155,13 @@ const SiloModal = ({ handleClose, modalOpen, imageSet }) => {
                 >
                     <TulfaCloseButton
                         onClick={handleClose}
-                        className={`${styles.silo_handle_close} trigger_header_button`}
+                        className={styles.silo_handle_close}
+                        height={
+                            windowSize.width > 768 ? 36 : 30
+                        }
+                        width={
+                            windowSize.width > 768 ? 36 : 30
+                        }
                     />
                     <div
                         className={styles.silo_text_container}
@@ -88,7 +178,7 @@ const SiloModal = ({ handleClose, modalOpen, imageSet }) => {
                     <div
                         className={styles.silo_carousel_container}
                     >
-                        
+
 
                         {imageSet.order.map((imageName: string, index) => {
                             index = index + 1;
@@ -98,13 +188,13 @@ const SiloModal = ({ handleClose, modalOpen, imageSet }) => {
                                     style={{
                                         x: displacementValue,
                                         transition: 'ease-in-out 0.5s',
-                                        height: '50vh',
-                                        width: `${imageSet[imageName].width * 25}vw`,
+                                        height: '45vh',
+                                        width: `${imageSet[imageName].width * (imageBaseSizeCoefficient * 12.5)}vw`,
                                         overflow: 'hidden',
                                         position: 'relative',
                                         borderRadius: 40
                                     }}
-                                    
+
                                 >
                                     <Image
 
@@ -114,31 +204,42 @@ const SiloModal = ({ handleClose, modalOpen, imageSet }) => {
                                             objectFit: 'cover', // maintain aspect ratio but fill the container
                                             height: '100%', // ensure image fills height
                                             width: '100%', // ensure image fills width
-                                            objectPosition:imageSet[imageName].overrideStyle.objectPosition , // center the image inside the container
-                                            
-                                          }}
-                                        
+                                            objectPosition: imageSet[imageName].overrideStyle.objectPosition, // center the image inside the container
+
+                                        }}
+
 
                                     />
-                                    
+
                                 </motion.div>
                             );
                         })}
-                        
+
                     </div>
-                    <button
+
+                    <div
+                        className={styles.button_container}
+                    >
+                        <TulfaLeftArrow
+                            height={windowSize.width > 768 ? 36 : 40}
+                            width={windowSize.width > 768 ? 36 : 40}
                             onClick={translateRight}
                             className={
                                 `${styles.invisi_button_left} trigger_header_button`
                             }
 
                         />
-                        <button
+                        <TulfaRightArrow
+                            height={windowSize.width > 768 ? 36 : 40}
+                            width={windowSize.width > 768 ? 36 : 40}
                             className={
                                 `${styles.invisi_button_right} trigger_header_button`
                             }
                             onClick={translateLeft}
                         />
+
+                    </div>
+
                 </div>
             </motion.div>
         </>

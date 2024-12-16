@@ -31,6 +31,9 @@ export default function CallOut({ heading, paragraph, modifier, calloutStyleType
         case 1:
             calloutStyle = styles.callout_style_2
             break
+        case 2:
+            calloutStyle = styles.callout_style_3
+            break
         default:
             break
     }

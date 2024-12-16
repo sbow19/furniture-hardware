@@ -1,5 +1,5 @@
 'use client'
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 
 const TulfaUpArrow = ({
     height,
@@ -10,14 +10,14 @@ const TulfaUpArrow = ({
 
     return (
         <button
-            // onMouseEnter={()=>{
-            // setIsHovered(true)}}
-            // onMouseLeave={()=>{
-            // setIsHovered(false)}}
+        // onMouseEnter={()=>{
+        // setIsHovered(true)}}
+        // onMouseLeave={()=>{
+        // setIsHovered(false)}}
 
-            // style={{
-            //     opacity: isHovered
-            // }}
+        // style={{
+        //     opacity: isHovered
+        // }}
         >
             <svg width={width} height={height} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="40" width="40" height="40" rx="20" transform="rotate(90 40 0)" fill="#F5F5F7" />
@@ -53,10 +53,15 @@ const TulfaDownArrow = ({
 
 const TulfaRightArrow = ({
     height,
-    width
+    width,
+    className,
+    onClick
 }) => {
     return (
-        <button>
+        <button
+            className={className}
+            onClick={onClick}
+        >
             <svg width={width} height={height} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect x="40" y="40" width="40" height="40" rx="20" transform="rotate(-180 40 40)" fill="#F5F5F7" />
                 <g clip-path="url(#clip0_17_643)">
@@ -74,10 +79,15 @@ const TulfaRightArrow = ({
 
 const TulfaLeftArrow = ({
     height,
-    width
+    width,
+    className,
+    onClick
 }) => {
     return (
-        <button>
+        <button
+            className={className}
+            onClick={onClick}
+        >
             <svg width={width} height={height} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect width="40" height="40" rx="20" fill="#F5F5F7" />
                 <g clip-path="url(#clip0_16_631)">

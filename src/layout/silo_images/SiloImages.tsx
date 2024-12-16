@@ -16,11 +16,11 @@ import chairImageThree from "../../assets/images/silo_images/BCL 8003 BL_View01.
 import chairImageFour from "../../assets/images/silo_images/BCL 8003 BL_View04.png"
 import chairImageFive from "../../assets/images/silo_images/BCL 8003 BL_View03.png"
 
-import modalChairImageOne from "../../assets/images/silo_images/CB_Tulfa_3.png"
-import modalChairImageTwo from "../../assets/images/silo_images/CB_Tulfa_2.png"
-import modalChairImageThree from "../../assets/images/silo_images/CB_Tulfa_4.png"
-import modalChairImageFour from "../../assets/images/silo_images/CB_Tulfa_4.png"
-import modalChairImageFive from "../../assets/images/silo_images/CB_Tulfa_1.png"
+import modalChairImageOne from "../../assets/images/silo_images/silo/1.png"
+import modalChairImageTwo from "../../assets/images/silo_images/silo/2.png"
+import modalChairImageThree from "../../assets/images/silo_images/silo/3.png"
+import modalChairImageFour from "../../assets/images/silo_images/silo/4.png"
+import modalChairImageFive from "../../assets/images/silo_images/silo/5.png"
 
 type ImageSet = {
     [key: string]: {
@@ -37,9 +37,9 @@ type ImageSet = {
 const mainImageSet: ImageSet = {
     order: [
         "chairImageOne",
-        "chairImageFour",
         "chairImageTwo",
         "chairImageThree",
+        "chairImageFour",
         "chairImageFive"
     ],
     chairImageOne: {
@@ -74,8 +74,8 @@ const mainImageSet: ImageSet = {
 const modalImageSet: ImageSet = {
     order: [
         "chairImageOne",
-        "chairImageFour",
         "chairImageTwo",
+        "chairImageFour",
         "chairImageThree",
         "chairImageFive"
     ],
@@ -106,7 +106,7 @@ const modalImageSet: ImageSet = {
     chairImageFour: {
         imageName: "chairImageFour",
         imageData: modalChairImageFour,
-        width: 2,
+        width: 1.5,
         overrideStyle: {
             objectPosition: "50% 60%"
         }
@@ -267,7 +267,7 @@ const SiloImages: React.FC<LayoutProps> = ({
 				
 			</AnimatePresence>
 
-            <div
+            {/* <div
                 style={{
                     position: 'absolute', 
                     top: viewportSize.height / 1.2,
@@ -282,7 +282,7 @@ const SiloImages: React.FC<LayoutProps> = ({
                     text={"Blogs: Lorem"}
                 />
                       
-            </div>
+            </div> */}
             
         </div>
     );

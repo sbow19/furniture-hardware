@@ -2,7 +2,7 @@
 import Image from 'next/image';
 import { StaticImageData } from "next/image";
 import { motion } from 'framer-motion';
-import { useEffect, useState, memo } from 'react';
+import { useEffect, useState, memo, useRef } from 'react';
 
 type ImageSet = {
     [key: string]: {
@@ -21,8 +21,12 @@ const FadeInCarousel: React.FC<FadeInCarouselProps> = memo(({ imageSet }) => {
 
     const [currentIndex, setCurrentIndex] = useState(0);
 
+    const timeoutRef = useRef(null)
+
     useEffect(() => {
-        setTimeout(() => {
+
+        clearTimeout(timeoutRef.current)
+       timeoutRef.current = setTimeout(() => {
             setCurrentIndex(prev => {
 
                 const imageSetLength = imageSet.order.length;

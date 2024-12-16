@@ -10,12 +10,15 @@ type ShowCaseProps = {
     }
 }
 
-export default function ShowCase({ heading, animationValues }: ShowCaseProps) {
+export default function ShowCase({ heading, animationValues, style }: ShowCaseProps) {
     return (
         <motion.div className={
             styles.showcase
         }
-            style={animationValues}
+            style={{
+                ...animationValues,
+                ...style
+            }}
         
         >
             {heading && <h3 className={styles.showcase_heading}>{heading}</h3>}

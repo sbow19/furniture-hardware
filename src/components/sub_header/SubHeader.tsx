@@ -23,7 +23,7 @@ export default function SubHeader({
         { href: "/", label: "Product Images" },
         { href: "/product_videos", label: "Product Videos" },
         { href: "/immersive_experience", label: "Immersive Experience" },
-        // { href: "/happiest_costumers", label: "Happiest Costumers" },
+        { href: "/happiest_costumers", label: "Happiest Costumers" },
     ];
 
     let headerStyle = "";
@@ -32,6 +32,7 @@ export default function SubHeader({
     let headerLinkDisabled = "";
     let TulfaIcon: JSX.Element = "";
     let arrowFill = "#433E99";
+    let headerDropdownBar = "";
 
     switch (headerStyleType) {
         case 0:
@@ -39,14 +40,16 @@ export default function SubHeader({
             headerFontColor = styles.subheader_font_color_1;
             headerLinkActivated = styles.subheader_nav_activated_1;
             headerLinkDisabled = styles.subheader_nav_disabled_1;
+            headerDropdownBar  = styles.dropdown_bar_1;
             TulfaIcon = TulfaSubheaderStyleOne;
-            
+
             break
         case 1:
             headerStyle = styles.subheader_style_2;
             headerFontColor = styles.subheader_font_color_2;
             headerLinkActivated = styles.subheader_nav_activated_2;
             headerLinkDisabled = styles.subheader_nav_disabled_2;
+            
             TulfaIcon = TulfaSubheaderStyleTwo;
             break
         case 2:
@@ -54,6 +57,7 @@ export default function SubHeader({
             headerFontColor = styles.subheader_font_color_1;
             headerLinkActivated = styles.subheader_nav_activated_1;
             headerLinkDisabled = styles.subheader_nav_disabled_1;
+            headerDropdownBar  = styles.dropdown_bar_2;
             TulfaIcon = TulfaSubheaderStyleOne;
             arrowFill = "transparent"
             break
@@ -136,7 +140,7 @@ export default function SubHeader({
                     <motion.div
                         className={styles.subheader_heading_container}
                         animate={{
-                            transform: (headerActivated && viewportSize.width < 720 && viewportSize.width > 500) ? `translateX(-15vw)` : null
+                            transform: (headerActivated && viewportSize.width < 1020 && viewportSize.width > 500) ? `translateX(-20vw)` : null
                         }}
                     >
                         <h3 className={
@@ -155,12 +159,12 @@ export default function SubHeader({
                     <motion.nav
                         className={styles.subheader_nav}
                         animate={{
-                            transform: (headerActivated && viewportSize.width < 720 && viewportSize.width > 500) ? `translateX(15vw)` : null
+                            transform: (headerActivated && viewportSize.width < 1020 && viewportSize.width > 500) ? `translateX(20vw)` : null
                         }}
                     >
 
                         {/* LAPTOPS */}
-                        {viewportSize.width > 720 && <div>
+                        {viewportSize.width > 1020 && <div>
                             {navLinks.map(({ href, label }) => (
                                 <Link
                                     key={href}
@@ -178,17 +182,19 @@ export default function SubHeader({
                         }
 
                         {/* MOBILE DEVICES */}
-                        {viewportSize.width < 720 &&
+                        {viewportSize.width < 1020 &&
 
                             <>
                                 <motion.div
                                     className={styles.dropdown_arrow}
                                     initial={{
-                                        rotate: 0
+                                        rotate: 0,
+
                                     }}
                                     animate={
                                         {
-                                            rotate: headerActivated ? 180 : 0
+                                            rotate: headerActivated ? 180 : 0,
+
                                         }
                                     }
                                 >
@@ -215,14 +221,15 @@ export default function SubHeader({
 
                     {/* DROPDOWN BAR */}
                     <motion.div
-                        className={styles.dropdown_bar}
+                        className={`${styles.dropdown_bar} ${headerDropdownBar}`}
                         animate={{
-                            transform: headerActivated ? `translateY(37vh)` : 'translateY(-30vh)'
+                            transform: headerActivated ? `translateY(${((navLinks.length - 1) * 50) - 25}px)` : `translateY(-${(navLinks.length - 1) * 50}px)`,
+
                         }}
                         transition={{
                             type: 'spring',
-                            damping: 40,
-                            duration: 0.2
+                            damping: 20,
+                            duration: 0.1,
                         }}
                     >
                         {navLinks.map(({ href, label }) => (
@@ -231,29 +238,27 @@ export default function SubHeader({
 
                             >
                                 <motion.div
-                                   
-                                    initial={{ opacity: 0 }}  // Start with opacity 0
-                                    whileInView={{ opacity: 1 }}  // Fade in to opacity 1 when in view
-                                    transition={{ duration: 0.2}}
-                                    exit={{ opacity: 0 }} 
-                                    style={{
-                                        width: "100%",
-                                        height: '100%'
+                                    initial={{
+                                        opacity: 0
                                     }}
+                                    whileInView={{
+                                        opacity: headerActivated ? 1 : 0,
+                                        transition: {
+                                            duration: 0.1
+                                        }
+                                    }}
+                                    viewport={{
+                                        margin: "-30px"
+                                    }}
+                                    className={`${styles.link_container_style}`}
                                 >
                                     <Link
 
                                         href={href}
-                                        className={
-                                            activePage === href
-                                                ? headerLinkActivated
-                                                : headerLinkDisabled
-                                        }
-                                        style={{
-                                            textAlign: 'left',
-                                            width: '80%',
-                                            paddingLeft: "15vw"
-                                        }}
+
+                                        className={`${activePage === href
+                                            ? headerLinkActivated
+                                            : headerLinkDisabled}`}
                                     >
                                         {label}
                                     </Link>

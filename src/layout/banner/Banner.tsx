@@ -67,6 +67,10 @@ const Banner: React.FC<LayoutProps> = ({
     return (
         <div
             ref={elementRef}
+            style={{
+                height: '100%',
+                width: '100%'
+            }}
         >
             <motion.section
                 className={styles.banner_container}
@@ -77,6 +81,7 @@ const Banner: React.FC<LayoutProps> = ({
                     src="/videos/banner/Edit version_text edit.mp4"
                     type="video/mp4"
                     altText=''
+                    loop={false}
                     onVideoComplete={() => {
                         // handleLayoutLoad(layoutName)
                         // setTimeout(() => {

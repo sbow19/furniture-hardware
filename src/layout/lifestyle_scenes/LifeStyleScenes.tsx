@@ -8,6 +8,7 @@ import useAutoLoad from "@/hooks/use_autoload";
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { useRef, useEffect, useState, useMemo } from "react";
 import useWindowSize from "@/hooks/use_window_size";
+import LifeStyleBranch from "./branch/LifeStyleScenesBranch";
 
 const LifeStyleScenes: React.FC<LayoutProps> = ({
     layoutName,
@@ -22,7 +23,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
     const scrollHeight = useMemo(() => {
 
         // Height of element is 150%, therefore we  multiply viewport by 1.9 to get total scroll distance
-        return viewportSize.height * 6;
+        return viewportSize.height * 4;
 
     }, [viewportSize])
 
@@ -221,17 +222,26 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
             popupPositionInternal.top = viewportSize.height / 1.2;
             popupPositionInternal.left = viewportSize.width / 2.5;
             popupPositionInternal.textStyle = {
-            
+
             }
         }
 
         return popupPositionInternal;
     }, [viewportSize]);
 
+    /* LIFESTYLE SCENE BRANCH STATE */
+    const [isLifestyleBVisible, setIsLifestyleBVisible] = useState(false);
 
 
     return (
         <>
+           
+            <motion.div
+                animate={{
+                    opacity: !isLifestyleBVisible ? 1 : 0,
+                    duration: 1
+                }}
+            >
             <div
                 style={{
                     height: '100vh',
@@ -243,7 +253,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
             >
                 <div
                     style={{
-                        minHeight: viewportSize.height * 6,
+                        minHeight: viewportSize.height * 4,
                         backgroundColor: 'transparent',
                         position: 'relative',
                         zIndex: 100
@@ -252,127 +262,134 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
 
                 />
             </div>
-            <div
+                <div
 
-                style={{
-                    position: 'relative',
-                    height: '100%',
-                    width: '100%'
-                }}
-            >
-
-                <motion.div
                     style={{
-                        position: "fixed",
-                        top: 0,
-                        left: 0,
-                        width: "100%",
-                        overflow: 'hidden',
+                        position: 'relative',
+                        height: '100%',
+                        width: '100%'
                     }}
-                    className={styles.scroll_container}
                 >
-                    <motion.section
-                        className={styles.lifestyle_container}
-                        ref={containerRef}
+
+                    <motion.div
+                        style={{
+                            position: "fixed",
+                            top: 0,
+                            left: 0,
+                            width: "100%",
+                            overflow: 'hidden',
+                        }}
+                        className={styles.scroll_container}
                     >
-                        {/* BACKDROP OVERLAY */}
-
-                        <motion.div
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                zIndex: 20,
-                                backgroundColor: 'rgb(0,0,0)',
-                                opacity: transformOpacityAnimationOne
-                            }}
-
-                        />
-
-                        {/* BACKGROUND IMAGE */}
-                        <motion.div
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                scale: springyTransformScaleAnimationOne,
-                                y: springyTranslateAnimationOne
-                            }}
+                        <motion.section
+                            className={styles.lifestyle_container}
+                            ref={containerRef}
                         >
-                            <Image
-                                src={lifeStyleScenesImage}
-                                alt=''
-                                priority
-                                className={styles.lifestyle_image}
+                            {/* BACKDROP OVERLAY */}
 
-
-                            />
-                        </motion.div>
-
-                        <motion.div
-                            style={{
-                                width: '100%',
-                                height: '100%',
-                                position: 'absolute',
-                                top: 0,
-                                left: 0,
-                                zIndex: 30
-                            }}
-                        >
-                            <ShowCase
-                                heading="Lifestyle Scenes"
-                                animationValues={{
-                                    y: springyTransformShowcaseAnimationOne,
-                                    opacity: transformOpacityAnimationTwo
+                            <motion.div
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    zIndex: 20,
+                                    backgroundColor: 'rgb(0,0,0)',
+                                    opacity: transformOpacityAnimationOne
                                 }}
+
                             />
-                        </motion.div>
 
-                        {/* BUTTON TRIGGER */}
-                        <motion.div
-                            className={styles.lifestyle_button_container}
-                            style={{
-                                opacity: transformOpacityAnimationTwo,
-                                y: springyTransformShowcaseAnimationTwo,
-                            }}
-                            ref={popupButtonRef}
+                            {/* BACKGROUND IMAGE */}
+                            <motion.div
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    scale: springyTransformScaleAnimationOne,
+                                    y: springyTranslateAnimationOne
+                                }}
+                            >
+                                <Image
+                                    src={lifeStyleScenesImage}
+                                    alt=''
+                                    priority
+                                    className={styles.lifestyle_image}
+
+
+                                />
+                            </motion.div>
+
+                            <motion.div
+                                style={{
+                                    width: '100%',
+                                    height: '100%',
+                                    position: 'absolute',
+                                    top: 0,
+                                    left: 0,
+                                    zIndex: 30
+                                }}
+                            >
+                                <ShowCase
+                                    heading="Lifestyle Scenes"
+                                    animationValues={{
+                                        y: springyTransformShowcaseAnimationOne,
+                                        opacity: transformOpacityAnimationTwo
+                                    }}
+                                />
+                            </motion.div>
+
+                            {/* BUTTON TRIGGER */}
+                            <motion.div
+                                className={styles.lifestyle_button_container}
+                                style={{
+                                    opacity: transformOpacityAnimationTwo,
+                                    y: springyTransformShowcaseAnimationTwo,
+                                }}
+                                ref={popupButtonRef}
+                            />
+
+                        </motion.section>
+
+
+                    </motion.div>
+
+
+                </div>
+
+                {/* POP BUTTON CONTAINER */}
+                <div
+                    style={{
+                        position: "absolute",
+                        bottom: "15%",
+                        left: "calc(50vw - 110px)",
+                        width: 400,
+                        height: 60,
+                        zIndex: 150,
+                        top: "85vh",
+                    }}
+
+
+                >
+                    {
+                        isPopupVisible &&
+                        <TulfaPopupButton
+                            timer={1000}
+                            height={60}
+                            width={300}
+                            textStyle={popupPosition.textStyle}
+                            text={"Take a closer look"}
+                            onClick={setIsLifestyleBVisible}
                         />
+                    }
+                </div>
+            </motion.div>
+            
 
-                    </motion.section>
-
-
-                </motion.div>
-
-
-            </div>
-
-            {/* POP BUTTON CONTAINER */}
-            <div
-                style={{
-                    position: "absolute",
-                    bottom: "15%",
-                    left: "calc(50vw - 110px)",
-                    width: 400,
-                    height: 60,
-                    zIndex: 150,
-                    top: "85vh",
-                }}
-
-                
-            >
-                {
-                    isPopupVisible &&
-                    <TulfaPopupButton
-                        timer={1000}
-                        height={60}
-                        width={300}
-                        textStyle={popupPosition.textStyle}
-                        text={"Take a closer look"}
-                        onClick={()=>{console.log("Helloworld")}}
-                    />
-                }
-            </div>
+            {/* LIFESTYLE SCENES BRANCH */}
+            {
+                isLifestyleBVisible && <LifeStyleBranch />
+            }
 
         </>
     );
