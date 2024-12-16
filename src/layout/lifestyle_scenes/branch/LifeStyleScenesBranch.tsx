@@ -174,7 +174,7 @@ const LifeStyleBranch = () => {
                     }}
                     animate={{
                         transform: isLifestyleContainerActive ? `scale(1.2)` : `scale(1) translateY(-70vh)`,
-                        opacity: isGroupImagesActive ? 0 : 1,
+                        opacity: isGroupImagesActive ? 0 : 1
                     }}
                     transition={{
                         duration: 0.7,
@@ -215,7 +215,7 @@ const LifeStyleBranch = () => {
 
                         <motion.div>
                             <VideoPlayer
-                                src='/videos/lifestyle/-b7fc-4a9b-80ad-780f951e5462.mp4'
+                                src='/videos/lifestyle/lifestyle.mp4'
                                 type="video/mp4"
                                 loop={true}
                                 styleOverride={{

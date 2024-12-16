@@ -101,11 +101,11 @@ export default function Home() {
     }, 1000); // Throttle to run once every 100ms
 
     // Attach event listener for 'wheel' event
-    window.addEventListener('wheel', handleWheel);
+    window.addEventListener('scroll', handleWheel);
 
     // Clean up the event listener on component unmount
     return () => {
-      window.removeEventListener('wheel', handleWheel);
+      window.removeEventListener('scroll', handleWheel);
     };
   }, []);
 
