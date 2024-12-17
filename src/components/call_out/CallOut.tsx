@@ -21,7 +21,7 @@ type CallOutProps =
     }
     
 
-export default function CallOut({ heading, paragraph, modifier, calloutStyleType, animationValues }: CallOutProps) {
+export default function CallOut({ overrideStyles, heading, paragraph, modifier, calloutStyleType, animationValues }: CallOutProps) {
     
     let calloutStyle = '';
     switch(calloutStyleType){
@@ -42,7 +42,11 @@ export default function CallOut({ heading, paragraph, modifier, calloutStyleType
     return (
         <motion.div 
             className={`${styles.call_container} ${calloutStyle}`}
-            style={animationValues}
+            style={{
+                ...animationValues,
+                ...overrideStyles
+            
+            }}
             
         >
             {heading && <h3 className={styles.call_heading}>{heading}</h3>}

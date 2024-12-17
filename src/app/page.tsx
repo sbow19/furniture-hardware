@@ -83,10 +83,6 @@ export default function Home() {
   }, []);
 
 
- 
-
-
-
   return (
     <>
       <SubHeader 

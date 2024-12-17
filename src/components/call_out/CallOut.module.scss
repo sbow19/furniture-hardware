@@ -47,7 +47,7 @@
         }
     
         @include variables.lg {
-            @include variables.setTypography(26px, normal, 400, normal);
+            @include variables.setTypography(32px, normal, 500, normal);
             max-width: 700px
         }
         

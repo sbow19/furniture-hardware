@@ -51,7 +51,7 @@ const ColorVariation: React.FC<ColorVarProps> = ({
                     className={styles.color_left}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }} // Use animate to trigger the opacity change right away
-                    transition={{ duration: 1, delay: 0.4 }} // Delay the start of the animation
+                    transition={{ duration: 0.5, delay: 0.4 }} // Delay the start of the animation
                     exit={{ opacity: 0 }}
 
                 >
@@ -67,7 +67,10 @@ const ColorVariation: React.FC<ColorVarProps> = ({
                         Object.keys(imageSet).map((color, index) => {
                             return (
                                 <button
-                                    className={imageSet[color].buttonColor}
+                                    className={
+                                        `${imageSet[color].buttonColor} 
+                                        disable_trigger_header_button`
+                                    }
                                     key={index}
                                     onClick={(e) => {
                                         e.stopPropagation()
@@ -86,7 +89,7 @@ const ColorVariation: React.FC<ColorVarProps> = ({
                     className={styles.color_right}
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }} // Use animate to trigger the opacity change right away
-                    transition={{ duration: 1, delay: 0.4 }} // Delay the start of the animation
+                    transition={{ duration: 0.5, delay: 0.4 }} // Delay the start of the animation
                     exit={{ opacity: 0 }}
                 >
                     <Image

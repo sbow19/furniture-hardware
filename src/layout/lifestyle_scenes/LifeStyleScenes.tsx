@@ -8,7 +8,7 @@ import useAutoLoad from "@/hooks/use_autoload";
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { useRef, useEffect, useState, useMemo } from "react";
 import useWindowSize from "@/hooks/use_window_size";
-import LifeStyleBranch from "./branch/LifeStyleScenesBranch";
+import ModalContainer from "@/components/modals/ModalContainer";
 
 const LifeStyleScenes: React.FC<LayoutProps> = ({
     layoutName,
@@ -230,38 +230,16 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
     }, [viewportSize]);
 
     /* LIFESTYLE SCENE BRANCH STATE */
-    const [isLifestyleBVisible, setIsLifestyleBVisible] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
-    // useEffect(() => {
-    //     // Define the wheel handler function
-    //     if (!scrollTarget.current) return;
-    //     if (typeof window === 'undefined') return;
-    //     const handleWheel = (event) => {
-    //         console.log(event.deltaY)
-    //         // Prevent default page scroll behavior
-    //         event.preventDefault()
+    const handleModalOpen = ()=>{
+        setIsModalOpen(true)
+    }
 
-    //         const { deltaY } = event
-    //         if (deltaY < 100 && deltaY > 0) {
-    //             return
-
-    //         } else if (deltaY > 140 || deltaY < -140) {
-    //             return
-    //         } else if (deltaY > 100) {
-    //             scrollTarget.current.scrollBy(0, deltaY * 0.2)
-
-    //         }
-    //         else if (deltaY < -100) {
-    //             scrollTarget.current.scrollBy(0, deltaY * 0.2)
-
-    //         }
-
-    //     };
-    //     // Attach the wheel event listener to the 
-    //     scrollTarget.current.addEventListener('wheel', handleWheel, { passive: false });
-
-
-    // }, []); // Empty dependency array ensures the effect runs once when the component mounts
+    const handleModalClose = ()=>{
+        console.log("Closed")
+        setIsModalOpen(false)
+    }
 
     const lastCallRef = useRef(0);
 
@@ -304,20 +282,14 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
             scrollTarget.current.addEventListener('wheel', handleWheel, { passive: false });
         }
 
-
-
-
     }, []); // Empty dependency array ensures the effect runs once when the component mounts
-
-
-
 
     return (
         <>
 
             <motion.div
                 animate={{
-                    opacity: !isLifestyleBVisible ? 1 : 0,
+                    opacity: true ? 1 : 0,
                     duration: 1
                 }}
             >
@@ -427,13 +399,8 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
                                 }}
                                 ref={popupButtonRef}
                             />
-
                         </motion.section>
-
-
                     </motion.div>
-
-
                 </div>
 
                 {/* POP BUTTON CONTAINER */}
@@ -458,17 +425,21 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
                             width={300}
                             textStyle={popupPosition.textStyle}
                             text={"Take a closer look"}
-                            onClick={setIsLifestyleBVisible}
+                            onClick={()=>{
+                                setIsModalOpen(true)
+                            }}
                         />
                     }
                 </div>
             </motion.div>
 
 
-            {/* LIFESTYLE SCENES BRANCH */}
-            {
-                isLifestyleBVisible && <LifeStyleBranch />
-            }
+            {/* LIFESTYLE SCENES Modal */}
+            <ModalContainer
+                handleModalClose={handleModalClose}
+                isModalOpen={isModalOpen}
+            />
+            
 
         </>
     );

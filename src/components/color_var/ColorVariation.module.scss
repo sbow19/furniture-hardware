@@ -6,11 +6,13 @@
     overflow: hidden;
     @include variables.setLayout(flex, center);
     width: 50%;
+    height: 90%;
 
     .color_left_image {
         /* LAYOUT */
-        height: 90%;
-        width: auto
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
     }
 }
 
@@ -26,6 +28,7 @@
     .color_right_image {
         /* LAYOUT */
         transform: scale(2) translateY(25%);
+        object-fit: contain;
         overflow: hidden;
     }
 }
@@ -33,7 +36,7 @@
 .color_left_filter {
     /* LAYOUT */
     position: absolute;
-    bottom: 1.018125rem;
+    bottom: 7%;
     left: 25%;
     @include variables.setLayout(flex, center, center, 7.64px);
     transform: translate(-50%);
