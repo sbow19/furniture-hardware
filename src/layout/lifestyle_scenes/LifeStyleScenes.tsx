@@ -237,6 +237,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
         if (!scrollTarget.current) return;
         if (typeof window === 'undefined') return;
         const handleWheel = (event) => {
+            console.log(event.deltaY)
             // Prevent default page scroll behavior
             event.preventDefault()
 
