@@ -3,13 +3,17 @@ import React, { useState } from 'react';
 
 const TulfaUpArrow = ({
     height,
-    width
+    width,
+    fill,
+    arrowColor,
+    handleClick
 }) => {
 
     // const [isHovered, setIsHovered] = useState(false)
 
     return (
         <button
+            className="disable_trigger_header_button"
         // onMouseEnter={()=>{
         // setIsHovered(true)}}
         // onMouseLeave={()=>{
@@ -20,7 +24,7 @@ const TulfaUpArrow = ({
         // }}
         >
             <svg width={width} height={height} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="40" width="40" height="40" rx="20" transform="rotate(90 40 0)" fill="#F5F5F7" />
+                <rect x="40" width="40" height="40" rx="20" transform="rotate(90 40 0)" fill={fill} />
                 <path d="M12.5 22.75L20 15.25L27.5 22.75" stroke="#433E99" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
         </button>
@@ -42,7 +46,7 @@ const TulfaDownArrow = ({
         >
             <svg width={width} height={height} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect y="40" width="40" height="40" rx="20" transform="rotate(-90 0 40)" fill={fill} />
-                <path d="M27.5 17.25L20 24.75L12.5 17.25" stroke={arrowColor} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M27.5 17.25L20 24.75L12.5 17.25" stroke="#433E99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
 
 

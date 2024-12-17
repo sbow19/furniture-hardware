@@ -17,11 +17,23 @@
 
         .cta_content_paragraph {
             /* LAYOUT */
-            width: 742px;
             flex-shrink: 0;
 
             /* TYPOGRAPHY */
-            @include variables.setTypography(86px, normal, 600, normal);
+            @include variables.sm {
+                @include variables.setTypography(48px, normal, 600, normal);
+                width: 348px;
+            }
+
+            @include variables.md {
+                @include variables.setTypography(60px, normal, 600, normal);
+                width: 540px
+            }
+            @include variables.lg{
+                @include variables.setTypography(86px, normal, 600, normal);
+                width: 742px;
+            }
+            
 
             span {
                 color: variables.$ctaTertiaryTextDisabled;
@@ -38,7 +50,14 @@
 
         /*LAYOUT*/
         min-height: 100vh; 
+        width: 100%;
         overflow: hidden;
+        @include variables.sm {
+            width: 150vw
+        }
+        @include variables.md {
+            width: 100vw
+        }
         .cta_image {
             /* LAYOUT */
             width: 100%;

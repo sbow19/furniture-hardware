@@ -5,10 +5,11 @@ import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 import lifeStyleScenesImage from "../../assets/images/lifestyle_scenes/Banner.png";
 import styles from "./LifeStyleScenes.module.scss";
 import useAutoLoad from "@/hooks/use_autoload";
-import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion'
 import { useRef, useEffect, useState, useMemo } from "react";
 import useWindowSize from "@/hooks/use_window_size";
 import LifeStyleBranch from "./branch/LifeStyleScenesBranch";
+import { throttle } from 'lodash'
 
 const LifeStyleScenes: React.FC<LayoutProps> = ({
     layoutName,
@@ -118,7 +119,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
                     };
 
                 } else {
-                    console.log(isAtTopRef.current)
+                    
                     // Scrolled up
                     if (isAtTopRef.current) {
 
@@ -132,7 +133,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
             // Apply the event listener after a 2-second delay
             elementRef.current.addEventListener("wheel", myListener);
         } else {
-            console.log(isInView)
+          
             elementRef.current.removeEventListener("wheel", myListener);
         }
 
@@ -232,36 +233,66 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
     /* LIFESTYLE SCENE BRANCH STATE */
     const [isLifestyleBVisible, setIsLifestyleBVisible] = useState(false);
 
+    useEffect(() => {
+        // Define the wheel handler function
+        const handleWheel = (event) => {
+            // Prevent default page scroll behavior
+            event.preventDefault()
+
+            const { deltaY } = event
+            if (deltaY < 110 && deltaY > 0) {
+                return
+
+            } else if (deltaY > 140 || deltaY < -140) {
+                return
+            } else if (deltaY > 110) {
+                scrollTarget.current.scrollBy(0, deltaY * 0.2)
+
+            }
+            else if (deltaY < -110) {
+                scrollTarget.current.scrollBy(0, deltaY * 0.2)
+
+            }
+
+        };
+        // Attach the wheel event listener to the 
+        scrollTarget.current.addEventListener('wheel', handleWheel, { passive: false });
+
+
+    }, []); // Empty dependency array ensures the effect runs once when the component mounts
+
+
+
 
     return (
         <>
-           
+
             <motion.div
                 animate={{
                     opacity: !isLifestyleBVisible ? 1 : 0,
                     duration: 1
                 }}
             >
-            <div
-                style={{
-                    height: '100vh',
-                    width: '100vw',
-                    overflowY: "scroll",
-                    position: 'absolute',
-                }}
-                ref={scrollTarget}
-            >
                 <div
                     style={{
-                        minHeight: viewportSize.height * 4,
-                        backgroundColor: 'transparent',
-                        position: 'relative',
-                        zIndex: 100
+                        height: '100vh',
+                        width: '100vw',
+                        overflowY: "scroll",
+                        position: 'absolute',
                     }}
-                    ref={elementRef}
+                    ref={scrollTarget}
+                >
+                    <div
+                        style={{
+                            minHeight: viewportSize.height * 4,
+                            backgroundColor: 'transparent',
+                            position: 'relative',
+                            zIndex: 100
+                        }}
+                        ref={elementRef}
 
-                />
-            </div>
+                    />
+                </div>
                 <div
 
                     style={{
@@ -384,7 +415,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
                     }
                 </div>
             </motion.div>
-            
+
 
             {/* LIFESTYLE SCENES BRANCH */}
             {

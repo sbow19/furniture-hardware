@@ -159,7 +159,7 @@ export default function SubHeader({
                     <motion.nav
                         className={styles.subheader_nav}
                         animate={{
-                            transform: (headerActivated && viewportSize.width < 1020 && viewportSize.width > 500) ? `translateX(20vw)` : null
+                            transform: (headerActivated && viewportSize.width < 1020 && viewportSize.width > 500) ? `translateX(15vw)` : null
                         }}
                     >
 

@@ -22,7 +22,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
     const scrollHeight = useMemo(() => {
 
         // Change size depending on desired length of animations
-        return viewportSize.height * 6;
+        return viewportSize.height * 5;
 
     }, [viewportSize])
 
@@ -173,7 +173,72 @@ const CtaTertiary: React.FC<LayoutProps> = ({
         damping: 20
     })
 
+    /*SCROLL THROTTLING*/
 
+    // useEffect(() => {
+    //     // Define the wheel handler function
+    //     const handleWheel = (event) => {
+    //         // Prevent default page scroll behavior
+    //         event.preventDefault()
+
+    //         const { deltaY } = event
+    //         if (deltaY < 110 && deltaY > 0) {
+    //             return
+
+    //         } else if (deltaY > 140 || deltaY < -140) {
+    //             return
+    //         } else if (deltaY > 110) {
+    //             scrollTarget.current.scrollBy(0, Math.max(deltaY * 0.25, 25))
+
+    //         }
+    //         else if (deltaY < -110) {
+    //             scrollTarget.current.scrollBy(0, Math.min(deltaY * 0.25, -25))
+
+    //         }
+
+    //     };
+    //     // Attach the wheel event listener to the 
+    //     scrollTarget.current.addEventListener('wheel', handleWheel, { passive: false });
+
+
+    // }, []); // Empty dependency array ensures the effect runs once when the component mounts
+
+    // Create a ref to store the last time the function was called
+    const lastCallRef = useRef(0);
+
+  useEffect(() => {
+        // Define the wheel handler function
+        const handleWheel = (event) => {
+            // Prevent default page scroll behavior
+            event.preventDefault()
+
+            
+            const now = Date.now();
+            const limit = 75; // Throttle limit in milliseconds (1 second)
+        
+            if (now - lastCallRef.current >= limit) {
+                const { deltaY } = event
+                if (deltaY < 110 && deltaY > 0) {
+                    return
+        
+                } else if (deltaY > 140 || deltaY < -140) {
+                    return
+                } else if (deltaY > 110) {
+                    scrollTarget.current.scrollBy(0, deltaY)
+        
+                }
+                else if (deltaY < -110) {
+                    scrollTarget.current.scrollBy(0, deltaY)
+        
+                }
+                lastCallRef.current = now;
+            }
+        };
+        // Attach the wheel event listener to the 
+        scrollTarget.current.addEventListener('wheel', handleWheel, { passive: false });
+
+
+    }, []); // Empty dependency array ensures the effect runs once when the component mounts
 
     return (
         <>
@@ -188,7 +253,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
             >
                 <div
                     style={{
-                        minHeight: viewportSize.height * 6,
+                        minHeight: viewportSize.height * 5,
                         backgroundColor: 'transparent',
                         position: 'relative',
                         zIndex: 100
@@ -208,7 +273,7 @@ const CtaTertiary: React.FC<LayoutProps> = ({
                     className={styles.cta_container}
                     ref={containerRef}
                 >
-                    <motion.div 
+                    <motion.div
                         className={styles.cta_content}
                         style={{
                             y: springyTranslateAnimationOne

@@ -1,12 +1,12 @@
 import VideoPlayer from "@/components/video/VideoPlayer"
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 import ShowCase from "@/components/showcase/ShowCase";
 import { useRef, useEffect, useState } from 'react'
 import CallOut from "@/components/call_out/CallOut";
-import Image from 'next/image';
 import useWindowSize from "@/hooks/use_window_size";
+import LifeStyleCollection from "./LIfeStyleCollection";
 
-import groupShotBackgroundImage from '../../../assets/images/group_shots/Firefly 20240929230829.png'
+import styles from './LifeStyleScenesBranch.module.scss'
 
 const LifeStyleBranch = () => {
 
@@ -34,6 +34,11 @@ const LifeStyleBranch = () => {
         const handlePageScrollTrigger = (e) => {
             /* Prevent default behaviour */
             e.preventDefault();
+
+            if(coolDown.current){
+                
+                return
+            }
 
             if(e.deltaY > 0){
                 
@@ -69,6 +74,10 @@ const LifeStyleBranch = () => {
 
             /* Prevent default behaviour */
             e.preventDefault();
+
+            if(coolDown.current){
+                return
+            }
 
             if(e.deltaY > 0){
                 setIsGroupContainerActive(false)
@@ -110,6 +119,10 @@ const LifeStyleBranch = () => {
             /* Prevent default behaviour */
             e.preventDefault();
 
+            if(coolDown.current){
+                return
+            }
+
             if(e.deltaY > 0){
                 return
             } else {
@@ -138,10 +151,25 @@ const LifeStyleBranch = () => {
     }, [isGroupImagesActive])
 
 
+    const coolDown = useRef(null) 
+    /* SCROLL COOLDOWN */
+    useEffect(()=>{
+
+        coolDown.current = setTimeout(()=>{
+            coolDown.current = null
+        }, 1000);
+
+    }, [isGroupImagesActive, isGroupContainerActive, isLifestyleContainerActive]);
+
+
+    const measurements = {
+        lifestyleContainer: isGroupImagesActive ? -100 : -70
+    }
+
 
     return (
 
-        <>
+        <div>
 
             <motion.div
                 initial={{
@@ -161,67 +189,44 @@ const LifeStyleBranch = () => {
                 {/* INITIAL SCENE */}
 
                 <motion.div
-                    style={{
-                        width: '100vw',
-                        height: '100vh',
-                        position: 'absolute',
-                        top: 0,
-                        left: 0,
-                        zIndex: 30
-                    }}
+                    className={styles.video_scene_container}
+                    
                     initial={{
-                        transform: `scale(1.2)`
+                        scale: 1.2
                     }}
                     animate={{
-                        transform: isLifestyleContainerActive ? `scale(1.2)` : `scale(1) translateY(-70vh)`,
+                        transform: isLifestyleContainerActive ? `scale(1.2)` : `scale(1) translateY(${measurements.lifestyleContainer}vh)`,
                         opacity: isGroupImagesActive ? 0 : 1
                     }}
                     transition={{
                         duration: 0.7,
                     }}
-
+                   
                     ref={lifestyleContainerRef}
                 >
                     <motion.div
-                        style={{
-
-                            width: '100vw',
-                            height: '100vh',
-                            backgroundColor: "rgba(0, 0, 0, 1)",
-                            position: "relative",
-                            zIndex: 1
-                        }}
+                        className={styles.video_scene_container_inner }
 
                     >
                         <div
-                            style={{
-                                position: 'absolute',
-                                bottom: "10vh",
-                                width: `100%`,
-                                display: `flex`,
-                                justifyItems: 'center',
-
-                            }}
+                            className={styles.showcase_container}
                         >
 
                             <ShowCase
                                 heading="Lifestyle Scenes"
-                                style={{
-                                    left: `30vw`
-                                }}
 
                             />
                         </div>
 
                         <motion.div>
                             <VideoPlayer
-                                src='/videos/lifestyle/lifestyle.mp4'
+                                src='/videos/lifestyle.mp4'
                                 type="video/mp4"
                                 loop={true}
                                 styleOverride={{
                                     zIndex: 0,
                                     position: 'absolute',
-                                    opacity: 0.5
+                                    opacity: 0.7
                                 }}
                             >
                             </VideoPlayer>
@@ -239,12 +244,17 @@ const LifeStyleBranch = () => {
                         backgroundColor: 'white'
                     }}
                     animate={{
-                        transform: 'translateY(30vh)',
-                        opacity: isGroupContainerActive || isGroupImagesActive ? 1 : 0,
-                        zIndex: isGroupContainerActive ? 1000 : 0,
+                        transform: isGroupImagesActive ? 'translateY(-30vh)' : 'translateY(30vh)',
+                        opacity: isGroupImagesActive ? 0 : 1,
+                        zIndex: 250,
                     }}
                     transition={{
-                        duration: 0.7
+                        opacity: {
+                            duration: 0.3
+                        },
+                        transform: {
+                            duration: 0.7
+                        }
                     }}
 
                     style={{
@@ -252,61 +262,46 @@ const LifeStyleBranch = () => {
                         position: 'relative',
                     }}
                 >
-                    <CallOut
+                     <CallOut
                         paragraph="Showcase your furniture in thousands of beautiful designed room setups - without moving a thing or touching the camera"
                         modifier="mw-768"
                         calloutStyleType={2}
 
                     />
+                   
 
+                </motion.div>
 
-                    {/* GROUP SHOTS ELEMENT */}
+                 {/* GROUP SHOTS ELEMENT */}
 
-                    <motion.div
+                 <motion.div
                         style={{
-                            height: '100% ',
-                            zIndex: 100
+                            height: '100vh',
+                            zIndex: 200,
+                            x: "5vw",
+                            position: 'absolute'
                         }}
                         initial={{
                             scale: 1.2,
-                            y: 100
                         }}
                         animate={{
-                            scale: isGroupImagesActive ? 1 : 1.2,
-                            y: isGroupImagesActive ? `-60vh` : 100,
+                            scale: isGroupImagesActive ? 1.1 : 1.2,
+                            top: isGroupImagesActive ?  0 : '60vh',
                             transition: {
-                                duration: 0.5
+                                duration: 0.7
                             }
                         }}
                         ref={groupImagesRef}
 
                     >
-
-
-                        <Image
-                            src={groupShotBackgroundImage}
-                            alt=''
-                            priority
-
-                            style={{
-                                objectFit: 'cover', // maintain aspect ratio but fill the container
-                                height: '100%', // ensure image fills height
-                                width: '100%', // ensure image fills width
-
-
-                            }}
-                        />
-
-                        {/*BUTTON OVERLAY */}
+                       <LifeStyleCollection/>
 
                     </motion.div>
-
-                </motion.div>
 
 
             </motion.div >
 
-        </>
+        </div>
 
     )
 

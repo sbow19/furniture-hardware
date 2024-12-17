@@ -64,7 +64,7 @@
 .subheader_container {
     /* LAYOUT */
     @include variables.setLayout(flex, center, center);
-    height: 50px;
+    height: 60px;
     padding: var(--item-spacing-10, 10px) 100px;
     width: 100vw;
     position: absolute;
@@ -84,11 +84,6 @@
             min-width: 350px;
             max-width: 500px
         }
-
-        // @include variables.md {
-        //     max-width: 960px;
-        //     min-width: 100%;
-        // }
 
         @include variables.lg {
             max-width: 1440px;

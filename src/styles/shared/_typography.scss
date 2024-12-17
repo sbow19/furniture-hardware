@@ -9,8 +9,3 @@
     @include setTypography($fs, normal, 600, normal);
     text-transform: capitalize;
 }
-
-@mixin setCallOutParagraphTypography() {
-    @include setTypography(26px, normal, 400, normal);
-    text-align: center;
-}

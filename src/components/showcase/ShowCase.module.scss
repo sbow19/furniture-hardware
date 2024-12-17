@@ -4,16 +4,17 @@
     /* LAYOUT */
     position: relative;
     @include variables.setLayout(flex, start, center);
-    width: 100%;
+    width: 50%;
     height: 100%;
 
     .showcase_heading {
         /* LAYOUT */
-        width: 585.333px;
+        width: 100%;
         margin-left: 120px;
         flex-shrink: 0;
         position: relative;
         z-index: 1000;
+        flex-wrap: wrap;
 
         /* STYLES */
         color: variables.$light;
@@ -21,9 +22,6 @@
         /* TYPOGRAPHY */
 
         @include variables.sm {
-            @include variables.setTypography(42px, normal, 600, normal);
-        }
-        @include variables.lg {
             @include variables.setTypography(64px, normal, 600, normal);
         }
        

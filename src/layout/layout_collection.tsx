@@ -30,7 +30,7 @@ const layoutCollection: Array<[React.FC, number]> = [
     [Banner, 0],
     [SiloImages, 0],
     [LifeStyleScenes, 2],
-    // [CtaTertiary, 0],
+    [CtaTertiary, 0],
     // [ColorVar, 0],
     // [FabricVar, 0],
     // [SizeVar, 0],
