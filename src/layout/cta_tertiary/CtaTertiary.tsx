@@ -203,8 +203,8 @@ const CtaTertiary: React.FC<LayoutProps> = ({
 
     // }, []); // Empty dependency array ensures the effect runs once when the component mounts
 
-    // Create a ref to store the last time the function was called
-    const lastCallRef = useRef(0);
+// Create a ref to store the last time the function was called
+const lastCallRef = useRef(0);
 
   useEffect(() => {
         // Define the wheel handler function

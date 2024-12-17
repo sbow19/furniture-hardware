@@ -118,7 +118,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
                     };
 
                 } else {
-                    
+
                     // Scrolled up
                     if (isAtTopRef.current) {
 
@@ -132,7 +132,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
             // Apply the event listener after a 2-second delay
             elementRef.current.addEventListener("wheel", myListener);
         } else {
-          
+
             elementRef.current.removeEventListener("wheel", myListener);
         }
 
@@ -232,33 +232,77 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
     /* LIFESTYLE SCENE BRANCH STATE */
     const [isLifestyleBVisible, setIsLifestyleBVisible] = useState(false);
 
+    // useEffect(() => {
+    //     // Define the wheel handler function
+    //     if (!scrollTarget.current) return;
+    //     if (typeof window === 'undefined') return;
+    //     const handleWheel = (event) => {
+    //         console.log(event.deltaY)
+    //         // Prevent default page scroll behavior
+    //         event.preventDefault()
+
+    //         const { deltaY } = event
+    //         if (deltaY < 100 && deltaY > 0) {
+    //             return
+
+    //         } else if (deltaY > 140 || deltaY < -140) {
+    //             return
+    //         } else if (deltaY > 100) {
+    //             scrollTarget.current.scrollBy(0, deltaY * 0.2)
+
+    //         }
+    //         else if (deltaY < -100) {
+    //             scrollTarget.current.scrollBy(0, deltaY * 0.2)
+
+    //         }
+
+    //     };
+    //     // Attach the wheel event listener to the 
+    //     scrollTarget.current.addEventListener('wheel', handleWheel, { passive: false });
+
+
+    // }, []); // Empty dependency array ensures the effect runs once when the component mounts
+
+    const lastCallRef = useRef(0);
+
     useEffect(() => {
-        // Define the wheel handler function
         if (!scrollTarget.current) return;
         if (typeof window === 'undefined') return;
+        // Define the wheel handler function
         const handleWheel = (event) => {
-            console.log(event.deltaY)
             // Prevent default page scroll behavior
             event.preventDefault()
 
-            const { deltaY } = event
-            if (deltaY < 110 && deltaY > 0) {
-                return
+            const now = Date.now();
+            const limit = 500; // Throttle limit in milliseconds (1 second)
 
-            } else if (deltaY > 140 || deltaY < -140) {
-                return
-            } else if (deltaY > 110) {
-                scrollTarget.current.scrollBy(0, deltaY * 0.2)
+            if (now - lastCallRef.current >= limit) {
 
-            }
-            else if (deltaY < -110) {
-                scrollTarget.current.scrollBy(0, deltaY * 0.2)
+                const { deltaY } = event
+
+                if(deltaY  < 100 && deltaY > -100){
+                    return
+                }
+                if (deltaY > 0) {
+                    scrollTarget.current.scrollBy(0, scrollHeight / 3)
+        
+                }
+                else if (deltaY < 0) {
+                    scrollTarget.current.scrollBy(0, -scrollHeight / 3)
+        
+                }
+        
+
+                lastCallRef.current = now;
 
             }
 
         };
-        // Attach the wheel event listener to the 
-        scrollTarget.current.addEventListener('wheel', handleWheel, { passive: false });
+        if (scrollTarget.current) {
+            scrollTarget.current.addEventListener('wheel', handleWheel, { passive: false });
+        }
+
+
 
 
     }, []); // Empty dependency array ensures the effect runs once when the component mounts
