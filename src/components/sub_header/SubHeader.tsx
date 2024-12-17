@@ -146,7 +146,7 @@ export default function SubHeader({
                         <h3 className={
                             `${styles.subheader_heading} ${headerFontColor}`
                         }>
-                            {/* LOGO SVG */}
+                            {/* LOGO SVG HELLO*/}
                             <TulfaIcon
                                 height={30}
                                 width={120}
