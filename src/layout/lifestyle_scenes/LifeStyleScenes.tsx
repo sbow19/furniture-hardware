@@ -5,11 +5,10 @@ import TulfaPopupButton from "@/assets/icons/tulfa_popup_button";
 import lifeStyleScenesImage from "../../assets/images/lifestyle_scenes/Banner.png";
 import styles from "./LifeStyleScenes.module.scss";
 import useAutoLoad from "@/hooks/use_autoload";
-import { motion, useScroll, useTransform, useSpring, useMotionValueEvent } from 'framer-motion'
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion'
 import { useRef, useEffect, useState, useMemo } from "react";
 import useWindowSize from "@/hooks/use_window_size";
 import LifeStyleBranch from "./branch/LifeStyleScenesBranch";
-import { throttle } from 'lodash'
 
 const LifeStyleScenes: React.FC<LayoutProps> = ({
     layoutName,
@@ -235,6 +234,8 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
 
     useEffect(() => {
         // Define the wheel handler function
+        if (!scrollTarget.current) return;
+        if (typeof window === 'undefined') return;
         const handleWheel = (event) => {
             // Prevent default page scroll behavior
             event.preventDefault()
