@@ -147,7 +147,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
     /* BACKGROUND ANIMATIONS */
     const transformScaleAnimationOne = useTransform(
         scrollYProgress,
-        [0, .15, .9, 1],
+        [0, .15, .7, 1],
         [2, 1, 1, 1.1]
     )
     const springyTransformScaleAnimationOne = useSpring(transformScaleAnimationOne, {
@@ -156,7 +156,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
 
     const translateAnimationOne = useTransform(
         scrollYProgress,
-        [0, .2, .9, 1],
+        [0, .2, .7, 1],
         [150, -150, -150, -viewportSize.height / 1.5]
     )
     const springyTranslateAnimationOne = useSpring(translateAnimationOne, {
@@ -166,7 +166,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
     /* SHOWCASE ANIMATIONS */
     const transformOpacityAnimationOne = useTransform(
         scrollYProgress,
-        [0, .15, .9, 1],
+        [0, .15, .7, 1],
         [0, 0.3, 0.3, 0]
     )
 
@@ -183,7 +183,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
     /* BUTTON ANIMATION */
     const transformOpacityAnimationTwo = useTransform(
         scrollYProgress,
-        [0, .15, .9, 1],
+        [0, .15, .7, 1],
         [0, 1, 1, 0]
     )
 
@@ -274,21 +274,23 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
             event.preventDefault()
 
             const now = Date.now();
-            const limit = 500; // Throttle limit in milliseconds (1 second)
+            const limit = 1000; // Throttle limit in milliseconds (1 second)
 
             if (now - lastCallRef.current >= limit) {
 
                 const { deltaY } = event
 
+                console.log(deltaY)
+
                 if(deltaY  < 100 && deltaY > -100){
                     return
                 }
                 if (deltaY > 0) {
-                    scrollTarget.current.scrollBy(0, scrollHeight / 3)
+                    scrollTarget.current.scrollBy(0, scrollHeight / 3 - 100)
         
                 }
                 else if (deltaY < 0) {
-                    scrollTarget.current.scrollBy(0, -scrollHeight / 3)
+                    scrollTarget.current.scrollBy(0, -scrollHeight / 3 + 100)
         
                 }
         

@@ -203,39 +203,43 @@ const CtaTertiary: React.FC<LayoutProps> = ({
 
     // }, []); // Empty dependency array ensures the effect runs once when the component mounts
 
-// Create a ref to store the last time the function was called
-const lastCallRef = useRef(0);
+    // Create a ref to store the last time the function was called
+    const lastCallRef = useRef(0);
 
-  useEffect(() => {
+    useEffect(() => {
         // Define the wheel handler function
         const handleWheel = (event) => {
             // Prevent default page scroll behavior
             event.preventDefault()
 
-            
             const now = Date.now();
-            const limit = 75; // Throttle limit in milliseconds (1 second)
-        
+            const limit = 1000; // Throttle limit in milliseconds (1 second)
+
             if (now - lastCallRef.current >= limit) {
+
                 const { deltaY } = event
-                if (deltaY < 110 && deltaY > 0) {
+
+                if(deltaY  < 100 && deltaY > -100){
                     return
-        
-                } else if (deltaY > 140 || deltaY < -140) {
-                    return
-                } else if (deltaY > 110) {
-                    scrollTarget.current.scrollBy(0, deltaY)
+                }
+                if (deltaY > 0) {
+                    scrollTarget.current.scrollBy(0, scrollHeight / 6)
         
                 }
-                else if (deltaY < -110) {
-                    scrollTarget.current.scrollBy(0, deltaY)
+                else if (deltaY < 0) {
+                    scrollTarget.current.scrollBy(0, -scrollHeight / 6)
         
                 }
+        
+
                 lastCallRef.current = now;
+
             }
+
         };
-        // Attach the wheel event listener to the 
-        scrollTarget.current.addEventListener('wheel', handleWheel, { passive: false });
+        if (scrollTarget.current) {
+            scrollTarget.current.addEventListener('wheel', handleWheel, { passive: false });
+        }
 
 
     }, []); // Empty dependency array ensures the effect runs once when the component mounts
