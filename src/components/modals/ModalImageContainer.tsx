@@ -28,8 +28,6 @@ const ModalImageContainer = memo(({ imageSet, imageNo }) => {
             }
         }
 
-
-
         // Every image in a 5 image cycle occupies  particular column start and column span
         const checkColumnValue = (i + 5) % 6;
 
@@ -112,7 +110,7 @@ const ModalImageContainer = memo(({ imageSet, imageNo }) => {
         <div
             className={styles.modal_image_container}
             style={{
-                gridTemplateRows: `repeat(${Math.ceil(imageNo / 1.5)}, ${viewportSize.height / (viewportSize.height > 960 ? 1 : 2)}px)`,
+                gridTemplateRows: `repeat(${Math.ceil(imageNo / 1.5)}, ${viewportSize.height / (viewportSize.width > 960 ? 1 : 2)}px)`,
             }}
         >
             {memoizedComponents}

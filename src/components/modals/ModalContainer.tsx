@@ -151,7 +151,7 @@ const ModalContainer = ({
                             opacity: 0,
                             y: "100vh"
                         }}
-                        onClick={handleModalClose}
+                        
                     >
 
 
@@ -204,7 +204,7 @@ const ModalContainer = ({
                                                     return (
                                                         <button
                                                             style={{
-                                                                backgroundColor: selectedIndex === key ? "pink" : ""
+                                                                backgroundColor: selectedIndex === key ? "" : ""
                                                             }}
                                                             key={key}
                                                             className={`${styles.modal_filter_button} disable_trigger_header_button`}

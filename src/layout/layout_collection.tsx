@@ -23,10 +23,10 @@ import structureLayouts from "@/utils/structure_layouts";
 
 /* LAYOUT COLLECTION MUST BE IN DESIRED ORDER */
 const layoutCollection: Array<[React.FC, number]> = [
-    // [Banner, 0],
-    // [SiloImages, 0],
+    [Banner, 0],
+    [SiloImages, 0],
     [LifeStyleScenes, 2],
-    // [CtaTertiary, 0],
+    [CtaTertiary, 0],
     // [CloseUpShots, 2],
     // [GroupShots, 2],
     // [DimensionImages, 0],

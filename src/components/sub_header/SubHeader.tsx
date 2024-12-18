@@ -72,45 +72,45 @@ export default function SubHeader({
 
     const [isVisible, setIsVisible] = useState(true);
 
-    useEffect(() => {
+    // useEffect(() => {
 
-        const handleScroll = (e) => {
+    //     const handleScroll = (e) => {
 
-            if (e.deltaY > 0) {
-                // If scrolling down...
-                setIsVisible(false);
+    //         if (e.deltaY > 0) {
+    //             // If scrolling down...
+    //             setIsVisible(false);
 
-            } else if (e.deltaY < 0) {
-                // If scrolling up
-                setIsVisible(true)
-            }
-        }
+    //         } else if (e.deltaY < 0) {
+    //             // If scrolling up
+    //             setIsVisible(true)
+    //         }
+    //     }
 
-        const handleClick = (e) => {
+    //     const handleClick = (e) => {
 
-            if (e.target.closest('.trigger_header_button')) {
-                setIsVisible(false)
-            } else if (e.target.closest('.disable_trigger_header_button')) {
-                return
-            } else {
-                setIsVisible(prev => !prev)
-            }
+    //         if (e.target.closest('.trigger_header_button')) {
+    //             setIsVisible(false)
+    //         } else if (e.target.closest('.disable_trigger_header_button')) {
+    //             return
+    //         } else {
+    //             setIsVisible(prev => !prev)
+    //         }
 
 
-        }
+    //     }
 
-        if (typeof document !== 'undefined') {
-            document.addEventListener("wheel", handleScroll);
-            document.addEventListener("click", handleClick);
+    //     if (typeof document !== 'undefined') {
+    //         document.addEventListener("wheel", handleScroll);
+    //         document.addEventListener("click", handleClick);
 
-            // Cleanup the event listeners when the component unmounts
-            return () => {
-                document.removeEventListener("wheel", handleScroll);
-                document.removeEventListener("click", handleClick);
-            };
-        }
+    //         // Cleanup the event listeners when the component unmounts
+    //         return () => {
+    //             document.removeEventListener("wheel", handleScroll);
+    //             document.removeEventListener("click", handleClick);
+    //         };
+    //     }
 
-    }, [])
+    // }, [])
 
     /* DEVICE SIZE  */
     const viewportSize = useWindowSize();
