@@ -14,7 +14,7 @@ export default function Home() {
   // Layout Collection
   const [layoutCollectionState, setLayoutCollectionState] = useState(layoutCollection);
 
-  const [ headerStyle, setHeaderStyle ] = useState(0);
+  const [headerStyle, setHeaderStyle] = useState(0);
 
   const windowSize = useWindowSize();
 
@@ -23,35 +23,51 @@ export default function Home() {
     previousSlide: 0
   });
 
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const lastCallRef = useRef(0);
 
-  const handleChangeSlide = useCallback((direction: number) => {
-    // Clear any existing timeout before setting a new one
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current);
+  const handleChangeSlide = useCallback((direction: number, e) => {
+
+    e.preventDefault();
+
+    const now = Date.now();
+    const limit = 1000; // Throttle limit in milliseconds (1 second)
+
+    if (now - lastCallRef.current >= limit) {
+
+      const { deltaY } = e;
+
+      // Clear any existing timeout before setting a new one
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current)
+      }
+
+      if (deltaY < 100 && deltaY > -100) {
+        return
+      } if (deltaY > 75 || deltaY < -75) {
+
+        // Set a timeout to handle the slide change after a delay
+        timeoutRef.current = setTimeout(() => {
+
+          setCurrentSlide(prev => {
+            if (prev.currentSlide + direction < 0) {
+              return prev;
+            } else if (prev.currentSlide + direction >= layoutCollectionState.order.length) {
+              return prev;
+            } else {
+              return {
+                currentSlide: prev.currentSlide + direction,
+                previousSlide: prev.currentSlide
+              };
+            }
+          });
+        }, 750);
+      }
+      lastCallRef.current = now;
     }
-    // Set a timeout to handle the slide change after a delay
-    timeoutRef.current = setTimeout(() => {
-      setCurrentSlide(prev => {
-        if (prev.currentSlide + direction < 0) {
-          return prev;
-        } else if (prev.currentSlide + direction >= layoutCollectionState.order.length) {
-          return prev;
-        } else {
-          return {
-            currentSlide: prev.currentSlide + direction,
-            previousSlide: prev.currentSlide
-          };
-        }
-      });
-
-      
-
-    
-    }, 300);
   }, [])
 
-  useEffect(()=>{
+  useEffect(() => {
     setHeaderStyle(layoutCollectionState[currentSlide.currentSlide].subheaderStyle)
   }, [currentSlide])
 
@@ -82,11 +98,10 @@ export default function Home() {
 
   }, []);
 
-
   return (
     <>
-      <SubHeader 
-        activePage="/" 
+      <SubHeader
+        activePage="/"
         headerStyleType={headerStyle}
       />
 
@@ -99,7 +114,7 @@ export default function Home() {
           width: "100%",
           height: "100vh",
           overflow: "hidden",
-          
+
         }}
       >
         {/* MOST RECENT COMPONENTS RENDERED */}
@@ -110,7 +125,7 @@ export default function Home() {
               return null
             }
 
-            if(compName > currentSlide.currentSlide + 1 || compName < currentSlide.currentSlide - 1){
+            if (compName > currentSlide.currentSlide + 1 || compName < currentSlide.currentSlide - 1) {
               return null
             }
 
@@ -124,7 +139,7 @@ export default function Home() {
               modifier = -1
             }
 
-            
+
             return (
               <motion.div
                 key={compName}
@@ -145,7 +160,7 @@ export default function Home() {
                 transition={{
                   duration: 0.5
                 }}
-                
+
               >
                 <NextComp
                   layoutName={compName}

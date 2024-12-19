@@ -4,66 +4,23 @@ import BlurredBackdrop from '../backdrops/Blur';
 import styles from './modal_container.module.scss';
 import TulfaCloseButton from '@/assets/icons/tulfa_close_button';
 import CallOut from '../call_out/CallOut';
-import { useState, useMemo } from 'react'
+import { useState } from 'react'
 import dynamic from 'next/dynamic'
-import Image from 'next/image';
+import ImageContainer from '../image_container/ImageContainer';
 
 const ModalImageContainer = dynamic(() => import('./ModalImageContainer'), { ssr: false });
-
-import ImageOne from "../../assets/images/lifestyle_scenes/placeholder/Kitchen.jpg";
-import ImageTwo from "../../assets/images/lifestyle_scenes/placeholder/image_one.png";
-import ImageThree from "../../assets/images/lifestyle_scenes/placeholder/image_two.png";
 
 
 const ModalContainer = ({
     handleModalClose,
-    isModalOpen
+    isModalOpen,
+    imageSet,
+    imageNo,
+    selectionArray
 }) => {
-    const selectionArray = [
-        "All",
-        "Applications",
-        "Armchairs",
-        "Bathrooms",
-        "Bedrooms",
-        "Cabinets",
-        "Chairs",
-        "Custom",
-        "Indoor",
-        "Holidays",
-        "Kitchen",
-        "Lighting",
-        "Living Room",
-        "Office",
-        "Outdoors",
-        "Prints",
-        "Velvets",
-        "Leathers",
-        "Plains",
-        "Embroidery"
-    ]
+
 
     const [selectedIndex, setSelectedIndex] = useState(0);
-
-    /* Images under different categories */
-    type ImageSet = {
-        [key: string]: Array<string>
-    };
-
-    const imageSet = useMemo(()=>{
-        /* RETRIEVE IMAGE URLS FROM STORAGE LOCATION, BUT DONT LOAD YET */
-
-        const dynamicImageSet = {
-            top: [
-                ImageOne,
-                ImageThree,
-                ImageTwo,
-                
-            ]
-        }
-
-        return dynamicImageSet;
-
-    },[])
 
     return (
         <>
@@ -111,16 +68,16 @@ const ModalContainer = ({
 
                             transition: {
                                 duration: 1,
-                                delay: isModalOpen ? 1 : 0,  
-                                opacity: { duration: 0.1, delay: isModalOpen ? 1.5 : 0 }, 
-                                y: { duration: 1 }, 
+                                delay: isModalOpen ? 1 : 0,
+                                opacity: { duration: 0.1, delay: isModalOpen ? 1.5 : 0 },
+                                y: { duration: 1 },
                             }
                         }}
                         exit={{
                             opacity: 0,
                             transition: {
                                 opacity: { duration: 0.1 },
-                                y: { duration: 0.1 }, 
+                                y: { duration: 0.1 },
                             }
                         }}
                     >
@@ -151,7 +108,7 @@ const ModalContainer = ({
                             opacity: 0,
                             y: "100vh"
                         }}
-                        
+
                     >
 
 
@@ -163,16 +120,19 @@ const ModalContainer = ({
                                 <div
                                     className={styles.closeup_modal_header_image}
                                 >
-                                    <Image
-                                        src={imageSet["top"][0]}
-                                        priority
-                                        style={{
+                                    <ImageContainer
+                                        imageSrc={imageSet["top"][0]}
+                                        priority={true}
+                                        imageStyle={{
                                             height: "100%",
                                             width: "100%",
                                             objectFit: "cover",
-                                            borderRadius: 25
+                                            borderTopLeftRadius: 23,
+                                            borderTopRightRadius: 23,
                                         }}
                                         alt=""
+                                        imageClassName=""
+                                        fullscreenToggle={true}
                                     />
 
                                 </div>
@@ -193,32 +153,34 @@ const ModalContainer = ({
                                         }}
                                     />
 
-                                    <div
-                                        className={styles.modal_button_container}
-                                    >
+                                    {selectionArray.length > 0 &&
                                         <div
-                                            className={styles.modal_button_container_inner}
+                                            className={styles.modal_button_container}
                                         >
-                                            {
-                                                selectionArray.map((selection, key) => {
-                                                    return (
-                                                        <button
-                                                            style={{
-                                                                backgroundColor: selectedIndex === key ? "" : ""
-                                                            }}
-                                                            key={key}
-                                                            className={`${styles.modal_filter_button} disable_trigger_header_button`}
-                                                            onClick={(e) => {
-                                                                e.preventDefault()
-                                                                setSelectedIndex(key)
-                                                            }}
-                                                        >
-                                                            {selection}
-                                                        </button>)
-                                                })
-                                            }
+                                            <div
+                                                className={styles.modal_button_container_inner}
+                                            >
+                                                {
+                                                    selectionArray.map((selection, key) => {
+                                                        return (
+                                                            <button
+                                                                style={{
+                                                                    backgroundColor: selectedIndex === key ? "" : ""
+                                                                }}
+                                                                key={key}
+                                                                className={`${styles.modal_filter_button} disable_trigger_header_button`}
+                                                                onClick={(e) => {
+                                                                    e.preventDefault()
+                                                                    setSelectedIndex(key)
+                                                                }}
+                                                            >
+                                                                {selection}
+                                                            </button>)
+                                                    })
+                                                }
+                                            </div>
                                         </div>
-                                    </div>
+                                    }
 
 
                                 </div>
@@ -227,19 +189,19 @@ const ModalContainer = ({
 
                             {/*Image Container */}
                             {
-                                isModalOpen && 
-                                    <ModalImageContainer 
-                                        imageSet={imageSet}
-                                        imageNo={9}
-                                    />
+                                isModalOpen &&
+                                <ModalImageContainer
+                                    imageSet={imageSet}
+                                    imageNo={imageNo}
+                                />
                             }
 
 
                         </div>
                     </motion.div>
-                    </div>
+                </div>
             </AnimatePresence>
-            
+
         </>
     );
 }

@@ -78,21 +78,23 @@
 
         /* LAYOUT */
         @include variables.setLayout(flex, space-between, center);
-        
 
         @include variables.sm {
-            min-width: 350px;
-            max-width: 500px;
+            width: 300px;            
         }
 
         @include variables.md {
-            min-width: 400px;
-            max-width: 768px;
+            width: 400px;
         }
 
         @include variables.lg {
             max-width: 75%;
             min-width: 50%;
+        }
+
+        @include variables.breakpoint(1020px){
+            max-width: 1440px;
+            min-width: 100%;
         }
 
         @include variables.xl {
@@ -183,7 +185,7 @@
             max-width: 100%;
         }
 
-        @include variables.lg {
+        @include variables.xl {
             max-width: 1440px;
             min-width: 100%;
         }

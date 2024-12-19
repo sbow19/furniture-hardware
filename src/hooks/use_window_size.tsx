@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 // Hook
 function useWindowSize() {
@@ -9,17 +9,42 @@ function useWindowSize() {
     height: 500,
   });
 
-  useEffect(() => {
-    // only execute all the code below in client side
-    // Handler to call on window resize
+  const isFullscreen = useRef(false);
+  const resizeTimeoutRef = useRef(null);
 
+
+  useEffect(() => {
+
+    // Function to check fullscreen status
+    const checkFullscreen = () => {
+      clearTimeout(resizeTimeoutRef.current);
+      isFullscreen.current = true;
+
+      setTimeout(()=>{
+        isFullscreen.current = false
+      }, 2000)
+    };
+    // Add fullscreen change event listener
+    document.addEventListener('fullscreenchange', checkFullscreen);
+
+  }, []); // Empty array ensures that effect is only run on mount
+
+  useEffect(() => {
     if (typeof window !== 'undefined') {
       function handleResize() {
+        // Clear the previous timeout to debounce resize events
+        clearTimeout(resizeTimeoutRef.current);        
         // Set window width/height to state
-        setWindowSize({
-          width: window.innerWidth,
-          height: window.innerHeight,
-        });
+        // Set a delay to ensure fullscreen state is processed first
+        resizeTimeoutRef.current = setTimeout(() => {
+          // Only update window size if not in fullscreen mode
+          if (!isFullscreen.current) {
+            setWindowSize({
+              width: window.innerWidth,
+              height: window.innerHeight,
+            });
+          }
+        }, 1000); // Adjust delay as needed
       }
 
       // Add event listener
@@ -31,8 +56,8 @@ function useWindowSize() {
       // Remove event listener on cleanup
       return () => window.removeEventListener("resize", handleResize);
     }
-  }, []); // Empty array ensures that effect is only run on mount
-  
+  }, [])
+
   return windowSize;
 }
 

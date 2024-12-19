@@ -93,13 +93,13 @@ const CtaTertiary: React.FC<LayoutProps> = ({
                 if (e.deltaY > 0) {
                     // Scrolled down
                     if (isAtBottomRef.current) {
-                        handleChangeSlide(1);
+                        handleChangeSlide(1, e);
                     };
 
                 } else {
                     // Scrolled up
                     if (isAtTopRef.current) {
-                        handleChangeSlide(-1)
+                        handleChangeSlide(-1, e)
                     };
                 }
             }

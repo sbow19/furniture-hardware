@@ -2,8 +2,9 @@
 import styles from './modal_container.module.scss';
 import useWindowSize from '@/hooks/use_window_size';
 import { memo, useMemo } from 'react';
-import Image from 'next/image';
+
 import {motion} from 'framer-motion'
+import ImageContainer from '../image_container/ImageContainer';
 
 const ModalImageContainer = memo(({ imageSet, imageNo }) => {
 
@@ -16,6 +17,10 @@ const ModalImageContainer = memo(({ imageSet, imageNo }) => {
     let columnSpan = 1;
 
     let imageIndex = 0;
+
+    const gridStyle = useMemo(() => ({
+        gridTemplateRows: `repeat(${Math.ceil(imageNo / 1.5)}, ${viewportSize.height / (viewportSize.width > 960 ? 1 : 2)}px)`
+    }), [imageNo, viewportSize]);
 
     for (let i = 1; i < imageNo + 1; i++) {
 
@@ -70,10 +75,13 @@ const ModalImageContainer = memo(({ imageSet, imageNo }) => {
                 }}
                 className={styles.modal_indiv_image_container}
             >
-                <Image
+                <ImageContainer
                     alt=""
-                    src={imageSet["top"][imageIndex]}
-                    className={styles.modal_indiv_image}
+                    imageSrc={imageSet["top"][imageIndex]}
+                    imageClassName=""
+                    priority={false}
+                    imageStyles={{}}
+                    fullscreenToggle={true}
                     
                 />
 
@@ -87,14 +95,15 @@ const ModalImageContainer = memo(({ imageSet, imageNo }) => {
                         opacity: 0,
                         transition: 'opacity 0.2s ease-in-out', // Fade in/out transition for the overlay
                         borderRadius: '8px',
-                        zIndex: 10,
+                        zIndex: 100,
+                        pointerEvents: "auto"
                     }}
                     className={styles.modal_focus_overlay}
                     whileHover={{
-                        opacity: 1
-                    }}
+                        opacity: 1,
+                    }} />
                     
-                />
+            
 
             </div>
         )
@@ -110,7 +119,7 @@ const ModalImageContainer = memo(({ imageSet, imageNo }) => {
         <div
             className={styles.modal_image_container}
             style={{
-                gridTemplateRows: `repeat(${Math.ceil(imageNo / 1.5)}, ${viewportSize.height / (viewportSize.width > 960 ? 1 : 2)}px)`,
+                gridTemplateRows: gridStyle.gridTemplateRows,
             }}
         >
             {memoizedComponents}

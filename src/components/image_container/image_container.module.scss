@@ -1,0 +1,23 @@
+@use '@/styles/shared/variables';
+
+.indiv_image {
+
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: 300;
+    position: relative;
+
+}
+
+.indiv_image_overlay {
+
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    z-index: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+}

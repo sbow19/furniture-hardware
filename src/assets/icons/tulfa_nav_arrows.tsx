@@ -46,7 +46,7 @@ const TulfaDownArrow = ({
         >
             <svg width={width} height={height} viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <rect y="40" width="40" height="40" rx="20" transform="rotate(-90 0 40)" fill={fill} />
-                <path d="M27.5 17.25L20 24.75L12.5 17.25" stroke="#433E99" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M27.5 17.25L20 24.75L12.5 17.25" stroke={arrowColor} stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
 
 

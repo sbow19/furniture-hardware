@@ -2,28 +2,26 @@
 
 .close_container {
     /* LAYOUT */
-    @include variables.setLayout(flex, start, center, 0, column);
-    height: 200vh;
-    position: relative;
-    overflow: hidden;
-    .close_showcase {
-        /* LAYOUT */    
-        height: 100%;
-        width: 100%;
-        position: relative;
-        overflow: hidden;
+    height: 100%;
+    position: relative;  
+}
+.close_background {
+    position: absolute;
+    height: 110%;
+    width: 100%;
+    object-fit: cover;
+}
 
-        .close_background {
-            /* LAYOUT */
-            position: absolute;
-            min-width: 100%;
-            height: auto;
-        }
-    }
+.closeup_button_container {
+    position: sticky;
+    z-index: 120;
+    bottom: 15%;
+    left: calc(50vw - 110px);
+    width: 400px;
+    height: 60px
+}
 
-    .close_button_container {
-        position: absolute;
-        z-index: 20;
-        bottom: 60%
-    }
+.scroll_container {
+    height: 150vh;
+    width: 100%
 }

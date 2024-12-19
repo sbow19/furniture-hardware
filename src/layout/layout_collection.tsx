@@ -15,6 +15,9 @@ import InstallationImages from "@/layout/installation_images/InstallationImages"
 import LifeStyleScenes from "@/layout/lifestyle_scenes/LifeStyleScenes";
 import MarketingImages from "@/layout/marketing_images/MarketingImages";
 import SiloImages from "@/layout/silo_images/SiloImages";
+import ProSizeVar from "./size_var/ProSizeVar";
+import ProColVar from "./color_var/ProColVar";
+import ProTextVar from "./text_var/ProColVar";
 
 /* Memoize components */
 import { memoizeComponents } from "@/utils/memoize_components";
@@ -26,8 +29,11 @@ const layoutCollection: Array<[React.FC, number]> = [
     [Banner, 0],
     [SiloImages, 0],
     [LifeStyleScenes, 2],
+    [ProSizeVar, 0],
+    [ProColVar, 0],
+    [ProTextVar, 0],
     [CtaTertiary, 0],
-    // [CloseUpShots, 2],
+    [CloseUpShots, 2],
     // [GroupShots, 2],
     // [DimensionImages, 0],
     // [InstallationImages, 0],

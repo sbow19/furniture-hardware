@@ -10,6 +10,11 @@ import { useRef, useEffect, useState, useMemo } from "react";
 import useWindowSize from "@/hooks/use_window_size";
 import ModalContainer from "@/components/modals/ModalContainer";
 
+/*MODAL IMAGES */
+import ImageOne from "../../assets/images/lifestyle_scenes/placeholder/Kitchen.jpg";
+import ImageTwo from "../../assets/images/lifestyle_scenes/placeholder/image_one.png";
+import ImageThree from "../../assets/images/lifestyle_scenes/placeholder/image_two.png";
+
 const LifeStyleScenes: React.FC<LayoutProps> = ({
     layoutName,
     handleLayoutLoad,
@@ -18,12 +23,14 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
     // Detect whenuser scrolls into range
     const containerRef = useAutoLoad(layoutName, handleLayoutLoad, 0.5);
 
+    
+
     // Calculate size of screen initially 
     const viewportSize = useWindowSize();
     const scrollHeight = useMemo(() => {
 
         // Height of element is 150%, therefore we  multiply viewport by 1.9 to get total scroll distance
-        return viewportSize.height * 4;
+        return viewportSize.height * 3;
 
     }, [viewportSize])
 
@@ -103,10 +110,22 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
         };
     }, []);
 
+    /* Throttle on first render */
+    const scrollDelayOnLoad = useRef(false);
+    useEffect(()=>{
+
+        scrollDelayOnLoad.current = true
+        setTimeout(()=>{
+            scrollDelayOnLoad.current = false; 
+        }, 700)
+    }, [isInView])
+
     useEffect(() => {
         // Define the wheel event handler
         const myListener = (e) => {
             // Event handler logic her
+
+            if(scrollDelayOnLoad.current) return
 
             if (isInView) {
 
@@ -114,7 +133,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
                     // Scrolled do
                     if (isAtBottomRef.current) {
 
-                        handleChangeSlide(1);
+                        handleChangeSlide(1, e);
                     };
 
                 } else {
@@ -122,7 +141,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
                     // Scrolled up
                     if (isAtTopRef.current) {
 
-                        handleChangeSlide(-1)
+                        handleChangeSlide(-1, e)
                     };
                 }
             }
@@ -151,7 +170,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
         [2, 1, 1, 1.1]
     )
     const springyTransformScaleAnimationOne = useSpring(transformScaleAnimationOne, {
-        damping: 40
+        damping: 40,
     })
 
     const translateAnimationOne = useTransform(
@@ -160,7 +179,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
         [150, -150, -150, -viewportSize.height / 1.5]
     )
     const springyTranslateAnimationOne = useSpring(translateAnimationOne, {
-        damping: 40
+        damping: 40,
     })
 
     /* SHOWCASE ANIMATIONS */
@@ -237,9 +256,10 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
     }
 
     const handleModalClose = ()=>{
-        console.log("Closed")
         setIsModalOpen(false)
     }
+
+    
 
     const lastCallRef = useRef(0);
 
@@ -251,30 +271,27 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
             // Prevent default page scroll behavior
             event.preventDefault()
 
+            if(scrollDelayOnLoad.current) return
+
             const now = Date.now();
-            const limit = 1000; // Throttle limit in milliseconds (1 second)
+            const limit = 750; // Throttle limit in milliseconds (1 second)
 
             if (now - lastCallRef.current >= limit) {
 
                 const { deltaY } = event
 
-                console.log(deltaY)
-
-                if(deltaY  < 100 && deltaY > -100){
+                if(deltaY < 100 && deltaY > -100){
                     return
                 }
-                if (deltaY > 0) {
+                if (deltaY > 85 && deltaY < 120) {
                     scrollTarget.current.scrollBy(0, scrollHeight / 3 - 100)
         
                 }
-                else if (deltaY < 0) {
+                else if (deltaY < -85 && deltaY > -120) {
                     scrollTarget.current.scrollBy(0, -scrollHeight / 3 + 100)
         
                 }
-        
-
                 lastCallRef.current = now;
-
             }
 
         };
@@ -283,6 +300,50 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
         }
 
     }, []); // Empty dependency array ensures the effect runs once when the component mounts
+
+    /* Images under different categories */
+    type ImageSet = {
+        [key: string]: Array<string>
+    };
+
+    const imageSet = useMemo(()=>{
+        /* RETRIEVE IMAGE URLS FROM STORAGE LOCATION, BUT DONT LOAD YET */
+
+        const dynamicImageSet = {
+            top: [
+                ImageOne,
+                ImageThree,
+                ImageTwo,
+                
+            ]
+        }
+
+        return dynamicImageSet;
+
+    },[])
+
+    const selectionArray = [
+        "All",
+        "Applications",
+        "Armchairs",
+        "Bathrooms",
+        "Bedrooms",
+        "Cabinets",
+        "Chairs",
+        "Custom",
+        "Indoor",
+        "Holidays",
+        "Kitchen",
+        "Lighting",
+        "Living Room",
+        "Office",
+        "Outdoors",
+        "Prints",
+        "Velvets",
+        "Leathers",
+        "Plains",
+        "Embroidery"
+    ]
 
     return (
         <>
@@ -304,7 +365,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
                 >
                     <div
                         style={{
-                            minHeight: viewportSize.height * 4,
+                            minHeight: viewportSize.height * 3,
                             backgroundColor: 'transparent',
                             position: 'relative',
                             zIndex: 100
@@ -371,6 +432,7 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
                                 />
                             </motion.div>
 
+                            {/* CALLOUT CONTAINER */}
                             <motion.div
                                 style={{
                                     width: '100%',
@@ -438,6 +500,9 @@ const LifeStyleScenes: React.FC<LayoutProps> = ({
             <ModalContainer
                 handleModalClose={handleModalClose}
                 isModalOpen={isModalOpen}
+                imageSet={imageSet}
+                imageNo={9}
+                selectionArray={selectionArray}
             />
             
 

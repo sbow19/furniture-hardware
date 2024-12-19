@@ -40,16 +40,29 @@ const Banner: React.FC<LayoutProps> = ({
         };
     }, []);
 
+    /* Throttle on first render */
+    const scrollDelayOnLoad = useRef(false);
+    useEffect(()=>{
+
+        scrollDelayOnLoad.current = true
+        setTimeout(()=>{
+            scrollDelayOnLoad.current = false; 
+        }, 70)
+    }, [isInView])
+
     useEffect(() => {
         // Define the wheel event handler
         const myListener = (e) => {
+
+            if(scrollDelayOnLoad.current) return
+
             if (isInView) { // Check if the element is in view before handling scroll
                 if (e.deltaY > 0) {
                     // Scrolled down
-                    handleChangeSlide(1); // Call function to handle slide change (scroll down)
+                    handleChangeSlide(1, e); // Call function to handle slide change (scroll down)
                 } else {
                     // Scrolled up
-                    handleChangeSlide(-1); // Call function to handle slide change (scroll up)
+                    handleChangeSlide(-1, e); // Call function to handle slide change (scroll up)
                 }
             }
         };
